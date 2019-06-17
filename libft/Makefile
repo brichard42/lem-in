@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/05/19 17:41:34 by tlandema         ###   ########.fr        #
+#    Updated: 2019/06/17 14:38:03 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS_PATH = srcs
 
 SRCS = get_next_line.c \
 	   ft_stristr.c \
+	   ft_str_join.c \
 	   ft_atoli.c \
 	   ft_quicksort.c \
 	   ft_last_char.c \

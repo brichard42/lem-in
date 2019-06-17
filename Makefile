@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/06/16 16:15:19 by tlandema         ###   ########.fr        #
+#    Updated: 2019/06/17 13:26:07 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ LEM_IN_PATH = srcs
 
 LEM_IN = main.c \
 		 parsing.c \
+		 stock.c \
 		 free.c \
 
 LEM_IN_OBJS = $(LEM_IN:.c=.o)
