@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/17 16:29:52 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:05:32 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	main(void)
 {
 	char	*str;
-	t_env	*env;
+	t_env	env;
 
 	str = NULL;
-	if (!(env = ft_get_ants(str)))
+	ft_bzero(&env, sizeof(t_env));
+	if (ft_get_ants(&env, str))
 		return (1);
-	if (ft_get_rooms_and_links(env, str))
+	if (ft_get_rooms_and_links(&env, str))
 		return (1);
-	ft_putendl(env->room_list);
-	ft_putendl(env->link_list);
+	ft_print_tree(env.tree);
 	return (0);
 }

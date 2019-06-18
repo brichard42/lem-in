@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/17 16:57:12 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:15:50 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 
 int			ft_get_rooms_and_links(t_env *env, char *str)
 {
-	int i;
+	int		i;
+	char	s_e;
 
 	i = 0;
+	s_e = '\0';
 	while (get_next_line(0, &str))
 	{
-		if (ft_strchr(str, '-') && (i == 0 || i == 1))
-			ft_stock_link(env, str, &i);
+		if (ft_strchr(str, '-'))
+		{
+			i = 1;
+		}
 		else if (i == 0)
-			ft_stock_room(env, str, &i);
+			ft_stock_room(env, str, &s_e); //BALANCE TREE SINON CASSER CERVEAU
 		else
 			return (0);
 		ft_strdel(&str);
@@ -31,18 +35,19 @@ int			ft_get_rooms_and_links(t_env *env, char *str)
 	return (0);
 }
 
-t_env		*ft_get_ants(char *str)
+int		ft_get_ants(t_env *env, char *str)
 {
-	t_env *env;
-	
+	long int	ants;
+
+	ants = 0;
 	if (get_next_line(0, &str) == -1)
-		return (NULL);
-	if (!(env = (t_env *)ft_memalloc(sizeof(t_env))))
-			return (NULL);
-	if (ft_strlen(str) > 11
-			|| (env->ants = ft_atoli(str)) > INT_MAX
-			|| env->ants < 0)
-		return (ft_free_env(env));
+		return (1);
+	if (ft_strlen(str) > 11 || (ants = ft_atoli(str)) > INT_MAX || ants < 0)
+	{
+		ft_strdel(&str);
+		return (1);
+	}
+	env->ants = (int)ants;
 	ft_strdel(&str);
-	return (env);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 09:37:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/16 12:49:32 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/18 13:58:51 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static char	*reading(char **str, char *buff, int fd)
 {
-	char	*truc;
+	char	*tmp;
 	int		ret;
 
 	ret = 1;
@@ -28,10 +28,10 @@ static char	*reading(char **str, char *buff, int fd)
 		if (ret)
 		{
 			buff[ret] = '\0';
-			truc = *str;
+			tmp = *str;
 			if (!(*str = ft_strjoin(*str, buff)))
 				return (NULL);
-			free(truc);
+			free(tmp);
 		}
 	}
 	free(buff);
@@ -42,22 +42,22 @@ static char	*a_line(char **str)
 {
 	char	*buff;
 	char	*line;
-	char	*truc;
+	char	*tmp;
 
 	buff = ft_strchr(*str, '\n');
-	truc = NULL;
+	tmp = NULL;
 	if (buff)
 	{
 		if (!(line = ft_strndup(*str, buff - *str)))
 			return (NULL);
-		truc = *str;
+		tmp = *str;
 		if (!(*str = ft_strdup(buff + 1)))
 			return (NULL);
-		free(truc);
+		free(tmp);
 	}
 	else if (!(line = ft_strdup(*str)))
 		return (NULL);
-	if (!(*str) || !truc)
+	if (!(*str) || !tmp)
 	{
 		free(*str);
 		*str = NULL;
