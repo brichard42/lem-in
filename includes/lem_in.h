@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/18 15:12:34 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/18 17:21:10 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct		s_nod
 {
 	char			*room;
+	int				hei;
 	char			s_e;
 	struct	s_nod	*right;
 	struct	s_nod	*left;
@@ -38,6 +39,9 @@ typedef struct		s_env
 void				ft_print_tree(t_nod *tree);
 int					ft_get_rooms_and_links(t_env *env, char *str);
 int					ft_get_ants(t_env *env, char *str);
+
+void				ft_right_rotate(t_nod **tree);
+void				ft_left_rotate(t_nod **tree);
 
 int					ft_node_add(t_nod **tree, char *room, char s_e);
 t_nod				*ft_node_new(char *room, char s_e);
