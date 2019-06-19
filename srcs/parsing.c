@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/18 15:15:50 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/19 17:15:23 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			ft_get_rooms_and_links(t_env *env, char *str)
 			i = 1;
 		}
 		else if (i == 0)
-			ft_stock_room(env, str, &s_e); //BALANCE TREE SINON CASSER CERVEAU
+			ft_stock_room(env, str, &s_e);
 		else
 			return (0);
 		ft_strdel(&str);
@@ -42,7 +42,7 @@ int		ft_get_ants(t_env *env, char *str)
 	ants = 0;
 	if (get_next_line(0, &str) == -1)
 		return (1);
-	if (ft_strlen(str) > 11 || (ants = ft_atoli(str)) > INT_MAX || ants < 0)
+	if (ft_strlen(str) > 11 || (ants = ft_atoli(str)) > INT_MAX || ants <= 0)
 	{
 		ft_strdel(&str);
 		return (1);
