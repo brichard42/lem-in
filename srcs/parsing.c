@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/19 17:15:23 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/20 13:55:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,25 @@ int			ft_get_rooms_and_links(t_env *env, char *str)
 {
 	int		i;
 	char	s_e;
+	char	*ret;
 
 	i = 0;
 	s_e = '\0';
 	while (get_next_line(0, &str))
 	{
-		if (ft_strchr(str, '-'))
+		if ((ret = ft_strchr(str, '-')) && !ft_strchr(ret + 1, '-'))
 		{
 			i = 1;
+			if (ft_stock_link(env, str))
+				return (1);
 		}
 		else if (i == 0)
-			ft_stock_room(env, str, &s_e);
+		{
+			if (ft_stock_room(env, str, &s_e))
+				return (1);
+		}
 		else
-			return (0);
+			return (1);
 		ft_strdel(&str);
 	}
 	return (0);

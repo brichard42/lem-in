@@ -6,19 +6,18 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/20 10:05:01 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/20 13:57:20 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_nod	*ft_node_new(char *room, char s_e)
+t_nod	*ft_node_new(char *room)
 {
 	t_nod *new;
 
 	if (!(new = (t_nod *)ft_memalloc(sizeof(t_nod))))
 		return (NULL);
-	new->s_e = s_e;
 	if (!(new->room = ft_strdup(room)))
 	{
 		ft_memdel((void **)&new);
@@ -34,21 +33,25 @@ void	ft_print_tree(t_nod *tree) // TO DELETE
 		ft_print_tree(tree->right);
 	if (tree->left)
 		ft_print_tree(tree->left);
-	printf("%s\t|\t%c\t|\t%d\t\n", tree->room, tree->s_e, tree->hei);
+	printf("%s\t|\t\t%d\t\n", tree->room, tree->hei);
 }
 
-int		ft_node_add(t_nod **tree, char *room, char s_e)
+int		ft_node_add(t_env *env, t_nod **tree, char *room, char s_e)
 {
 	if (!*tree)
 	{
-		if (!(*tree = ft_node_new(room, s_e)))
+		if (!(*tree = ft_node_new(room)))
 			return (1);
+		if (s_e == 'e')
+			env->end = *tree;
+		else if (s_e == 's')
+			env->start = *tree;
 		return (0);
 	}
 	else if (ft_strcmp(room, (*tree)->room) < 0)
-		ft_node_add(&(*tree)->left, room, s_e);
+		ft_node_add(env, &(*tree)->left, room, s_e);
 	else if (ft_strcmp(room, (*tree)->room) > 0)
-		ft_node_add(&(*tree)->right, room, s_e);
+		ft_node_add(env, &(*tree)->right, room, s_e);
 	ft_balance_tree(tree, room);
 	return (0);
 }
