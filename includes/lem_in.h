@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/19 15:00:35 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:22:20 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int					ft_node_add(t_nod **tree, char *room, char s_e);
 t_nod				*ft_node_new(char *room, char s_e);
 
 void				ft_balance_tree(t_nod **tree, char *room);
+void				ft_small_balance(t_nod **tree, int bal);
 
 void				ft_free_tree(t_nod *tree);
 

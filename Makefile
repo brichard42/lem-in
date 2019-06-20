@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/06/19 15:27:50 by tlandema         ###   ########.fr        #
+#    Updated: 2019/06/20 11:31:17 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ LEM_IN_PATH = srcs
 
 LEM_IN = main.c \
 		 tree_balance.c \
+		 tree_balance2.c \
 		 parsing.c \
 		 stock.c \
 		 tree.c \

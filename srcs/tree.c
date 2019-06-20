@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/19 17:24:10 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/20 10:05:01 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,10 @@ t_nod	*ft_node_new(char *room, char s_e)
 void	ft_print_tree(t_nod *tree) // TO DELETE	
 {
 	if (tree->right)
-	{
-		printf("%s\t|\t%c\t|\t%d\t\n", tree->right->room, tree->right->s_e, tree->right->hei);
 		ft_print_tree(tree->right);
-	}
 	if (tree->left)
-	{
-		printf("%s\t|\t%c\t|\t%d\t\n", tree->left->room, tree->left->s_e, tree->left->hei);
 		ft_print_tree(tree->left);
-	}
+	printf("%s\t|\t%c\t|\t%d\t\n", tree->room, tree->s_e, tree->hei);
 }
 
 int		ft_node_add(t_nod **tree, char *room, char s_e)
