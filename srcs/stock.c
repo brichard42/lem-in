@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/20 13:58:07 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/20 15:27:16 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,21 @@ static int	ft_stock_ret(char **tab)
 	return (1);
 }
 
+#include <stdio.h>
 int			ft_stock_link(t_env *env, char *str)
 {
 	char **tab;
 
 	(void)env;
+	(void)tab;
+	(void)str;
+	if (str[0] == '#')
+		return (0);
 	if (ft_strchr(str, ' '))
+	{
+		printf("[%s]\n", str);
 		return (1);//traiter les infos acquises
-	if (!(tab = ft_strsplit(str, '-')))
-		return (1);
-
+	}
 	return (0);
 }
 
