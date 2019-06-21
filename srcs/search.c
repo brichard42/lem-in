@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/21 16:08:07 by tlandema         ###   ########.fr       */
+/*   Created: 2019/06/20 16:04:35 by tlandema          #+#    #+#             */
+/*   Updated: 2019/06/21 13:52:45 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	main(void)
+t_nod	*ft_search_node(t_nod *tree, char *key)
 {
-	char	*str;
-	t_env	env;
-
-	str = NULL;
-	ft_bzero(&env, sizeof(t_env));
-	if (ft_get_ants(&env, str))
-		return (1);
-	if (ft_get_rooms_and_links(&env, str))
-		return (1);
-	//FAIRE UNE FONCTION DE CHECK DES INFOS
-	ft_print_tree(env.tree);
-	ft_free_tree(env.tree);
-	return (0);
+	if (!tree || ft_strequ(tree->room, key))
+		return (tree);
+	else if (ft_strcmp(tree->room, key) < 0)
+		return (ft_search_node(tree->right, key));
+	else if (ft_strcmp(tree->room, key) > 0)
+		return (ft_search_node(tree->left, key));
+	return (NULL);
 }

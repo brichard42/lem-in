@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:58:19 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/20 13:17:40 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/21 13:51:40 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		ft_balance_tree(t_nod **tree, char *room)
 
 	(*tree)->hei = 1 + (ft_hei((*tree)->left) > ft_hei((*tree)->right) ? ft_hei((*tree)->left) : ft_hei((*tree)->right));
 	bal = ft_hei((*tree)->left) - ft_hei((*tree)->right);
-	if ((bal == 1 || bal == -1) && ((*tree)->left == NULL || (*tree)->right == NULL))
+	if ((bal == 1 && (*tree)->right == NULL) || (bal == -1 && ((*tree)->left == NULL)))
 		ft_small_balance(tree, bal);
 	else if (bal > 1 && ft_strcmp(room, (*tree)->left->room) < 0)
 		ft_rotate(tree, RIGHT);

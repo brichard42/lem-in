@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/20 13:57:20 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:29:25 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int		ft_node_add(t_env *env, t_nod **tree, char *room, char s_e)
 		return (0);
 	}
 	else if (ft_strcmp(room, (*tree)->room) < 0)
-		ft_node_add(env, &(*tree)->left, room, s_e);
+		ft_node_add(env, &(*tree)->left, room, s_e); //manque protection ?
 	else if (ft_strcmp(room, (*tree)->room) > 0)
-		ft_node_add(env, &(*tree)->right, room, s_e);
+		ft_node_add(env, &(*tree)->right, room, s_e); //manque protection ?
 	ft_balance_tree(tree, room);
 	return (0);
 }
