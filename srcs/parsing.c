@@ -49,7 +49,8 @@ int		ft_get_ants(t_env *env, char *str)
 	ants = 0;
 	if (get_next_line(0, &str) == -1 || !str)
 		return (ft_print_error("Can't read the amount of ants."));
-	if (ft_strlen(str) > 11 || (ants = ft_atoli(str)) > INT_MAX || ants <= 0)
+	if (ft_strlen(str) > 11 || !ft_str_is_digit(str)
+		|| (ants = ft_atoli(str)) > INT_MAX || ants <= 0)
 	{
 		ft_strdel(&str);
 		return (ft_print_error("Wrong input or invalid amount of ants."));
