@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/22 13:46:49 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/22 17:31:41 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 typedef struct		s_nod
 {
-	struct s_nod	*links;
 	char			*room;
 	int				hei;
 	struct s_nod	*right;
@@ -34,12 +33,20 @@ typedef struct		s_room
 	struct s_pile	*next;
 }					t_room;
 
+typedef struct		s_link
+{
+	char			*name;
+	struct s_link	*next;
+	struct s_link	**tab_lnk;
+}					t_link;
+
 typedef struct		s_env
 {
 	long int		ants;
 	t_nod			*start;
 	t_nod			*end;
 	t_nod			*tree;
+	t_link			*links;
 }					t_env;
 
 void				ft_print_tree(t_nod *tree);
