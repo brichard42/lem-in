@@ -6,29 +6,29 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/21 16:40:48 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/22 13:46:19 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <limits.h>
 
-int			ft_get_rooms_and_links(t_env *env, char *str)
+int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 {
 	char	s_e;
 	char	*ret;
 	int		reta;
 
 	s_e = '\0';
-	ret = NULL;
 	while ((reta = get_next_line(0, &str)) > 0 || str)
 	{ 
 		if ((ret = ft_strchr(str, '-')) && !ft_strchr(ret + 1, '-'))
 		{
+			r_l = 1;
 			if (ft_stock_link(env, str))
 				return (1);
 		}
-		else if (ret == NULL)
+		else if (r_l == 0)
 		{
 			if (ft_stock_room(env, str, &s_e))
 				return (1);
@@ -38,7 +38,7 @@ int			ft_get_rooms_and_links(t_env *env, char *str)
 		ft_strdel(&str);
 	}
 	if (reta == -1)
-		return (ft_print_error("Error while reading rooms or link."));
+		return (ft_print_error("Error while reading rooms and links."));
 	return (0);
 }
 

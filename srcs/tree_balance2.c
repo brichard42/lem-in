@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:15:06 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/21 13:49:58 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/22 16:04:18 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ static void	ft_bal_l_r(t_nod **tree)
 
 	x = (*tree)->left;
 	y = x->right;
-	x->left = y;
-	x->right = (*tree);
+	y->left = x;
+	y->right = (*tree);
 	(*tree)->left = NULL;
+	x->right = NULL;
 	(*tree)->hei = 0;
-	x->hei = 1;
-	y->hei = 0;
-	*tree = x;
+	x->hei = 0;
+	y->hei = 1;
+	*tree = y;
 }
 
 static void	ft_bal_r_r(t_nod **tree)
@@ -65,12 +66,13 @@ static void	ft_bal_r_l(t_nod **tree)
 
 	x = (*tree)->right;
 	y = x->left;
-	x->right = y;
-	x->left = (*tree);
+	y->right = x;
+	y->left = (*tree);
 	(*tree)->right = NULL;
+	x->left = NULL;
 	(*tree)->hei = 0;
-	x->hei = 1;
-	y->hei = 0;
+	x->hei = 0;
+	y->hei = 1;
 	*tree = x;
 }
 

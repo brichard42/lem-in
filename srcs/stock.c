@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/21 16:51:32 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/22 15:53:56 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,22 @@ int			ft_stock_link(t_env *env, char *str)
 	t_nod	*b;
 
 	(void)env;
+	(void)a;
+	(void)b;
 	if (str[0] == '#')
 		return (0);
-	if (ft_strchr(str, ' '))
-		return (ft_print_error("A link is not well formated."));
-	if (!((tab = ft_strsplit(str, '-'))))
+	if (ft_strchr(str, ' ') || !(tab = ft_strsplit(str, '-')))
 		return (ft_print_error("A link is not well formated."));
 	if (ft_count_tab(tab) != 2)
 		return (ft_stock_ret(tab, 1));
-	if (!(a = ft_search_node(env->tree, tab[0])))
+	if (!(a = ft_search_node(env->tree, tab[0]))
+			|| !(b = ft_search_node(env->tree, tab[1])))
+	{
+		ft_putendl(tab[0]);
+		ft_putendl(tab[1]);
 		return (ft_stock_ret(tab, 2));
-	if (!(b = ft_search_node(env->tree, tab[1])))
-		return (ft_stock_ret(tab, 2));
+	}
+	//if (!(
 	ft_tabdel(ft_count_tab(tab), &tab);
 	return (0);
 }
@@ -65,7 +69,7 @@ int			ft_stock_room(t_env *env, char *str, char *s_e)
 		}
 		return (0);
 	}
-	if (!(tab = ft_strsplit(str, ' ')))
+	if (str[0] == 'L' || !(tab = ft_strsplit(str, ' ')))
 		return (ft_print_error("A room is not well formated."));
 	if (ft_count_tab(tab) != 3
 			|| !ft_str_is_digit(tab[1]) || !ft_str_is_digit(tab[2]))
