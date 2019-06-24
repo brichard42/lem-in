@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/22 15:41:09 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/24 13:41:24 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ t_nod	*ft_node_new(char *room)
 }
 
 #include <stdio.h>
+void	ft_print_links(t_link *begin)
+{
+	if (begin->next)
+		ft_print_links(begin->next);
+	printf("[%s]\n", begin->l_room->room);
+}
+
 void	ft_print_tree(t_nod *tree) // TO DELETE	
 {
 	if (tree->right)
@@ -34,6 +41,7 @@ void	ft_print_tree(t_nod *tree) // TO DELETE
 	if (tree->left)
 		ft_print_tree(tree->left);
 	printf("%s\t|\t\t%d\t\n", tree->room, tree->hei);
+	ft_print_links(tree->links);
 }
 
 int		ft_node_add(t_env *env, t_nod **tree, char *room, char s_e)

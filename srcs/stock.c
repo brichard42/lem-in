@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/22 17:40:29 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/24 13:35:40 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,24 @@ static int	ft_stock_ret(char **tab, int i)
 	else if (!i)
 		return (ft_print_error("A link is not well formated."));
 	else if (i == 2)
-		return (ft_print_error("One of the room in a link does not exist."));
+		return (ft_print_error("Room in the given link does not exist."));
 	else
 		return (1);
 
+}
+
+int			ft_add_link(t_nod *a, t_nod *b)
+{
+	t_link	*new;
+
+	//CHECK LA LIST POUR DOUBLONS
+	if (!(new = ft_linknew(a->room, a)))
+		return (1);
+	ft_linkadd(&b->links, new);
+	if (!(new = ft_linknew(b->room, b)))
+		return (1);
+	ft_linkadd(&a->links, new);
+	return (0);
 }
 
 int			ft_stock_link(t_env *env, char *str)
@@ -41,7 +55,8 @@ int			ft_stock_link(t_env *env, char *str)
 	if (!(a = ft_search_node(env->tree, tab[0]))
 			|| !(b = ft_search_node(env->tree, tab[1])))
 		return (ft_stock_ret(tab, 2));
-	//AGIR ICI
+	if (ft_add_link(a, b))
+		return (1);
 	ft_tabdel(ft_count_tab(tab), &tab);
 	return (0);
 }
@@ -68,7 +83,7 @@ int			ft_stock_room(t_env *env, char *str, char *s_e)
 			|| !ft_str_is_digit(tab[1]) || !ft_str_is_digit(tab[2]))
 		return (ft_stock_ret(tab, 0));
 	else if (ft_node_add(env, &env->tree, tab[0], *s_e))
-		return (ft_stock_ret(tab, 0)); //gestion d'err un peu inacurate discute avec BESTien lol
+		return (ft_stock_ret(tab, 0));
 	if (*s_e != '\0')
 		*s_e = '\0';
 	ft_tabdel(ft_count_tab(tab), &tab);

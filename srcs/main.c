@@ -6,12 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/22 13:47:57 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/24 13:37:07 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+#include <stdio.h>
 int	main(void)
 {
 	char	*str;
@@ -24,7 +25,10 @@ int	main(void)
 	if (ft_get_rooms_and_links(&env, str, 0))
 		return (1);
 	//FAIRE UNE FONCTION DE CHECK DES INFOS
+	system("cat test");
 	ft_print_tree(env.tree);
+	printf("start = %s\n", env.start->room);
+	printf("end = %s\n", env.end->room);
 	ft_free_tree(env.tree);
 	return (0);
 }
