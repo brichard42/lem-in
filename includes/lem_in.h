@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/*************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                        :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/24 13:21:36 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/24 15:27:58 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ typedef struct		s_nod
 typedef struct		s_link
 {
 	char			*name;
-	struct s_nod	*l_room;
-	struct s_link	*next;
-	struct s_link	*prev;
+	t_nod			*l_room;
+	struct s_link	*parent;
+	struct s_link	*right;
+	struct s_link	*left;
 }					t_link;
 
 typedef struct		s_env
@@ -43,12 +44,6 @@ typedef struct		s_env
 	t_nod			*end;
 	t_nod			*tree;
 }					t_env;
-
-void				ps_del(char *name);
-void				ft_linkdelone(t_link **alst, void (*del)(char*));
-void				ft_linkdel(t_link **alst, void (*del)(char*));
-void				ft_linkadd(t_link **alst, t_link *new);
-t_link				*ft_linknew(char const *name, t_nod *l_room);
 
 void				ft_print_tree(t_nod *tree);
 int					ft_get_rooms_and_links(t_env *env, char *str, int r_l);

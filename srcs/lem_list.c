@@ -6,63 +6,45 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 11:08:34 by brichard          #+#    #+#             */
-/*   Updated: 2019/06/24 13:15:52 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/24 15:27:58 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdlib.h>
 
-void	ps_del(char *name)
+t_link	*ft_link_new(char *name, t_nod *l_room)
 {
-	ft_strdel(&name);
-}
+	t_link *new;
 
-void	ft_linkdelone(t_link **alst, void (*del)(char*))
-{
-	if (!del || !alst || !*alst)
-		return ;
-	del((*alst)->name);
-	ft_memdel((void**)alst);
-}
-
-void	ft_linkdel(t_link **alst, void (*del)(char*))
-{
-	if (!alst || !*alst || !del)
-		return ;
-	if ((*alst)->next)
-		ft_linkdel(&((*alst)->next), del);
-	ft_linkdelone(alst, del);
-}
-
-void	ft_linkadd(t_link **alst, t_link *new)
-{
-	if (!alst || !new)
-		return ;
-	if (*alst)
-		(*alst)->prev = new;
-	new->next = *alst;
-	new->prev = NULL;
-	*alst = new;
-}
-
-t_link	*ft_linknew(char const *name, t_nod *l_room)
-{
-	t_link	*new;
-
-	new = NULL;
-	if (!(new = (t_link*)ft_memalloc(sizeof(t_link))))
+	if (!(new = (t_link *)ft_memalloc(sizeof(t_link))))
 		return (NULL);
-	if (name && l_room)
+	if (!(new->name = ft_strdup(name)))
 	{
-		if (!(new->name = ft_strdup(name)))
-		{
-			free(new);
-			return (NULL);
-		}
-		new->l_room = l_room;
+		ft_memdel((void **)&new);
+		return (NULL);
 	}
-	new->next = NULL;
-	new->prev = NULL;
+	new->l_room = l_room;
 	return (new);
+}
+
+int		ft_link_add(t_link *parent, t_link **tree, char *name)
+{
+	if (!*tree)
+	{
+		if (!(*tree = ft_link_new(name,)))
+			return (1);
+		tree->parent = parent;
+		return (0);
+	}
+	else if (ft_strcmp(name, (*tree)->name) < 0)
+	{
+		if (!(ft_link_add(*tree, &(*tree)->left, name)))
+			return (1);
+	}
+	else if (ft_strcmp(name, (*tree)->name) > 0)
+	{
+		if (!(ft_link_add(*tree, &(*tree)->right, name)))
+			return (1);
+	}
+	return (0);
 }

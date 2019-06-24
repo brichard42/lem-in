@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/24 13:35:40 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/24 14:52:06 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ int			ft_add_link(t_nod *a, t_nod *b)
 	t_link	*new;
 
 	//CHECK LA LIST POUR DOUBLONS
-	if (!(new = ft_linknew(a->room, a)))
+	if (ft_link_add(&b->links, new))
 		return (1);
-	ft_linkadd(&b->links, new);
-	if (!(new = ft_linknew(b->room, b)))
+	if (ft_link_add(&a->links, new))
 		return (1);
-	ft_linkadd(&a->links, new);
 	return (0);
 }
 
