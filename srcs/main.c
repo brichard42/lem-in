@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/27 10:10:31 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/27 11:24:25 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int	main(void)
 		return (1);
 	//FAIRE UNE FONCTION DE CHECK DES INFOS
 	ft_print_tree(env.tree);
-	printf("start = %s\n", env.start->room);
-	printf("end = %s\n", env.end->room);
+	if (env.start)
+		printf("start = %s\n", env.start->room);
+	if (env.end)
+		printf("end = %s\n", env.end->room);
 	ft_free_tree(env.tree);
 	return (0);
 }

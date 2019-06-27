@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/27 10:49:01 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/27 11:24:23 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_nod	*ft_node_new(char *room)
 #include <stdio.h>
 void	ft_print_links(t_link *begin)
 {
+	if (!begin)
+		return ;
 	if (begin->right)
 		ft_print_links(begin->right);
 	if (begin->left)

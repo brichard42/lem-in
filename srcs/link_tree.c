@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:11:05 by brichard          #+#    #+#             */
-/*   Updated: 2019/06/27 10:44:05 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/27 11:50:59 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,23 @@ t_link	*ft_link_new(char *name, t_nod *l_room)
 	return (new);
 }
 
-int		ft_link_add(t_link *parent, t_link **l_tree, char *name, t_nod *r_tree)
+int		ft_link_add(t_link *parent, t_link **l_tree, char *name, t_nod *l_room)
 {
 	if (!*l_tree)
 	{
-		if (!(*l_tree = ft_link_new(name, ft_search_room(r_tree, name))))
+		if (!(*l_tree = ft_link_new(name, l_room)))
 			return (1);
 		(*l_tree)->parent = parent;
 		return (0);
 	}
 	else if (ft_strcmp(name, (*l_tree)->name) < 0)
 	{
-		if (!(ft_link_add(*l_tree, &(*l_tree)->left, name, r_tree)))
+		if ((ft_link_add(*l_tree, &(*l_tree)->left, name, l_room)))
 			return (1);
 	}
 	else if (ft_strcmp(name, (*l_tree)->name) > 0)
 	{
-		if (!(ft_link_add(*l_tree, &(*l_tree)->right, name, r_tree)))
+		if ((ft_link_add(*l_tree, &(*l_tree)->right, name, l_room)))
 			return (1);
 	}
 	return (0);

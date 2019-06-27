@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/27 10:42:26 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/27 11:36:04 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define LEFT 'l'
 # define RIGHT 'r'
 
+#include <stdio.h>//to TEJ
 typedef struct		s_nod
 {
 	char			*room;

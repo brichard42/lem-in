@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/27 10:41:18 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/27 11:50:24 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int			ft_stock_link(t_env *env, char *str)
 	if (!(a = ft_search_room(env->tree, tab[0]))
 			|| !(b = ft_search_room(env->tree, tab[1])))
 		return (ft_stock_ret(tab, 2));
-	if (ft_link_add(NULL, &b->links, tab[0], env->tree))
-		return (1);
-	if (ft_link_add(NULL, &a->links, tab[1], env->tree))
-		return (1);
+	if (ft_link_add(NULL, &b->links, tab[0], a))
+		return (ft_stock_ret(tab, 2));
+	if (ft_link_add(NULL, &a->links, tab[1], b))
+		return (ft_stock_ret(tab, 2));
 	ft_tabdel(ft_count_tab(tab), &tab);
 	return (0);
 }
