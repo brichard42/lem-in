@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/24 14:52:06 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:41:18 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,6 @@ static int	ft_stock_ret(char **tab, int i)
 
 }
 
-int			ft_add_link(t_nod *a, t_nod *b)
-{
-	t_link	*new;
-
-	//CHECK LA LIST POUR DOUBLONS
-	if (ft_link_add(&b->links, new))
-		return (1);
-	if (ft_link_add(&a->links, new))
-		return (1);
-	return (0);
-}
-
 int			ft_stock_link(t_env *env, char *str)
 {
 	char	**tab;
@@ -50,10 +38,12 @@ int			ft_stock_link(t_env *env, char *str)
 		return (ft_print_error("A link is not well formated."));
 	if (ft_count_tab(tab) != 2)
 		return (ft_stock_ret(tab, 1));
-	if (!(a = ft_search_node(env->tree, tab[0]))
-			|| !(b = ft_search_node(env->tree, tab[1])))
+	if (!(a = ft_search_room(env->tree, tab[0]))
+			|| !(b = ft_search_room(env->tree, tab[1])))
 		return (ft_stock_ret(tab, 2));
-	if (ft_add_link(a, b))
+	if (ft_link_add(NULL, &b->links, tab[0], env->tree))
+		return (1);
+	if (ft_link_add(NULL, &a->links, tab[1], env->tree))
 		return (1);
 	ft_tabdel(ft_count_tab(tab), &tab);
 	return (0);
