@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/27 11:50:24 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/02 10:26:37 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	ft_stock_ret(char **tab, int i)
 		return (ft_print_error("Room in the given link does not exist."));
 	else
 		return (1);
-
 }
 
 int			ft_stock_link(t_env *env, char *str)
@@ -41,9 +40,8 @@ int			ft_stock_link(t_env *env, char *str)
 	if (!(a = ft_search_room(env->tree, tab[0]))
 			|| !(b = ft_search_room(env->tree, tab[1])))
 		return (ft_stock_ret(tab, 2));
-	if (ft_link_add(NULL, &b->links, tab[0], a))
-		return (ft_stock_ret(tab, 2));
-	if (ft_link_add(NULL, &a->links, tab[1], b))
+	if (ft_link_add(NULL, &b->links, tab[0], a)
+			|| ft_link_add(NULL, &a->links, tab[1], b))
 		return (ft_stock_ret(tab, 2));
 	ft_tabdel(ft_count_tab(tab), &tab);
 	return (0);
