@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:58:19 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/22 16:05:39 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/02 10:09:59 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ static void	ft_rotate(t_nod **tree, char r_l)
 		x = tmp->left;
 		y = x->right;
 		x->right = tmp;
-		tmp->left = y;	
+		tmp->left = y;
 	}
 	tmp->hei = 1 + (ft_hei(tmp->left) > ft_hei(tmp->right)
 			? ft_hei(tmp->left) : ft_hei(tmp->right));
-	x->hei = 1 + (ft_hei(x->left) > ft_hei(x->right) ? ft_hei(x->left) : ft_hei(x->right));
+	x->hei = 1 + (ft_hei(x->left) > ft_hei(x->right)
+			? ft_hei(x->left) : ft_hei(x->right));
 	*tree = x;
 }
 
@@ -51,9 +52,11 @@ void		ft_balance_tree(t_nod **tree, char *room)
 {
 	int	bal;
 
-	(*tree)->hei = 1 + (ft_hei((*tree)->left) > ft_hei((*tree)->right) ? ft_hei((*tree)->left) : ft_hei((*tree)->right));
+	(*tree)->hei = 1 + (ft_hei((*tree)->left) > ft_hei((*tree)->right)
+			? ft_hei((*tree)->left) : ft_hei((*tree)->right));
 	bal = ft_hei((*tree)->left) - ft_hei((*tree)->right);
-	if ((bal == 1 && (*tree)->right == NULL) || (bal == -1 && ((*tree)->left == NULL)))
+	if ((bal == 1 && (*tree)->right == NULL)
+			|| (bal == -1 && ((*tree)->left == NULL)))
 		ft_small_balance(tree, bal);
 	else if (bal > 1 && ft_strcmp(room, (*tree)->left->room) < 0)
 		ft_rotate(tree, RIGHT);

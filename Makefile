@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/06/27 10:20:04 by brichard         ###   ########.fr        #
+#    Updated: 2019/07/02 10:04:24 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ LEM_IN_NAME = lem-in
 LEM_IN_PATH = srcs
 
 LEM_IN = main.c \
+		 free_functions.c \
 		 error_printer.c \
 		 tree_balance2.c \
 		 tree_balance.c \

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/27 11:24:23 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/02 10:08:43 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_nod	*ft_node_new(char *room)
 	return (new);
 }
 
-#include <stdio.h>
 void	ft_print_links(t_link *begin)
 {
 	if (!begin)
@@ -38,7 +37,7 @@ void	ft_print_links(t_link *begin)
 	printf("[%s]\n", begin->name);
 }
 
-void	ft_print_tree(t_nod *tree) // TO DELETE	
+void	ft_print_tree(t_nod *tree) // TO DELETE
 {
 	if (tree->right)
 		ft_print_tree(tree->right);
@@ -61,21 +60,15 @@ int		ft_node_add(t_env *env, t_nod **tree, char *room, char s_e)
 		return (0);
 	}
 	else if (ft_strcmp(room, (*tree)->room) < 0)
-		ft_node_add(env, &(*tree)->left, room, s_e); //manque protection !
+	{
+		if (ft_node_add(env, &(*tree)->left, room, s_e))
+			return (1);
+	}
 	else if (ft_strcmp(room, (*tree)->room) > 0)
-		ft_node_add(env, &(*tree)->right, room, s_e); //manque protection !
+	{
+		if (ft_node_add(env, &(*tree)->right, room, s_e))
+			return (1);
+	}
 	ft_balance_tree(tree, room);
 	return (0);
-}
-
-void        ft_free_tree(t_nod *tree)
-{
-	if (!tree)
-		return ;
-	if (tree->left)
-		ft_free_tree(tree->left);
-	if (tree->right)
-		ft_free_tree(tree->right);
-	ft_strdel(&tree->room);
-	ft_memdel((void **)&tree);
 }

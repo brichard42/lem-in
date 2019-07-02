@@ -6,14 +6,14 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/27 11:36:59 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/02 10:01:05 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <limits.h>
 
-int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
+int	ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 {
 	char	s_e;
 	char	*ret;
@@ -21,7 +21,7 @@ int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 
 	s_e = '\0';
 	while ((reta = get_next_line(0, &str)) > 0 || str)
-	{ 
+	{
 		if ((ret = ft_strchr(str, '-')) && !ft_strchr(ret + 1, '-'))
 		{
 			r_l = 1;
@@ -42,7 +42,7 @@ int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 	return (0);
 }
 
-int		ft_get_ants(t_env *env, char *str)
+int	ft_get_ants(t_env *env, char *str)
 {
 	long int	ants;
 
