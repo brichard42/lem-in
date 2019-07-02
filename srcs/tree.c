@@ -6,11 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/02 10:08:43 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/02 16:31:22 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+#include "../libft/includes/ft_printf.h"
 
 t_nod	*ft_node_new(char *room)
 {
@@ -34,7 +36,7 @@ void	ft_print_links(t_link *begin)
 		ft_print_links(begin->right);
 	if (begin->left)
 		ft_print_links(begin->left);
-	printf("[%s]\n", begin->name);
+	ft_printf("[%s]\n", begin->name);
 }
 
 void	ft_print_tree(t_nod *tree) // TO DELETE
@@ -43,7 +45,7 @@ void	ft_print_tree(t_nod *tree) // TO DELETE
 		ft_print_tree(tree->right);
 	if (tree->left)
 		ft_print_tree(tree->left);
-	printf("|%s\t|\t\t%d\t|\n", tree->room, tree->hei);
+	ft_printf("|%s\t|\t\t%d\t|\n", tree->room, tree->hei);
 	ft_print_links(tree->links);
 }
 

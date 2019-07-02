@@ -6,11 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/02 10:46:04 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/02 16:31:31 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+#include "../libft/includes/ft_printf.h"
 
 static int	ft_free_spec(t_env env)
 {
@@ -31,9 +33,9 @@ int			main(void)
 		return (ft_free_spec(env));
 	ft_print_tree(env.tree);
 	if (env.start)
-		printf("start = %s\n", env.start->room);
+		ft_printf("start = %s\n", env.start->room);
 	if (env.end)
-		printf("end = %s\n", env.end->room);
+		ft_printf("end = %s\n", env.end->room);
 	ft_free_tree(env.tree);
 	return (0);
 }

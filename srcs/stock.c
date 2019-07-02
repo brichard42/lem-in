@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/02 10:26:37 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/02 16:38:16 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	ft_stock_ret(char **tab, int i)
 		return (ft_print_error("A link is not well formated."));
 	else if (i == 2)
 		return (ft_print_error("Room in the given link does not exist."));
+	else if (i == 3)
+		return (ft_print_error("You tried to link a room to itself."));
 	else
 		return (1);
 }
@@ -37,6 +39,8 @@ int			ft_stock_link(t_env *env, char *str)
 		return (ft_print_error("A link is not well formated."));
 	if (ft_count_tab(tab) != 2)
 		return (ft_stock_ret(tab, 1));
+	if (ft_strequ(tab[0], tab[1]))
+		return (ft_stock_ret(tab, 3));
 	if (!(a = ft_search_room(env->tree, tab[0]))
 			|| !(b = ft_search_room(env->tree, tab[1])))
 		return (ft_stock_ret(tab, 2));
