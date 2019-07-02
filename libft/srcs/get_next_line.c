@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 09:37:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/18 13:58:51 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/06/27 14:23:33 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ static char	*reading(char **str, char *buff, int fd)
 			tmp = *str;
 			if (!(*str = ft_strjoin(*str, buff)))
 				return (NULL);
-			free(tmp);
+			ft_strdel(&tmp);
 		}
 	}
-	free(buff);
 	return (*str);
 }
 
@@ -53,36 +52,36 @@ static char	*a_line(char **str)
 		tmp = *str;
 		if (!(*str = ft_strdup(buff + 1)))
 			return (NULL);
-		free(tmp);
+		ft_strdel(&tmp);
 	}
 	else if (!(line = ft_strdup(*str)))
 		return (NULL);
-	if (!(*str) || !tmp)
-	{
-		free(*str);
-		*str = NULL;
-	}
 	return (line);
+}
+
+static int 	clean(char *to_f)
+{
+	ft_strdel(&to_f);
+	return (-1);
 }
 
 int			get_next_line(const int fd, char **line)
 {
 	static char	*str[4864];
-	char		*buff;
+	char		*buff[BUFF_SIZE + 1];
 
-	if (fd < 0 || !line || BUFF_SIZE <= 0 || \
-			!(buff = ft_strnew(BUFF_SIZE + 1)) \
+	if (fd < 0 || !line || BUFF_SIZE <= 0
 			|| read(fd, buff, 0) == -1 || \
 			(str[fd] == NULL && !(str[fd] = ft_strnew(0))))
 		return (-1);
-	if (!(reading(&str[fd], buff, fd)))
-		return (-1);
+	if (!(reading(&str[fd], (char *)buff, fd)))
+		return (clean(str[fd]));
 	if (*str[fd])
 	{
 		if (!(*line = a_line(&str[fd])))
-			return (-1);
+			return (clean(str[fd]));
 		return (1);
 	}
-	free(str[fd]);
+	ft_strdel(&str[fd]);
 	return (0);
 }
