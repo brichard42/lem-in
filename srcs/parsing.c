@@ -6,13 +6,14 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/03 12:28:35 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/03 16:37:42 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <limits.h>
 
+#include "../libft/includes/ft_printf.h"
 int	ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 {
 	char	s_e;

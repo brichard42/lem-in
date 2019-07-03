@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:15:06 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/22 16:04:18 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/03 16:39:59 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	ft_bal_r_l(t_nod **tree)
 	(*tree)->hei = 0;
 	x->hei = 0;
 	y->hei = 1;
-	*tree = x;
+	*tree = y;
 }
 
 void		ft_small_balance(t_nod **tree, int bal)
