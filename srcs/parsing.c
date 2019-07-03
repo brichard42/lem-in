@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/02 16:11:40 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/03 12:28:35 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 	}
 	if (reta == -1)
 		return (ft_print_error("Error while reading rooms and links."));
+	if (!env->start || !env->end)
+		return (ft_print_error("Error: Missing Start/End."));
 	return (0);
 }
 
