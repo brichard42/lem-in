@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/03 15:46:54 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/04 17:20:47 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,13 @@ void	ft_hei_to_null(t_nod *tree)
 		ft_hei_to_null(tree->right);
 }
 
-int		ft_calc_dist(t_env *env, t_nod *start, t_nod *parent, int dist)
+int		ft_calc_dist(t_env *env)
 {
-	if (start->hei != 0)
+	t_nod	**current;
+
+	if (!(current = (t_nod **)ft_memalloc(sizeof(t_nod *) * 2)))
 		return (1);
-	start->hei = dist;
-	if (!start || start == env->end)
-		return (1);
-	if (!start->links)
-		return (1/*si il n'y a pas de link dans la sale elle est useless donc delete
-				   si il s'avere que c'est start qu'est link a rien on peut arreter le
-				   traitement de données*/);
-	if (start->links && parent != start->links->l_room)
-		ft_calc_dist(env, start->links->l_room, start, dist + 1);
-	if (start->links->left && parent != start->links->left->l_room)
-		ft_calc_dist(env, start->links->left->l_room, start, dist + 1);
-	if (start->links->right && parent != start->links->right->l_room)
-		ft_calc_dist(env, start->links->right->l_room, start, dist + 1);
+	current[0] = env->start;
+	ft_putendl(current[0]->room);
 	return (0);
 }
