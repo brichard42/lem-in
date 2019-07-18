@@ -6,14 +6,14 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/07/03 13:29:59 by tlandema         ###   ########.fr        #
+#    Updated: 2019/07/18 04:08:11 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I./includes -I./libft/includes
+CFLAGS = -Wall -g -Wextra -Werror -I./includes -I./libft/includes
 
 LIB = -lft
 
@@ -41,6 +41,7 @@ LEM_IN = main.c \
 		 parsing.c \
 		 tree_search.c \
 		 stock.c \
+		 utils.c \
 		 tree.c \
 
 LEM_IN_OBJS = $(LEM_IN:.c=.o)

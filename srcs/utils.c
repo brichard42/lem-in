@@ -1,44 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_functions.c                                   :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/02 10:01:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/18 04:17:02 by tlandema         ###   ########.fr       */
+/*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
+/*   Updated: 2019/07/18 03:58:16 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_nod		**ft_free_ret_nod(t_nod **to_f)
-{
-	ft_memdel((void **)&to_f);
-	return (NULL);
-}
-
-static void	ft_free_link(t_link *link)
-{
-	if (!link)
-		return ;
-	if (link->right)
-		ft_free_link(link->right);
-	if (link->left)
-		ft_free_link(link->left);
-	ft_strdel(&link->name);
-	ft_memdel((void **)&link);
-}
-
-void		ft_free_tree(t_nod *tree)
+void	ft_hei_to_null(t_nod *tree)
 {
 	if (!tree)
 		return ;
+	tree->hei = 0;
 	if (tree->left)
-		ft_free_tree(tree->left);
+		ft_hei_to_null(tree->left);
 	if (tree->right)
-		ft_free_tree(tree->right);
-	ft_free_link(tree->links);
-	ft_strdel(&tree->room);
-	ft_memdel((void **)&tree);
+		ft_hei_to_null(tree->right);
 }
