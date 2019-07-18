@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/18 04:16:01 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:08:59 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_nod				*ft_node_new(char *room);
 int					ft_link_add(t_link *parent, t_link **l_tree,\
 													char *name, t_nod *r_tree);
 
-void				ft_hei_to_null(t_nod *tree);
+void				ft_hei_to_neg(t_nod *tree);
 int					ft_calc_dist(t_env *env);
 
 t_nod				*ft_search_room(t_nod *tree, char *key);
