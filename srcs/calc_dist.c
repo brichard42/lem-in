@@ -50,10 +50,13 @@ int		ft_set_links(t_link *to_put, t_nod **new_tab, int i, int new_hei)
 	return (i);
 }
 
-void	ft_get_links(t_nod **current, t_nod **new_tab, int i, int new_hei)
+void	ft_get_links(t_nod **current, t_nod **new_tab, int new_hei)
 {
 	int	j;
+	int	i;
 
+	
+	i = 0;
 	j = 0;
 	while (current[j])
 	{
@@ -62,7 +65,7 @@ void	ft_get_links(t_nod **current, t_nod **new_tab, int i, int new_hei)
 	}
 }
 
-t_nod	**ft_get_current(t_nod **current, int new_hei)
+static t_nod	**ft_get_current(t_nod **current, int new_hei)
 {
 	int		i;
 	int		count;
@@ -79,7 +82,7 @@ t_nod	**ft_get_current(t_nod **current, int new_hei)
 		return (ft_free_ret_nod(current));
 	if (!(new_tab = (t_nod **)ft_memalloc(sizeof(t_nod *) * (count + 1))))
 		return (ft_free_ret_nod(current));
-	ft_get_links(current, new_tab, 0, new_hei);
+	ft_get_links(current, new_tab, new_hei);
 	i = 0;
 	while (new_tab[i])
 	{
