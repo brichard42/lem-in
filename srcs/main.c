@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/18 19:36:28 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/19 11:07:55 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int			main(void)
 {
 	char	*str;
 	t_env	env;
+	int		i;
 
 	str = NULL;
 	ft_bzero(&env, sizeof(t_env));
@@ -33,7 +34,7 @@ int			main(void)
 		return (ft_free_spec(env));
 	if (ft_calc_dist(&env))
 		return (ft_free_spec(env));
-	if (ft_get_path(&env))
+	if (ft_get_multi_paths(&env))
 		return (ft_free_spec(env));
 	ft_print_tree(env.tree);
 	if (env.start)
@@ -41,6 +42,8 @@ int			main(void)
 	if (env.end)
 		ft_printf("end = %s\n", env.end->room);
 	ft_free_tree(env.tree);
-	ft_free_path(env.the_path);
+	i = -1;
+	while (env.the_paths[++i])
+		ft_free_path(env.the_paths[i]);
 	return (0);
 }

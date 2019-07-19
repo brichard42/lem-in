@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 16:49:31 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/18 19:26:28 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/19 10:26:55 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,20 @@ static int		ft_path_finder(t_path *the_path, t_nod *node)
 	return (0);
 }
 
-static void		ft_print_path(t_path *path)
+static void		ft_print_path(t_path *path, int i) /* TO TEJ */
 {
-	static int i = 0;
 
 	if (i == 0)
 		while (path->next)
 			path = path->next;
-	i = 1;
 	if (path)
 	{
 		ft_putendl(path->name);
-		ft_print_path(path->prev);
+		ft_print_path(path->prev, 1);
 	}
 }
 
-int				ft_get_path(t_env *env) /*TO TEJ*/
+int				ft_get_path(t_env *env)
 {
 	t_path	*the_path;
 
@@ -94,7 +92,7 @@ int				ft_get_path(t_env *env) /*TO TEJ*/
 		return (1);
 	env->the_path = the_path;
 	ft_putendl("THE PATH");
-	ft_print_path(env->the_path);
+	ft_print_path(env->the_path, 0);
 	ft_putendl("C'ETAIT THE PATH");
 	ft_putchar('\n');
 	return (0);

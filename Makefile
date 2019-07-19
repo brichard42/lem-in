@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/07/18 18:00:07 by tlandema         ###   ########.fr        #
+#    Updated: 2019/07/19 10:09:43 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ LEM_IN_NAME = lem-in
 LEM_IN_PATH = srcs
 
 LEM_IN = main.c \
+		 get_multi_paths.c \
 		 free_functions.c \
 		 error_printer.c \
 		 tree_balance2.c \
@@ -39,11 +40,11 @@ LEM_IN = main.c \
 		 tree_search.c \
 		 calc_dist.c \
 		 link_tree.c \
-		 get_path.c \
 		 parsing.c \
 		 stock.c \
 		 utils.c \
 		 tree.c \
+		#get_path.c 
 
 LEM_IN_OBJS = $(LEM_IN:.c=.o)
 

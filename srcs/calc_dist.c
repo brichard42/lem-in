@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/19 07:57:30 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/19 08:37:03 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		ft_count_links(t_link *count, int n_hei)
+int		ft_count_links(t_link *count, int n_hei)
 {
 	int		i;
 	t_link	*left;
