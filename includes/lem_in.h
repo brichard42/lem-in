@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/19 10:05:06 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/20 10:45:58 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_link
 typedef struct		s_path
 {
 	char			*name;
+	int				*g_b;
 	struct s_path	*next;
 	struct s_path	*prev;
 }					t_path;
@@ -48,13 +49,14 @@ typedef struct		s_path
 typedef struct		s_env
 {
 	long int		ants;
-	t_path			**the_paths;
+	t_path			***the_paths;
 	t_nod			*start;
 	t_nod			*end;
 	t_nod			*tree;
 }					t_env;
 
-void				ft_print_tree(t_nod *tree);
+void				ft_print_tree(t_nod *tree); // TO TEJ
+void				ft_aff_paths(t_path ***the_paths); // TO TEJ
 int					ft_get_rooms_and_links(t_env *env, char *str, int r_l);
 int					ft_get_ants(t_env *env, char *str);
 int					ft_get_path(t_env *env);
@@ -78,7 +80,7 @@ void				ft_small_balance(t_nod **tree, int bal);
 
 void				ft_free_tree(t_nod *tree);
 t_nod				**ft_free_ret_nod(t_nod **to_f);
-void				ft_free_path(t_path *path);
+void				ft_free_path(t_path ***path);
 
 int					ft_stock_room(t_env *env, char *str, char *s_e);
 int					ft_stock_link(t_env *env, char *str);

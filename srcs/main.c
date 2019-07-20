@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/20 08:14:15 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/20 10:42:57 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int			main(void)
 		ft_printf("end = %s\n", env.end->room); //same
 	ft_free_tree(env.tree);
 	i = -1;
-	while (env.the_paths[++i]) //probablement meilleur facon de remove
-		ft_free_path(env.the_paths[i]); //ouais vraiment
+	ft_free_path(env.the_paths);
 	ft_memdel((void **)&env.the_paths);
 	return (0);
 }
