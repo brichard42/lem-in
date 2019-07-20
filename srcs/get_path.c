@@ -6,11 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 16:49:31 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/19 10:26:55 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/20 08:08:12 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/* WE HAVE TO REMOVE THAT SHIT BECAUSE IT IS USELESS NOW */
 
 static t_nod	*ft_find_path(t_link *link, int dist)
 {

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:50:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/19 11:07:01 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/20 08:15:05 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,15 @@ int	ft_get_multi_paths(t_env *env)
 			return (1);
 	}
 	env->the_paths = the_paths;
+	ft_memdel((void **)&the_nods);
 	i = -1;
 	while (env->the_paths[++i])
 	{
+		/* a enlever */
 		ft_putendl("THE PATH");
 		ft_print_path(env->the_paths[i], 0);
 		ft_putendl("C'ETAIT THE PATH");
+		/* jusque la */
 	}
 	return (0);
 }
