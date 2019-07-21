@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/20 14:31:23 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/21 19:31:19 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ void		ft_aff_paths(t_path ***the_paths) /* TO REMOVE */
 	}
 }
 
-t_path		*ft_create_path(t_nod *tmp)
+t_path		*ft_create_path(t_nod *tmp, int i)
 {
 	t_path	*new;
 
 	if (!(new = (t_path *)ft_memalloc(sizeof(t_path))))
-		return (NULL);
-	if (tmp->u)
-		new->u = 1;
+		return (NULL);	
+	new->u = i;
 	if (!(new->name = ft_strdup(tmp->room)))
 		return (NULL/*free new*/);
 	return (new);

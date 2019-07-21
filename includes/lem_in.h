@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/20 14:30:13 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/21 19:30:58 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					ft_get_ants(t_env *env, char *str);
 int					ft_get_path(t_env *env);
 int					ft_get_multi_paths(t_env *env);
 
-t_path				*ft_create_path(t_nod *tmp);
+t_path				*ft_create_path(t_nod *tmp, int i);
 
 int					ft_node_add(t_env *env, t_nod **tree, char *room, char s_e);
 t_nod				*ft_node_new(char *room);
