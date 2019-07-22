@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:50:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/21 19:58:33 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/22 17:40:53 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,29 @@ static int ft_get_the_nods(t_path ***the_path, t_nod **the_nods, t_link *link, i
 	return (i);
 }
 
+static void		ft_rem_links(t_link	*link, t_nod *nods)
+{
+	if (link->l_room == nods)
+	{
+		link->l_room = NULL;
+	}
+	if (link->left)
+		ft_rem_links(link->left, nods);
+	if (link->right)
+		ft_rem_links(link->right, nods);
+}
+
+static void		ft_clear_links(t_link *link, t_nod *nod)
+{
+	if (!link->l_room)
+		return ;
+	if (link->left)
+		ft_clear_links(link->left, nod);
+	if (link->right)
+		ft_clear_links(link->right, nod);
+	ft_rem_links(link->l_room->links, nod);
+}
+
 static t_nod	*ft_find_path(t_link *link, int dist, t_env *env)
 {
 	t_nod *save;
@@ -51,8 +74,15 @@ static t_nod	*ft_find_path(t_link *link, int dist, t_env *env)
 	save = NULL;
 	if (!link)
 		return (NULL);
-	if (link->l_room->hei == dist - 1 && link->l_room != env->end)
-		return (link->l_room);
+	if (link->l_room)
+	{
+		if ((link->l_room->hei == dist - 1 && link->l_room != env->end))
+		{
+			ft_clear_links(link->l_room->links, link->l_room);
+			ft_putchar('a');
+			return (link->l_room);
+		}
+	}
 	if (link->left)
 		if ((save = ft_find_path(link->left, dist, env)) != NULL)
 			return (save);
@@ -92,23 +122,19 @@ static int		ft_path_finder(t_path ***paths, t_nod **nods, t_env *env, int *sizes
 					j++;
 					break ;
 				}
-				if (++nods[j]->u > 1 && nods[j] != env->start)
-				{
-					nods[j] = ft_find_path(nods[j]->links, nods[j]->hei, env);
-					if (!(new_path = ft_create_path(nods[j], 2)))
-						return (1);
-				}
+			/*	if (++nods[j]->u > 1 && nods[j] != env->start)
+				{*/
+				nods[j] = ft_find_path(nods[j]->links, nods[j]->hei, env);
+				if (!(new_path = ft_create_path(nods[j], 2)))
+					return (1);
+				/*}
 				else
 				{
 					nods[j] = ft_find_path(nods[j]->links, nods[j]->hei, env);
 					if (!(new_path = ft_create_path(nods[j], 0)))
 						return (1);
-				}
+				}*/
 				paths[j][sizes[j] - 1] = new_path;
-/*				ft_putnbr(sizes[j] - 1);
-				ft_putchar(' ');
-				ft_putnbr(paths[j][sizes[j] - 1]->u);
-				ft_putchar('\n');*/
 				sizes[j++]--;	
 			}
 			j = 0;
