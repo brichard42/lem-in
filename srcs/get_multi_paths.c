@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:50:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/22 17:40:53 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/22 20:45:53 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ static int ft_get_the_nods(t_path ***the_path, t_nod **the_nods, t_link *link, i
 
 static void		ft_rem_links(t_link	*link, t_nod *nods)
 {
-	if (link->l_room == nods)
-	{
-		link->l_room = NULL;
-	}
 	if (link->left)
 		ft_rem_links(link->left, nods);
 	if (link->right)
 		ft_rem_links(link->right, nods);
+	if (link->l_room == nods)
+		link->l_room = NULL;
 }
 
 static void		ft_clear_links(t_link *link, t_nod *nod)
@@ -70,6 +68,7 @@ static void		ft_clear_links(t_link *link, t_nod *nod)
 static t_nod	*ft_find_path(t_link *link, int dist, t_env *env)
 {
 	t_nod *save;
+	t_nod *tmp;
 
 	save = NULL;
 	if (!link)
@@ -78,9 +77,9 @@ static t_nod	*ft_find_path(t_link *link, int dist, t_env *env)
 	{
 		if ((link->l_room->hei == dist - 1 && link->l_room != env->end))
 		{
+			tmp = link->l_room;
 			ft_clear_links(link->l_room->links, link->l_room);
-			ft_putchar('a');
-			return (link->l_room);
+			return (tmp);
 		}
 	}
 	if (link->left)
@@ -122,18 +121,18 @@ static int		ft_path_finder(t_path ***paths, t_nod **nods, t_env *env, int *sizes
 					j++;
 					break ;
 				}
-			/*	if (++nods[j]->u > 1 && nods[j] != env->start)
-				{*/
+				if (++nods[j]->u > 1 && nods[j] != env->start)
+				{
 				nods[j] = ft_find_path(nods[j]->links, nods[j]->hei, env);
 				if (!(new_path = ft_create_path(nods[j], 2)))
 					return (1);
-				/*}
+				}
 				else
 				{
 					nods[j] = ft_find_path(nods[j]->links, nods[j]->hei, env);
 					if (!(new_path = ft_create_path(nods[j], 0)))
 						return (1);
-				}*/
+				}
 				paths[j][sizes[j] - 1] = new_path;
 				sizes[j++]--;	
 			}
