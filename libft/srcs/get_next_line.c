@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 09:37:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/06/27 14:23:33 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:29:21 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*a_line(char **str)
 	return (line);
 }
 
-static int 	clean(char *to_f)
+static int	clean(char *to_f)
 {
 	ft_strdel(&to_f);
 	return (-1);

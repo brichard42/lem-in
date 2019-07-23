@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/20 14:08:37 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:27:10 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_count_links(t_link *count, int n_hei)
+int				ft_count_links(t_link *count, int n_hei)
 {
 	int		i;
 	t_link	*left;
@@ -54,7 +54,7 @@ static void		ft_get_links(t_nod **curr, t_nod **n_tab, int n_hei, t_nod *end)
 {
 	int	j;
 	int	i;
-	
+
 	i = 0;
 	j = 0;
 	while (curr[j])
@@ -74,10 +74,7 @@ static t_nod	**ft_get_current(t_nod **curr, int n_hei, t_nod *end)
 	count = 0;
 	i = 0;
 	while (curr[i])
-	{
-		count = count + ft_count_links(curr[i]->links, n_hei);
-		i++;
-	}
+		count = count + ft_count_links(curr[i++]->links, n_hei);
 	if (count == 0)
 		return (ft_free_ret_nod(curr));
 	if (!(n_tab = (t_nod **)ft_memalloc(sizeof(t_nod *) * (count + 1))))

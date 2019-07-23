@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/03 16:37:42 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:25:39 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,17 @@
 #include <limits.h>
 
 #include "../libft/includes/ft_printf.h"
-int	ft_get_rooms_and_links(t_env *env, char *str, int r_l)
+
+static int	ft_erro_helper(t_env *env, int reta)
+{
+	if (reta == -1)
+		return (ft_print_error("Error while reading rooms and links."));
+	if (!env->start || !env->end)
+		return (ft_print_error("Error: Missing Start/End."));
+	return (0);
+}
+
+int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 {
 	char	s_e;
 	char	*ret;
@@ -38,14 +48,10 @@ int	ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 			return (ft_print_error("A link is not well formated."));
 		ft_strdel(&str);
 	}
-	if (reta == -1)
-		return (ft_print_error("Error while reading rooms and links."));
-	if (!env->start || !env->end)
-		return (ft_print_error("Error: Missing Start/End."));
-	return (0);
+	return (ft_erro_helper(env, reta));
 }
 
-int	ft_get_ants(t_env *env, char *str)
+int			ft_get_ants(t_env *env, char *str)
 {
 	long int	ants;
 

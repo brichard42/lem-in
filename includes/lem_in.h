@@ -1,12 +1,12 @@
-/*************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                        :+:      :+:    :+:   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/15 16:32:27 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/21 19:30:58 by tlandema         ###   ########.fr       */
+/*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
+/*   Updated: 2019/07/23 16:28:25 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct		s_env
 }					t_env;
 
 void				ft_print_tree(t_nod *tree); // TO TEJ
-void				ft_aff_paths(t_path ***the_paths); // TO TEJ
+//void				ft_aff_paths(t_path ***the_paths); // TO TEJ
 int					ft_get_rooms_and_links(t_env *env, char *str, int r_l);
 int					ft_get_ants(t_env *env, char *str);
 int					ft_get_path(t_env *env);
