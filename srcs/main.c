@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 05:43:18 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 19:29:55 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int			main(void)
 		return (ft_free_spec(env));
 	if (ft_get_multi_paths(&env))
 		return (ft_free_spec(env));
-	ft_print_tree(env.tree);// a enlever
-	if (env.start) // same
-		ft_printf("start = %s\n", env.start->room); // same
-	if (env.end) //same 
-		ft_printf("end = %s\n", env.end->room); //same*/
+	ft_print_tree(env.tree);
+	if (env.start)
+		ft_printf("start = %s\n", env.start->room);
+	if (env.end)
+		ft_printf("end = %s\n", env.end->room);
 	ft_free_tree(env.tree);
-	ft_free_path(env.the_paths);
-	ft_memdel((void **)&env.the_paths);
+	ft_free_path(env.paths);
+	ft_memdel((void **)&env.paths);
 	return (0);
 }

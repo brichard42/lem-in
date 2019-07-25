@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 05:48:02 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 20:33:05 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,91 +38,15 @@ static int	ft_get_the_nods(t_path **paths, t_nod **nodes, t_link *link, int i)
 	return (i);
 }
 
-static int	ft_path_counter(t_path **paths)
+static int	ft_path_helper(t_path *path, t_nod **node, t_env *env)
 {
-	int i;
+	int ret;
 
-	i = 0;
-	while (paths[i])
-		i++;
-	return (i);
-}
-
-static int	ft_get_links(t_nod **tab_link, t_link *link, int i)
-{
-	if (!link)
-		return (0);
-	if (!link->l_room->u)
-	{
-		tab_link[i] = link->l_room;
-		i++;
-	}
-	if (link->left)
-		i = ft_get_links(tab_link, link->left, i);
-	if (link->right)
-		i = ft_get_links(tab_link, link->right, i);
-	return (i);
-}
-
-static t_nod	**ft_get_unvisited_links(t_nod *node)
-{
-	int		num_link;
-	t_nod	**links;
-
-	num_link = ft_count_links(node->links, -1);
-	if (!(links = (t_nod **)ft_memalloc(sizeof(t_nod *) * (num_link + 1))))
-		return (NULL);
-	ft_get_links(links, node->links, 0);
-	return (links);
-}
-
-static t_nod	*ft_best_link(t_nod **tab_link)
-{
-	int i;
-	int min_hei;
-
-	i = 1;
-	if (!tab_link[0])
-		return (NULL);
-	min_hei = tab_link[0]->hei;
-	while (tab_link[i])
-	{
-		if (tab_link[i]->hei < min_hei)
-			min_hei = tab_link[i]->hei;
-		i++;
-	}
-	i = 0;
-	while (tab_link[i])
-	{
-		if (tab_link[i]->hei == min_hei)
-			return (tab_link[i]);
-		i++;
-	}
-	return (NULL);
-}
-
-static int	ft_ret_2_del_links(t_nod **links)
-{
-	ft_memdel((void **)&links);
-	return (2);
-}
-
-static int	ft_get_next_node(t_path *path, t_nod **node, t_env *env)
-{
-	t_nod	*new;
-	t_nod	**links;
-
-	if (!(links = ft_get_unvisited_links(*node)))
+	ret = ft_get_next_node(path, node, env);
+	if (ret == 1)
 		return (1);
-	if (!links[0])
-		return (ft_ret_2_del_links(links));
-	if (!(new = ft_best_link(links)))
-		return (1);
-	if (new != env->start)
-		new->u++;
-	ft_memdel((void **)&links);
-	ft_create_path(&path, new);
-	*node = new;
+	if (ret == 2)
+		(*node)->hei = -1;
 	return (0);
 }
 
@@ -130,7 +54,6 @@ static int	ft_path_finder(t_path **paths, t_nod **nodes, t_env *env)
 {
 	int	j;
 	int	i;
-	int	ret;
 
 	j = 0;
 	i = ft_path_counter(paths);
@@ -142,13 +65,8 @@ static int	ft_path_finder(t_path **paths, t_nod **nodes, t_env *env)
 			while (paths[j])
 			{
 				if (nodes[j] != env->start)
-				{
-					ret = ft_get_next_node(paths[j], &nodes[j], env);
-					if (ret == 1)
+					if (ft_path_helper(paths[j], &nodes[j], env) == 1)
 						return (1);
-					if (ret == 2)
-						nodes[j]->hei = -1;
-				}
 				j++;
 			}
 			j = 0;

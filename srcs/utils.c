@@ -6,14 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 03:41:29 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 20:22:10 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-
-static int ft_print_path(t_path *path, int i)
+static int	ft_print_path(t_path *path, int i)
 {
 	if (!path)
 		return (0);
@@ -52,7 +51,6 @@ int			ft_create_path(t_path **path, t_nod *new)
 	return (0);
 }
 
-
 void		ft_hei_to_neg(t_nod *tree)
 {
 	if (!tree)
@@ -62,4 +60,14 @@ void		ft_hei_to_neg(t_nod *tree)
 		ft_hei_to_neg(tree->left);
 	if (tree->right)
 		ft_hei_to_neg(tree->right);
+}
+
+int			ft_path_counter(t_path **paths)
+{
+	int i;
+
+	i = 0;
+	while (paths[i])
+		i++;
+	return (i);
 }
