@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 03:12:56 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 03:42:50 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,8 @@ static int	ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 
 	if (!(links = ft_get_unvisited_links(*node)))
 		return (1);
-	//if (!links[0])
-	//{
-	//	ft_putendl((*node)->room);
-	//	return (1);
-	//}
+	if (!links[0])
+		return (2);
 	if (!(new = ft_best_link(links)))
 		return (1);
 	if (new != env->start)
@@ -127,6 +124,7 @@ static int	ft_path_finder(t_path **paths, t_nod **nodes, t_env *env)
 {
 	int	j;
 	int	i;
+	int	ret;
 
 	j = 0;
 	i = ft_path_counter(paths);
@@ -138,8 +136,13 @@ static int	ft_path_finder(t_path **paths, t_nod **nodes, t_env *env)
 			while (paths[j])
 			{
 				if (nodes[j] != env->start)
-					if (ft_get_next_node(paths[j], &nodes[j], env))
+				{
+					ret = ft_get_next_node(paths[j], &nodes[j], env);
+					if (ret == 1)
 						return (1);
+					if (ret == 2)
+						nodes[j]->hei = -1;
+				}
 				j++;
 			}
 			j = 0;
