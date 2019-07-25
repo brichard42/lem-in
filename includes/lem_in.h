@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 22:22:17 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 23:06:42 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void				ft_hei_to_neg(t_nod *tree);
 int					ft_calc_dist(t_env *env);
 int					ft_count_links(t_link *count, int n_hei);
 int					ft_get_next_node(t_path *path, t_nod **node, t_env *env);
+t_path				**ft_check_paths(t_path **old_paths, t_env *env, int num);
 
 t_nod				*ft_search_room(t_nod *tree, char *key);
 t_link				*ft_search_link(t_link *tree, char *key);

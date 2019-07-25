@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 22:22:31 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 23:24:30 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,12 @@ int			ft_get_multi_paths(t_env *env)
 		return (ft_ret_1_free(paths));
 	if (!(ft_get_the_nods(paths, nodes, env->end->links, 0)))
 		return (ft_free_paths_nodes(paths, nodes));
+	env->start->u = 0;
 	if (ft_path_finder(paths, nodes, env))
+		return (ft_free_paths_nodes(paths, nodes));
+	if (!(paths = ft_check_paths(paths, env, num_link)))
 		return (ft_free_paths_nodes(paths, nodes));
 	ft_memdel((void **)&nodes);
 	env->paths = paths;
-	ft_aff_paths(paths);
 	return (0);
 }
