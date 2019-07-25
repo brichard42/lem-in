@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:25:34 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 20:33:07 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:03:36 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 	if (!(links = ft_get_unvisited_links(*node)))
 		return (1);
 	if (!links[0])
-		return (ft_ret_2_del_links(links));
+		return (ft_ret_i_del_links(links, 2));
 	if (!(new = ft_best_link(links)))
 		return (1);
 	if (new != env->start)

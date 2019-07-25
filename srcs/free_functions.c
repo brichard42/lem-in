@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:01:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 19:27:22 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:23:30 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void		ft_free_path(t_path **path)
 	int	i;
 
 	i = -1;
-	while (path[++i])
-		ft_free_path_helper(path[i]);
+	if (path)
+		while (path[++i])
+			ft_free_path_helper(path[i]);
+	ft_memdel((void **)&path);
 }

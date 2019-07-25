@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 20:33:05 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:22:31 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ static int	ft_path_finder(t_path **paths, t_nod **nodes, t_env *env)
 	return (0);
 }
 
+static int	ft_ret_1_free(t_path **paths)
+{
+	ft_memdel((void **)&paths);
+	return (1);
+}
+
 int			ft_get_multi_paths(t_env *env)
 {
 	t_path	**paths;
@@ -86,11 +92,11 @@ int			ft_get_multi_paths(t_env *env)
 	if (!(paths = (t_path **)ft_memalloc(sizeof(t_path *) * (num_link + 1))))
 		return (1);
 	if (!(nodes = (t_nod **)ft_memalloc(sizeof(t_nod *) * (num_link + 1))))
-		return (1/*free paths properly*/);
+		return (ft_ret_1_free(paths));
 	if (!(ft_get_the_nods(paths, nodes, env->end->links, 0)))
-		return (1/*free paths properly*/);
+		return (ft_free_paths_nodes(paths, nodes));
 	if (ft_path_finder(paths, nodes, env))
-		return (1/*free paths properly*/);
+		return (ft_free_paths_nodes(paths, nodes));
 	ft_memdel((void **)&nodes);
 	env->paths = paths;
 	ft_aff_paths(paths);

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 19:29:55 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:19:00 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ int			main(void)
 		ft_printf("end = %s\n", env.end->room);
 	ft_free_tree(env.tree);
 	ft_free_path(env.paths);
-	ft_memdel((void **)&env.paths);
 	return (0);
 }
