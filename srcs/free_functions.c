@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:01:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/24 23:55:17 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 05:43:04 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,22 @@ void		ft_free_tree(t_nod *tree)
 	ft_free_link(tree->links);
 	ft_strdel(&tree->room);
 	ft_memdel((void **)&tree);
+}
+
+static void	ft_free_path_helper(t_path *path)
+{
+	if (!path)
+		return ;
+	if (path->next)
+		ft_free_path_helper(path->next);
+	ft_memdel((void **)&path);
+}
+
+void		ft_free_path(t_path	**path)
+{
+	int i;
+
+	i = -1;
+	while (path[++i])
+		ft_free_path_helper(path[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 03:42:50 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 05:48:02 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ static t_nod	*ft_best_link(t_nod **tab_link)
 	return (NULL);
 }
 
+static int	ft_ret_2_del_links(t_nod **links)
+{
+	ft_memdel((void **)&links);
+	return (2);
+}
+
 static int	ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 {
 	t_nod	*new;
@@ -109,7 +115,7 @@ static int	ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 	if (!(links = ft_get_unvisited_links(*node)))
 		return (1);
 	if (!links[0])
-		return (2);
+		return (ft_ret_2_del_links(links));
 	if (!(new = ft_best_link(links)))
 		return (1);
 	if (new != env->start)
@@ -167,6 +173,8 @@ int			ft_get_multi_paths(t_env *env)
 		return (1/*free paths properly*/);
 	if (ft_path_finder(paths, nodes, env))
 		return (1/*free paths properly*/);
+	ft_memdel((void **)&nodes);
+	env->paths = paths;
 	ft_aff_paths(paths);
 	return (0);
 }

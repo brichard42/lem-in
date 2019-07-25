@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/23 16:27:10 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 05:24:58 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int				ft_count_links(t_link *count, int n_hei)
 		return (0);
 	else
 		i++;
-	if (left && (left->l_room->hei > n_hei || left->l_room->hei == -1))
+	if (left)
 		i = i + ft_count_links(left, n_hei);
-	if (right && (right->l_room->hei > n_hei || right->l_room->hei == -1))
+	if (right)
 		i = i + ft_count_links(right, n_hei);
 	return (i);
 }

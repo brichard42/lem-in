@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 03:10:35 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 05:44:36 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct		s_path
 typedef struct		s_env
 {
 	long int		ants;
-	t_path			***the_paths;
+	t_path			**paths;
 	t_nod			*start;
 	t_nod			*end;
 	t_nod			*tree;
@@ -81,7 +81,7 @@ void				ft_small_balance(t_nod **tree, int bal);
 
 void				ft_free_tree(t_nod *tree);
 t_nod				**ft_free_ret_nod(t_nod **to_f);
-//void				ft_free_path(t_path ***path);
+void				ft_free_path(t_path **path);
 
 int					ft_stock_room(t_env *env, char *str, char *s_e);
 int					ft_stock_link(t_env *env, char *str);
