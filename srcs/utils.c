@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 23:22:08 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/26 00:00:57 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ int			ft_create_path(t_path **path, t_nod *new)
 		if (!(*path = (t_path *)ft_memalloc(sizeof(t_path))))
 			return (1);
 		(*path)->node = new;
+		(*path)->size = 1;
 	}
 	else
+	{
 		ft_create_path(&(*path)->next, new);
+		(*path)->size++;
+	}
 	return (0);
 }
 

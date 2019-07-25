@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/07/25 20:31:57 by tlandema         ###   ########.fr        #
+#    Updated: 2019/07/26 00:20:07 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ LEM_IN = main.c \
 		 error_printer.c \
 		 tree_balance2.c \
 		 tree_balance.c \
+		 ants_in_path.c \
 		 tree_search.c \
 		 calc_dist.c \
 		 link_tree.c \
