@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/23 16:19:18 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 00:02:24 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int			main(void)
 		return (ft_free_spec(env));
 	if (ft_calc_dist(&env))
 		return (ft_free_spec(env));
-	//if (ft_get_multi_paths(&env))
-	//	return (ft_free_spec(env));
+	if (ft_get_multi_paths(&env))
+		return (ft_free_spec(env));
 	ft_print_tree(env.tree);// a enlever
 	if (env.start) // same
 		ft_printf("start = %s\n", env.start->room); // same

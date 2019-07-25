@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/23 16:28:25 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/25 03:10:35 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ typedef struct		s_link
 
 typedef struct		s_path
 {
-	char			*name;
-	int				u;
+	t_nod			*node;
 	struct s_path	*next;
-	struct s_path	*prev;
 }					t_path;
 
 typedef struct		s_env
@@ -57,13 +55,13 @@ typedef struct		s_env
 }					t_env;
 
 void				ft_print_tree(t_nod *tree); // TO TEJ
-//void				ft_aff_paths(t_path ***the_paths); // TO TEJ
+void				ft_aff_paths(t_path **the_paths); // TO TEJ
 int					ft_get_rooms_and_links(t_env *env, char *str, int r_l);
 int					ft_get_ants(t_env *env, char *str);
 int					ft_get_path(t_env *env);
 int					ft_get_multi_paths(t_env *env);
 
-t_path				*ft_create_path(t_nod *tmp, int i);
+int					ft_create_path(t_path **path, t_nod *new);
 
 int					ft_node_add(t_env *env, t_nod **tree, char *room, char s_e);
 t_nod				*ft_node_new(char *room);
@@ -83,7 +81,7 @@ void				ft_small_balance(t_nod **tree, int bal);
 
 void				ft_free_tree(t_nod *tree);
 t_nod				**ft_free_ret_nod(t_nod **to_f);
-void				ft_free_path(t_path ***path);
+//void				ft_free_path(t_path ***path);
 
 int					ft_stock_room(t_env *env, char *str, char *s_e);
 int					ft_stock_link(t_env *env, char *str);

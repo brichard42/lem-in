@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:01:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/20 10:47:30 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/24 23:55:17 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,6 @@ static void	ft_free_link(t_link *link)
 		ft_free_link(link->left);
 	ft_strdel(&link->name);
 	ft_memdel((void **)&link);
-}
-
-void		ft_free_path(t_path ***paths)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (paths[i])
-	{
-		j = 0;
-		while (paths[i][j])
-		{
-			ft_strdel(&paths[i][j]->name);
-			ft_memdel((void **)&paths[i][j++]);
-		}
-		ft_memdel((void **)&paths[i++]);
-	}
 }
 
 void		ft_free_tree(t_nod *tree)
