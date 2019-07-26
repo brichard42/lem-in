@@ -6,11 +6,24 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 00:08:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/26 01:11:11 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/26 03:36:55 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+static void	ft_reduce_paths(t_path **paths)
+{
+	int i;
+	int red;
+
+	i = 0;
+	red = paths[0]->size - 1;
+	while (paths[i])
+	{
+		paths[i++]->size -= red;
+	}
+}
 
 static void	ft_sort_paths(t_path **paths)
 {
@@ -38,46 +51,59 @@ static void	ft_sort_paths(t_path **paths)
 		i = 0;
 		j--;
 	}
+	ft_reduce_paths(paths);
 }
 
-int			ft_ant_in_paths(t_env *env)
+/*static void	ft_aff_ants(t_paths **paths, int *tab_i, t_env *env, int n_path)
 {
-	int 	i;
-	int		tester;
+	int		i;
+	int		j;
+
+	i = 1;
+	j = 0;
+	while (tab_i[0])
+	{
+		while (paths[j])
+		{
+			ft_putchar('L');
+			ft_putnbr(i);
+			ft_putchar('-');
+//			ft_put_room_name(
+		}
+		j = 0;
+	}
+}*/
+
+int			ft_ant_in_paths(t_env *env, t_path **paths)
+{
+	int		i;
 	int		*tab_i;
 	int		ants;
-	t_path	**paths;
+	int		n_path;
 
-	i = 0;
-	paths = env->paths;
+	i = -1;
 	ants = (int)env->ants;
 	ft_sort_paths(paths);
-	if (!(tab_i = (int *)ft_memalloc(sizeof(int) * (ft_path_counter(paths) + 1))))
+	n_path = ft_path_counter(paths);
+	if (!(tab_i = (int *)ft_memalloc(sizeof(int) * (n_path + 1))))
 		return (1);
 	while (ants)
 	{
-		tester = 0;
-		while (paths[i])
+		while (paths[++i])
 		{
 			if (ants >= paths[i]->size)
 			{
-				tester = 1;
 				tab_i[i]++;
 				ants--;
 			}
-			i++;
 		}
-		if (tester == 0)
-		{
-			tab_i[0] += ants;
-			ants = 0;
-		}
-		i = 0;
+		i = -1;
 	}
-	while (tab_i[i] != 0)
+	while (tab_i[++i])
 	{
-		ft_putnbr(tab_i[i++]);
-		ft_putchar(' ');
+		ft_putnbr(tab_i[i]);
+		ft_putchar('\n');
 	}
+//	ft_aff_ants(paths, tab_i, env, n_path);
 	return (0);
 }
