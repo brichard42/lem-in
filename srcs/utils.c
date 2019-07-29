@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/29 13:53:20 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/29 17:35:47 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ int			ft_create_path(t_path **path, t_nod *new)
 	return (0);
 }
 
-void		ft_hei_to_neg(t_nod *tree)
+void		ft_hei_to_num(t_nod *tree, int i)
 {
 	if (!tree)
 		return ;
-	tree->hei = -1;
+	tree->hei = i;
 	if (tree->left)
-		ft_hei_to_neg(tree->left);
+		ft_hei_to_num(tree->left, i);
 	if (tree->right)
-		ft_hei_to_neg(tree->right);
+		ft_hei_to_num(tree->right, i);
 }
 
 int			ft_path_counter(t_path **paths)

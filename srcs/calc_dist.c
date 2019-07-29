@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/25 20:14:01 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/29 17:34:54 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int				ft_calc_dist(t_env *env)
 	int		i;
 
 	i = 1;
-	ft_hei_to_neg(env->tree);
+	ft_hei_to_num(env->tree, -1);
 	env->start->hei = 0;
 	if (!(curr = (t_nod **)ft_memalloc(sizeof(t_nod *) * 2)))
 		return (1);

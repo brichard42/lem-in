@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 00:08:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/29 16:04:39 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/29 18:43:33 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ int			ft_ant_in_paths(t_env *env, t_nod ***paths)
 		ft_putnbr(tab_i[i]);
 		ft_putchar('\n');
 	}
+	ft_send_ants(paths, tab_i, env, n_path);
+	ft_memdel((void **)&tab_i);
 	return (0);
 }
