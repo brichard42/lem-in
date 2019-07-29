@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/26 02:59:08 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/29 13:57:09 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,19 @@ typedef struct		s_path
 typedef struct		s_env
 {
 	long int		ants;
-	t_path			**paths;
+	t_nod			***paths;
 	t_nod			*start;
 	t_nod			*end;
 	t_nod			*tree;
 }					t_env;
 
 void				ft_print_tree(t_nod *tree); // TO TEJ
-void				ft_aff_paths(t_path **the_paths); // TO TEJ
+void				ft_aff_paths(t_nod ***the_paths); // TO TEJ
 int					ft_get_rooms_and_links(t_env *env, char *str, int r_l);
 int					ft_get_ants(t_env *env, char *str);
 int					ft_get_path(t_env *env);
 int					ft_get_multi_paths(t_env *env);
+int					ft_node_in_path(t_path *path, int i);
 
 int					ft_create_path(t_path **path, t_nod *new);
 
@@ -76,8 +77,9 @@ int					ft_calc_dist(t_env *env);
 int					ft_count_links(t_link *count, int n_hei);
 int					ft_get_next_node(t_path *path, t_nod **node, t_env *env);
 t_path				**ft_check_paths(t_path **old_paths, t_env *env, int num);
+t_nod				***ft_transform_paths(t_path **paths);
 
-int					ft_ant_in_paths(t_env *env, t_path **paths);
+int					ft_ant_in_paths(t_env *env, t_nod ***paths);
 
 t_nod				*ft_search_room(t_nod *tree, char *key);
 t_link				*ft_search_link(t_link *tree, char *key);
@@ -86,6 +88,7 @@ void				ft_balance_tree(t_nod **tree, char *room);
 void				ft_small_balance(t_nod **tree, int bal);
 
 void				ft_free_tree(t_nod *tree);
+void				ft_free_transformed_path(t_nod ***paths);
 t_nod				**ft_free_ret_nod(t_nod **to_f);
 void				ft_free_path(t_path **path);
 int					ft_free_paths_nodes(t_path **paths, t_nod **nodes);

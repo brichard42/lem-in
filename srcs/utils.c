@@ -6,31 +6,30 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/26 00:00:57 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/29 13:53:20 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	ft_print_path(t_path *path)
+int	ft_node_in_path(t_path *path, int i)
 {
-	if (!path)
-		return ;
 	if (path->next)
-		ft_print_path(path->next);
-	ft_putendl(path->node->room);
-	return ;
+		i = ft_node_in_path(path->next, i + 1);
+	return (i);
 }
 
-void		ft_aff_paths(t_path **the_paths)
+void		ft_aff_paths(t_nod ***the_paths)
 {
 	int i;
-
+	int	j;
 	i = -1;
 	while (the_paths[++i])
 	{
+		j = -1;;
 		ft_putendl("THE PATH");
-		ft_print_path(the_paths[i]);
+		while (the_paths[i][++j])
+			ft_putendl(the_paths[i][j]->room);
 		ft_putendl("C'ETAIT THE PATH");
 	}
 }

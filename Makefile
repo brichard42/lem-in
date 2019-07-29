@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/07/26 00:20:07 by tlandema         ###   ########.fr        #
+#    Updated: 2019/07/29 09:22:52 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ LEM_IN_NAME = lem-in
 LEM_IN_PATH = srcs
 
 LEM_IN = main.c \
+		 get_multi_paths3.c \
 		 get_multi_paths2.c \
 		 get_multi_paths.c \
 		 free_functions2.c \
