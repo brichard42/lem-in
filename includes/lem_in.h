@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 17:27:22 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/30 18:40:49 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,12 @@ t_link				*ft_search_link(t_link *tree, char *key);
 void				ft_balance_tree(t_nod **tree, char *room);
 void				ft_small_balance(t_nod **tree, int bal);
 
+t_nod				**ft_free_ret_nod(t_nod **to_f);
 void				ft_free_tree(t_nod *tree);
 void				ft_free_transformed_path(t_nod ***paths);
-t_nod				**ft_free_ret_nod(t_nod **to_f);
 void				ft_free_path(t_path **path);
 int					ft_free_paths_nodes(t_path **paths, t_nod **nodes);
+int					ft_free_str(char *str);
 int					ft_ret_i_del_links(t_nod **links, int i);
 
 int					ft_stock_room(t_env *env, char *str, char *s_e);

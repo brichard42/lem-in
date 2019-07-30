@@ -6,14 +6,12 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/23 16:25:39 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/30 18:40:12 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <limits.h>
-
-#include "../libft/includes/ft_printf.h"
 
 static int	ft_erro_helper(t_env *env, int reta)
 {
@@ -37,12 +35,12 @@ int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 		{
 			r_l = 1;
 			if (ft_stock_link(env, str))
-				return (1);
+				return (ft_free_str(str));
 		}
 		else if (r_l == 0)
 		{
 			if (ft_stock_room(env, str, &s_e))
-				return (1);
+				return (ft_free_str(str));
 		}
 		else
 			return (ft_print_error("A link is not well formated."));
