@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/29 16:06:12 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/30 13:51:21 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ int			ft_get_multi_paths(t_env *env)
 	int		i;
 	int		num_link;
 
-	i = 0;
+	i = -1;
 	num_link = ft_count_links(env->end->links, -1);
 	if (!(paths = (t_path **)ft_memalloc(sizeof(t_path *) * (num_link + 1))))
 		return (1);
 	if (!(nodes = (t_nod **)ft_memalloc(sizeof(t_nod *) * (num_link + 1))))
 		return (ft_ret_1_free(paths));
+	while (++i < num_link)
+		ft_create_path(&paths[i], ft_node_new(env->end->room));
 	if (!(ft_get_the_nods(paths, nodes, env->end->links, 0)))
 		return (ft_free_paths_nodes(paths, nodes));
 	env->start->u = 0;
@@ -102,7 +104,7 @@ int			ft_get_multi_paths(t_env *env)
 		return (ft_free_paths_nodes(paths, nodes));
 	if (!(paths = ft_check_paths(paths, env, num_link)))
 		return (ft_free_paths_nodes(paths, nodes));
-	if (!(env->paths = ft_transform_paths(paths)))
+	if (!(env->paths = ft_transform_paths(paths, env)))
 		return (ft_free_paths_nodes(paths, nodes));
 	ft_memdel((void **)&nodes);
 	ft_free_path(paths);
