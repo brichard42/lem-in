@@ -6,27 +6,37 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/29 17:35:47 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:13:01 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	ft_node_in_path(t_path *path, int i)
+int		ft_node_in_path(t_path *path, int i)
 {
 	if (path->next)
 		i = ft_node_in_path(path->next, i + 1);
 	return (i);
 }
 
-void		ft_aff_paths(t_nod ***the_paths)
+void	ft_aff_one_move(int ant, char *path)
+{
+	ft_putchar('L');
+	ft_putnbr(ant);
+	ft_putchar('-');
+	ft_putstr(path);
+	ft_putchar(' ');
+}
+
+void	ft_aff_paths(t_nod ***the_paths) //remove me for 5 function in file
 {
 	int i;
 	int	j;
+
 	i = -1;
 	while (the_paths[++i])
 	{
-		j = -1;;
+		j = -1;
 		ft_putendl("THE PATH");
 		while (the_paths[i][++j])
 			ft_putendl(the_paths[i][j]->room);
@@ -34,7 +44,7 @@ void		ft_aff_paths(t_nod ***the_paths)
 	}
 }
 
-int			ft_create_path(t_path **path, t_nod *new)
+int		ft_create_path(t_path **path, t_nod *new)
 {
 	if (!*path)
 	{
@@ -51,7 +61,7 @@ int			ft_create_path(t_path **path, t_nod *new)
 	return (0);
 }
 
-void		ft_hei_to_num(t_nod *tree, int i)
+void	ft_hei_to_num(t_nod *tree, int i)
 {
 	if (!tree)
 		return ;
@@ -62,7 +72,7 @@ void		ft_hei_to_num(t_nod *tree, int i)
 		ft_hei_to_num(tree->right, i);
 }
 
-int			ft_path_counter(t_path **paths)
+int		ft_path_counter(t_path **paths)
 {
 	int i;
 

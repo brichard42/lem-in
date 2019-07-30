@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 00:08:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 14:26:16 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:28:13 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,19 @@ static void	ft_reduce_paths(t_nod ***paths)
 		paths[i++][1]->hei -= red;
 }
 
+static void	ft_swap_paths(t_nod ***a, t_nod ***b)
+{
+	t_nod	**tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 static void	ft_sort_paths(t_nod ***paths)
 {
 	int		i;
 	int		j;
-	t_nod	**tmp;
 
 	i = 0;
 	j = 0;
@@ -38,14 +46,8 @@ static void	ft_sort_paths(t_nod ***paths)
 		while (paths[i])
 		{
 			if (paths[i + 1])
-			{
 				if (paths[i][1]->hei > paths[i + 1][1]->hei)
-				{
-					tmp = paths[i];
-					paths[i] = paths[i + 1];
-					paths[i + 1] = tmp;
-				}
-			}
+					ft_swap_paths(&paths[i], &paths[i + 1]);
 			i++;
 		}
 		i = 0;
@@ -54,18 +56,15 @@ static void	ft_sort_paths(t_nod ***paths)
 	ft_reduce_paths(paths);
 }
 
-int			ft_ant_in_paths(t_env *env, t_nod ***paths)
+int			ft_ant_in_paths(t_nod ***paths, int ants, int i)
 {
-	int		i;
 	int		*tab_i;
-	int		ants;
 	int		n_path;
 
 	i = -1;
 	n_path = 0;
 	while (paths[n_path])
 		n_path++;
-	ants = (int)env->ants;
 	ft_sort_paths(paths);
 	if (!(tab_i = (int *)ft_memalloc(sizeof(int) * (n_path + 1))))
 		return (1);
@@ -81,7 +80,7 @@ int			ft_ant_in_paths(t_env *env, t_nod ***paths)
 		}
 		i = -1;
 	}
-	ft_send_ants(paths, tab_i, n_path);
+	ft_send_ants(paths, tab_i, n_path, 1);
 	ft_memdel((void **)&tab_i);
 	return (0);
 }

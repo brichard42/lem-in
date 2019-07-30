@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 14:22:02 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:27:22 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define SUCCESS 0
 # define LEFT 'l'
 # define RIGHT 'r'
+# include <stdio.h> //to TEJ
 
-#include <stdio.h>//to TEJ
 typedef struct		s_nod
 {
 	char			*room;
@@ -69,7 +69,7 @@ int					ft_node_add(t_env *env, t_nod **tree, char *room, char s_e);
 t_nod				*ft_node_new(char *room);
 
 int					ft_link_add(t_link *parent, t_link **l_tree,\
-													char *name, t_nod *r_tree);
+					char *name, t_nod *r_tree);
 
 int					ft_path_counter(t_path **paths);
 void				ft_hei_to_num(t_nod *tree, int i);
@@ -79,8 +79,10 @@ int					ft_get_next_node(t_path *path, t_nod **node, t_env *env);
 t_path				**ft_check_paths(t_path **old_paths, t_env *env, int num);
 t_nod				***ft_transform_paths(t_path **paths, t_env *env);
 
-int					ft_ant_in_paths(t_env *env, t_nod ***paths);
-void				ft_send_ants(t_nod ***paths, int *tab_i, int n_path);
+int					ft_ant_in_paths(t_nod ***paths, int ants, int i);
+void				ft_send_ants(t_nod ***paths, int *tab_i, int n_path,\
+	   				int ant_name);
+void				ft_aff_one_move(int ant, char *path);
 
 t_nod				*ft_search_room(t_nod *tree, char *key);
 t_link				*ft_search_link(t_link *tree, char *key);

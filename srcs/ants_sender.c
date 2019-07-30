@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 16:46:50 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 15:27:52 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:28:34 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ static int	*ft_path_to_neg(t_nod ***paths, int n_path)
 		sizes[i] = j;
 	}
 	return (sizes);
-}
-
-static void	ft_aff_one_move(int ant, char *path)
-{
-	ft_putchar('L');
-	ft_putnbr(ant);
-	ft_putchar('-');
-	ft_putstr(path);
-	ft_putchar(' ');
 }
 
 static void	ft_sender(int name, t_nod **path, int p_size)
@@ -89,22 +80,14 @@ static int	ft_empty_paths(t_nod ***paths, int *sizes)
 	return (a);
 }
 
-void		ft_send_ants(t_nod ***paths, int *tab_i, int n_path)
+void		ft_send_ants(t_nod ***paths, int *tab_i, int n_path, int ant_name)
 {
-	int		ant_name;
 	int		i;
 	int		*sizes;
-	int		ant;
 
-	ant_name = 1;
 	i = 0;
-	ant = 0;
-	tab_i[n_path] = 0;
 	if (!(sizes = ft_path_to_neg(paths, n_path)))
 		return ; /*free*/
-	while (tab_i[i])
-		ant += tab_i[i++];
-	i = 0;
 	while (i <= n_path)
 	{
 		while (tab_i[i] > 0)
@@ -123,6 +106,5 @@ void		ft_send_ants(t_nod ***paths, int *tab_i, int n_path)
 	}
 	while (ft_empty_paths(paths, sizes))
 		ft_putchar('\n');
-	i = 0;
-	/*free sizes*/
+	ft_memdel((void **)&sizes);
 }

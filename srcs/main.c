@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 14:25:33 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:27:48 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			main(void)
 //	if (env.end)
 //		ft_printf("end = %s\n", env.end->room);
 //	ft_aff_paths(env.paths);
-	if (ft_ant_in_paths(&env, env.paths) == 1)
+	if (ft_ant_in_paths(env.paths, env.ants, -1))
 		return (ft_free_spec(env)/*free path too*/);
 	ft_free_tree(env.tree);
 	ft_free_transformed_path(env.paths);
