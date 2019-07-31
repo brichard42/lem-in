@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:25:34 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 14:25:15 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/31 09:47:51 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,12 @@ int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 	if (!links[0])
 		return (ft_ret_i_del_links(links, 2));
 	if (!(new = ft_best_link(links)))
-		return (1);
+		return (ft_ret_i_del_links(links, 1));
 	if (new != env->start)
 		new->u++;
 	ft_memdel((void **)&links);
-	ft_create_path(&path, new);
+	if (ft_create_path(&path, new))
+		return (1);
 	*node = new;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 00:08:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 17:28:13 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/31 10:34:28 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,17 @@ static void	ft_sort_paths(t_nod ***paths)
 	ft_reduce_paths(paths);
 }
 
+static int	ft_free_tab_i(int *tab_i)
+{
+	ft_memdel((void **)&tab_i);
+	return (1);
+}
+
 int			ft_ant_in_paths(t_nod ***paths, int ants, int i)
 {
 	int		*tab_i;
 	int		n_path;
 
-	i = -1;
 	n_path = 0;
 	while (paths[n_path])
 		n_path++;
@@ -80,7 +85,8 @@ int			ft_ant_in_paths(t_nod ***paths, int ants, int i)
 		}
 		i = -1;
 	}
-	ft_send_ants(paths, tab_i, n_path, 1);
+	if (ft_send_ants(paths, tab_i, n_path, 1))
+		return (ft_free_tab_i(tab_i));
 	ft_memdel((void **)&tab_i);
 	return (0);
 }

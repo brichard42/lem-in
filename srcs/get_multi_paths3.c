@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 08:51:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 16:56:18 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/31 09:52:34 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	ft_transform(t_nod **new_path, t_path *path, int j, int i)
+static int		ft_transform(t_nod **new_path, t_path *path, int j, int i)
 {
 	if (path->next)
 		j = ft_transform(new_path, path->next, j, i + 1);
@@ -23,7 +23,13 @@ static int	ft_transform(t_nod **new_path, t_path *path, int j, int i)
 	return (j);
 }
 
-t_nod		***ft_transform_paths(t_path **path, t_env *env)
+static t_nod	***free_ret_nod(t_nod ***n_path)
+{
+	ft_free_transformed_path(n_path);
+	return (NULL);
+}
+
+t_nod			***ft_transform_paths(t_path **path, t_env *env)
 {
 	t_nod	***n_path;
 	int		i;
@@ -37,7 +43,7 @@ t_nod		***ft_transform_paths(t_path **path, t_env *env)
 	{
 		count = ft_node_in_path(path[i], 1);
 		if (!(n_path[i] = (t_nod **)ft_memalloc(sizeof(t_nod *) * (count + 2))))
-			return (NULL/*free*/);
+			return (free_ret_nod(n_path));
 		ft_transform(n_path[i], path[i], 0, 1);
 		n_path[i][count + 1] = env->end;
 	}

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 16:46:50 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 17:28:34 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/31 10:31:36 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ static int	ft_empty_paths(t_nod ***paths, int *sizes)
 	return (a);
 }
 
-void		ft_send_ants(t_nod ***paths, int *tab_i, int n_path, int ant_name)
+int			ft_send_ants(t_nod ***paths, int *tab_i, int n_path, int ant_name)
 {
-	int		i;
-	int		*sizes;
+	int	i;
+	int	*sizes;
 
-	i = 0;
+	i = -1;
 	if (!(sizes = ft_path_to_neg(paths, n_path)))
-		return ; /*free*/
-	while (i <= n_path)
+		return (1);
+	while (++i <= n_path)
 	{
 		while (tab_i[i] > 0)
 		{
@@ -102,9 +102,9 @@ void		ft_send_ants(t_nod ***paths, int *tab_i, int n_path, int ant_name)
 			ft_putchar('\n');
 			i = 0;
 		}
-		i++;
 	}
 	while (ft_empty_paths(paths, sizes))
 		ft_putchar('\n');
 	ft_memdel((void **)&sizes);
+	return (0);
 }

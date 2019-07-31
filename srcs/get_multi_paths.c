@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 19:38:34 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/31 09:46:08 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ int			ft_get_multi_paths(t_env *env)
 	if (!(env->paths = ft_transform_paths(paths, env)))
 		return (ft_free_paths_nodes(paths, nodes));
 	ft_memdel((void **)&nodes);
-	ft_free_path(paths);
+	ft_free_path(paths, 1);
 	return (0);
 }

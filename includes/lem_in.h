@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 18:40:49 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/31 10:24:22 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_path				**ft_check_paths(t_path **old_paths, t_env *env, int num);
 t_nod				***ft_transform_paths(t_path **paths, t_env *env);
 
 int					ft_ant_in_paths(t_nod ***paths, int ants, int i);
-void				ft_send_ants(t_nod ***paths, int *tab_i, int n_path,\
+int					ft_send_ants(t_nod ***paths, int *tab_i, int n_path,\
 	   				int ant_name);
 void				ft_aff_one_move(int ant, char *path);
 
@@ -93,7 +93,7 @@ void				ft_small_balance(t_nod **tree, int bal);
 t_nod				**ft_free_ret_nod(t_nod **to_f);
 void				ft_free_tree(t_nod *tree);
 void				ft_free_transformed_path(t_nod ***paths);
-void				ft_free_path(t_path **path);
+void				ft_free_path(t_path **path, int j);
 int					ft_free_paths_nodes(t_path **paths, t_nod **nodes);
 int					ft_free_str(char *str);
 int					ft_ret_i_del_links(t_nod **links, int i);

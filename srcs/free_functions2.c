@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:16:56 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 18:59:22 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/07/31 09:27:21 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_ret_i_del_links(t_nod **links, int i)
 int		ft_free_paths_nodes(t_path **paths, t_nod **nodes)
 {
 	if (paths)
-		ft_free_path(paths);
+		ft_free_path(paths, 0);
 	ft_memdel((void **)&nodes);
 	return (1);
 }
