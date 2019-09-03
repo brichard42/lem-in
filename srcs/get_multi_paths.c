@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/31 09:46:08 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:11:49 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static int	ft_get_the_nods(t_path **paths, t_nod **nodes, t_link *link, int i)
 
 	right = link->right;
 	left = link->left;
-	current_room = link->l_room;
+	current_room = link->linked_room;
 	if (link)
 	{
-		current_room->u = 1;
+		current_room->mark = 1;
 		if (ft_create_path(&paths[i], current_room))
 			return (0);
 		nodes[i] = current_room;
@@ -46,7 +46,7 @@ static int	ft_path_helper(t_path *path, t_nod **node, t_env *env)
 	if (ret == 1)
 		return (1);
 	if (ret == 2)
-		(*node)->hei = -1;
+		(*node)->height = -1;
 	return (0);
 }
 
@@ -57,11 +57,11 @@ static int	ft_path_finder(t_path **paths, t_nod **nodes, t_env *env)
 
 	j = 0;
 	i = ft_path_counter(paths);
-	env->start->u = 0;
-	env->end->u = 1;
+	env->start->mark = 0;
+	env->end->mark = 1;
 	while (j < i)
 	{
-		while (nodes[j]->hei > 0)
+		while (nodes[j]->height > 0)
 		{
 			while (paths[j])
 			{

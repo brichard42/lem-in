@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/02 16:31:22 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:13:11 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_print_tree(t_nod *tree) // TO DELETE
 		ft_print_tree(tree->right);
 	if (tree->left)
 		ft_print_tree(tree->left);
-	ft_printf("|%s\t|\t\t%d\t|\n", tree->room, tree->hei);
+	ft_printf("|%s\t|\t\t%d\t|\n", tree->room, tree->height);
 	ft_print_links(tree->links);
 }
 

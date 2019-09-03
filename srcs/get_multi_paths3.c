@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 08:51:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/31 09:52:34 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:09:04 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		ft_transform(t_nod **new_path, t_path *path, int j, int i)
 		j = ft_transform(new_path, path->next, j, i + 1);
 	new_path[j] = path->node;
 	if (j == 1)
-		new_path[j]->hei = i + 1;
+		new_path[j]->height = i + 1;
 	j++;
 	return (j);
 }

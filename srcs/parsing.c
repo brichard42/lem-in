@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/31 09:19:51 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 18:54:35 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <limits.h>
 
+/*
 static int	ft_erro_helper(t_env *env, int reta)
 {
 	if (reta == -1)
@@ -21,7 +21,30 @@ static int	ft_erro_helper(t_env *env, int reta)
 		return (ft_print_error("Error: Missing Start/End."));
 	return (0);
 }
+*/
 
+int		get_ants_nb(char *str)
+{
+	int64_t	ants;
+
+	ants = 0;
+	if (ft_strlen(str) <= 11 && ft_strcheck(str, ft_isdigit) == TRUE)
+		ants = ft_atol(str);
+	return (ants > INT_MAX || ants < 0 ? 0 : (int)ants); 
+}
+
+uint8_t		ft_get_ants(t_env *env)
+{
+	char	*str;
+
+	str = NULL;
+	if (get_next_line(0, &str, '\n') != FAILURE && str != NULL)
+		env->ants = get_ants_nb(str);
+	ft_strdel(&str);
+	return (env->ants == 0 ? FAILURE : SUCCESS);
+}
+
+/*
 int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 {
 	char	s_e;
@@ -29,7 +52,7 @@ int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 	int		reta;
 
 	s_e = '\0';
-	while ((reta = get_next_line(0, &str)) > 0 || str)
+	while ((reta = get_next_line(0, &str, '\n')) > 0 || str)
 	{
 		if ((ret = ft_strchr(str, '-')) && !ft_strchr(ret + 1, '-'))
 		{
@@ -48,21 +71,4 @@ int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 	}
 	return (ft_erro_helper(env, reta));
 }
-
-int			ft_get_ants(t_env *env, char *str)
-{
-	long int	ants;
-
-	ants = 0;
-	if (get_next_line(0, &str) == -1 || !str)
-		return (ft_print_error("Can't read the amount of ants."));
-	if (ft_strlen(str) > 11 || !ft_str_is_digit(str)
-		|| (ants = ft_atoli(str)) > INT_MAX || ants <= 0)
-	{
-		ft_strdel(&str);
-		return (ft_print_error("Wrong input or invalid amount of ants."));
-	}
-	env->ants = (int)ants;
-	ft_strdel(&str);
-	return (0);
-}
+*/

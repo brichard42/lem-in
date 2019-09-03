@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 00:08:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/31 10:34:28 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:14:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	ft_reduce_paths(t_nod ***paths)
 	int red;
 
 	i = 0;
-	red = paths[0][1]->hei - 1;
+	red = paths[0][1]->height - 1;
 	while (paths[i])
-		paths[i++][1]->hei -= red;
+		paths[i++][1]->height -= red;
 }
 
 static void	ft_swap_paths(t_nod ***a, t_nod ***b)
@@ -46,7 +46,7 @@ static void	ft_sort_paths(t_nod ***paths)
 		while (paths[i])
 		{
 			if (paths[i + 1])
-				if (paths[i][1]->hei > paths[i + 1][1]->hei)
+				if (paths[i][1]->height > paths[i + 1][1]->height)
 					ft_swap_paths(&paths[i], &paths[i + 1]);
 			i++;
 		}
@@ -77,7 +77,7 @@ int			ft_ant_in_paths(t_nod ***paths, int ants, int i)
 	{
 		while (paths[++i])
 		{
-			if (ants >= paths[i][1]->hei)
+			if (ants >= paths[i][1]->height)
 			{
 				tab_i[i]++;
 				ants--;

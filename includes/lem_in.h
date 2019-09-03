@@ -6,34 +6,38 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/31 10:24:22 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 18:57:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "libft.h"
-# define ERROR 1
-# define SUCCESS 0
-# define LEFT 'l'
-# define RIGHT 'r'
-# include <stdio.h> //to TEJ
+# include "../libft/includes/libft.h"
+# include <stdint.h>
+# include <limits.h>
+# include <stdlib.h>
+# define FAILURE	-1
+# define SUCCESS	0
+# define TRUE		1
+# define FALSE		0
+# define LEFT		'l'
+# define RIGHT		'r'
 
 typedef struct		s_nod
 {
 	char			*room;
-	char			u;
-	int				hei;
 	struct s_link	*links;
 	struct s_nod	*right;
 	struct s_nod	*left;
+	uint64_t		height;
+	uint64_t		mark;
 }					t_nod;
 
 typedef struct		s_link
 {
 	char			*name;
-	t_nod			*l_room;
+	t_nod			*linked_room;
 	struct s_link	*parent;
 	struct s_link	*right;
 	struct s_link	*left;
@@ -41,24 +45,26 @@ typedef struct		s_link
 
 typedef struct		s_path
 {
-	int				size;
+	size_t			size;
 	t_nod			*node;
 	struct s_path	*next;
 }					t_path;
 
 typedef struct		s_env
 {
-	long int		ants;
 	t_nod			***paths;
 	t_nod			*start;
 	t_nod			*end;
 	t_nod			*tree;
+	int64_t			ants;
 }					t_env;
 
+uint8_t				ft_get_ants(t_env *env);
+
+/*
 void				ft_print_tree(t_nod *tree); // TO TEJ
 void				ft_aff_paths(t_nod ***the_paths); // TO TEJ
 int					ft_get_rooms_and_links(t_env *env, char *str, int r_l);
-int					ft_get_ants(t_env *env, char *str);
 int					ft_get_path(t_env *env);
 int					ft_get_multi_paths(t_env *env);
 int					ft_node_in_path(t_path *path, int i);
@@ -103,4 +109,5 @@ int					ft_stock_link(t_env *env, char *str);
 
 int					ft_print_error(char *str);
 
+*/
 #endif

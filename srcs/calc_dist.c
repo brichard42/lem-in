@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/31 09:22:11 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:17:13 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int		ft_set_links(t_link *to_put, t_nod **n_tab, int i, int n_hei)
 
 	left = to_put->left;
 	right = to_put->right;
-	current_room = to_put->l_room;
-	if (to_put && (current_room->hei > n_hei || current_room->hei == -1))
+	current_room = to_put->linked_room;
+	if (to_put && (current_room->height > n_hei || current_room->height == -1))
 		n_tab[i++] = current_room;
 	if (left)
 		i = ft_set_links(left, n_tab, i, n_hei);
@@ -82,7 +82,7 @@ static t_nod	**ft_get_current(t_nod **curr, int n_hei, t_nod *end)
 	ft_get_links(curr, n_tab, n_hei, end);
 	i = -1;
 	while (n_tab[++i])
-		n_tab[i]->hei = n_hei;
+		n_tab[i]->height = n_hei;
 	ft_memdel((void **)&curr);
 	return (n_tab);
 }
@@ -94,7 +94,7 @@ int				ft_calc_dist(t_env *env)
 
 	i = 1;
 	ft_hei_to_num(env->tree, -1);
-	env->start->hei = 0;
+	env->start->height = 0;
 	if (!(curr = (t_nod **)ft_memalloc(sizeof(t_nod *) * 2)))
 		return (1);
 	curr[0] = env->start;

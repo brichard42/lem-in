@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:58:19 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/02 10:09:59 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:13:11 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_hei(t_nod *tree)
 {
 	if (tree == NULL)
 		return (0);
-	return (tree->hei);
+	return (tree->height);
 }
 
 static void	ft_rotate(t_nod **tree, char r_l)
@@ -41,9 +41,9 @@ static void	ft_rotate(t_nod **tree, char r_l)
 		x->right = tmp;
 		tmp->left = y;
 	}
-	tmp->hei = 1 + (ft_hei(tmp->left) > ft_hei(tmp->right)
+	tmp->height = 1 + (ft_hei(tmp->left) > ft_hei(tmp->right)
 			? ft_hei(tmp->left) : ft_hei(tmp->right));
-	x->hei = 1 + (ft_hei(x->left) > ft_hei(x->right)
+	x->height = 1 + (ft_hei(x->left) > ft_hei(x->right)
 			? ft_hei(x->left) : ft_hei(x->right));
 	*tree = x;
 }
@@ -52,7 +52,7 @@ void		ft_balance_tree(t_nod **tree, char *room)
 {
 	int	bal;
 
-	(*tree)->hei = 1 + (ft_hei((*tree)->left) > ft_hei((*tree)->right)
+	(*tree)->height = 1 + (ft_hei((*tree)->left) > ft_hei((*tree)->right)
 			? ft_hei((*tree)->left) : ft_hei((*tree)->right));
 	bal = ft_hei((*tree)->left) - ft_hei((*tree)->right);
 	if ((bal == 1 && (*tree)->right == NULL)

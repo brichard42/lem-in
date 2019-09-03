@@ -3,60 +3,71 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/07/29 17:31:42 by tlandema         ###   ########.fr        #
+#    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
+#    Updated: 2019/09/03 18:58:56 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+################################################################################
+#                                   VARIABLES                                  #
+################################################################################
+
+NAME = lem-in
 
 CC = gcc
 
-CFLAGS = -Wall -g -Wextra -Werror -I./includes -I./libft/includes
+CFLAGS = -Werror -Wall -Wextra
 
-LIB = -lft
+LDFLAGS = $(addprefix -L, $(LIB_PATH))
 
-LIBFT = libft
+LDLIBS = $(subst lib, -l, $(LIB_PATH))
 
-LIB_PATH = -L./$(LIBFT)
+CPPFLAGS = -I$(INC_PATH)
 
-INC = includes
+LIB_PATH = $(basename $(LIB_FILES))
 
-OBJS_PATH = obj
+INC_PATH = includes
 
-#/********************LEM_IN****************\
+SRCS_PATH = srcs
 
-LEM_IN_NAME = lem-in
+OBJS_PATH = .obj
 
-LEM_IN_PATH = srcs
+OBJS_FILES = $(SRCS_FILES:.c=.o)
 
-LEM_IN = main.c \
-		 get_multi_paths3.c \
-		 get_multi_paths2.c \
-		 get_multi_paths.c \
-		 free_functions2.c \
-		 free_functions.c \
-		 error_printer.c \
-		 tree_balance2.c \
-		 tree_balance.c \
-		 ants_in_path.c \
-		 ants_sender.c \
-		 tree_search.c \
-		 calc_dist.c \
-		 link_tree.c \
-		 parsing.c \
-		 stock.c \
-		 utils.c \
-		 tree.c \
+OBJS = $(addprefix $(OBJS_PATH)/, $(OBJS_FILES))
 
-LEM_IN_OBJS = $(LEM_IN:.c=.o)
+LIBS = $(addprefix $(LIB_PATH)/, $(LIB_FILES))
 
-D_LEM_IN_OBJS = $(addprefix $(OBJS_PATH)/, $(LEM_IN_OBJS))
+INCS = $(addprefix $(INC_PATH)/, $(INC_FILES))
 
-#\**********************************************/
+CLEAN_LIB = $(addprefix && make clean -C , $(LIB_PATH))
 
-D_LIB = libft/libft.a
+FCLEAN_LIB = $(addprefix && make fclean -C , $(LIB_PATH))
+
+################################################################################
+#                                   LIB_FILES                                  #
+################################################################################
+
+LIB_FILES =		libft.a
+
+################################################################################
+#                                   INC_FILES                                  #
+################################################################################
+
+INC_FILES =		lem_in.h
+
+################################################################################
+#                                   SRCS_FILES                                 #
+################################################################################
+
+SRCS_FILES =	main.c \
+				parsing.c
+
+################################################################################
+#                                    COlORS                                    #
+################################################################################
 
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m
@@ -65,34 +76,19 @@ ERROR_COLOR = \033[0;31m
 WARN_COLOR  = \033[0;33m
 NO_COLOR    = \033[m
 
-define run_and_test_r
-printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@F)$(NO_COLOR)\r"; \
-	$(1) 2> $@.log; \
-	RESULT=$$?; \
-	if [ $$RESULT -ne 0 ]; then \
-	printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"   ; \
-	elif [ -s $@.log ]; then \
-	printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"   ; \
-	else  \
-	printf "%-60b%b" "$(COM_COLOR)$(BACK_COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"   ; \
-	fi; \
-	rm -f $@.log 2> /dev/null; \
-	exit $$RESULT
-endef
-
 define run_and_test
 printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@F)$(NO_COLOR)\r"; \
 	$(1) 2> $@.log; \
 	RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-	printf "%-60b%b" "$(COM_COLOR)$(BACK_COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"   ; \
+		printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"   ; \
 	elif [ -s $@.log ]; then \
-	printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"   ; \
+		printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"   ; \
 	else  \
-	printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"   ; \
+		printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"   ; \
 	fi; \
 	cat $@.log; \
-	rm -f $@.log; \
+	rm -f $@.log 2> /dev/null; \
 	exit $$RESULT
 endef
 
@@ -101,24 +97,40 @@ ERROR_STRING = "[ERROR]"
 WARN_STRING  = "[WARNING]"
 COM_STRING   = "Compiling"
 
-all: $(LEM_IN_NAME)
+################################################################################
+#                                   COMMANDS                                   #
+################################################################################
 
-$(LEM_IN_NAME): $(INC) $(D_LEM_IN_OBJS) $(D_LIB)
-	@$(call run_and_test, $(CC) $(CFLAGS) -o $(LEM_IN_NAME) $(D_LEM_IN_OBJS) $(LIB_PATH) $(LIB))
+.PHONY: all clean fclean re
 
-$(OBJS_PATH)/%.o: $(LEM_IN_PATH)/%.c
-	@$(call run_and_test, $(CC) $(CFLAGS) -o $@ -c $< -I$(LIB_PATH))
+all: $(NAME)
 
-$(D_LIB) :
-	@make -C libft
+$(NAME): $(LIBS) $(OBJS)
+	@$(call run_and_test, $(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $@ $(OBJS))
+
+$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c  $(INCS) Makefile | $(OBJS_PATH)
+	@$(call run_and_test, $(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<)
+
+$(OBJS_PATH):
+	@$(call run_and_test, mkdir $@)
+
+$(LIBS):
+	@echo "$(COM_COLOR)Compiling $(OBJ_COLOR)Libraries$(NO_COLOR)"
+	@make -C $(LIB_PATH)
 
 norme:
-	@$(call run_and_test_r, norminette | grep -v 'Warning: Not a valid file' | grep -B 1 -e 'Error' -e 'Warning')
+	@$(call run_and_test, norminette $(SRCS_PATH) $(INC_PATH) | grep -v 'Warning: Not a valid file' | grep -B 1 -e 'Error' -e 'Warning')
+
+lc:
+	@$(call run_and_test, $(RM) $(D_OBJS) && rm -rf $(OBJS_PATH) $(CLEAN_LIB))
+
+lfc:
+	@$(call run_and_test, $(RM) $(D_OBJS) && rm -rf $(OBJS_PATH) && $(RM) $(NAME) $(FCLEAN_LIB))
 
 clean:
-	@$(call run_and_test, rm -f $(D_LEM_IN_OBJS) && make clean -C libft)
+	@$(call run_and_test, rm -rf $(OBJS_PATH))
 
 fclean: clean
-	@$(call run_and_test, rm -f $(LEM_IN_NAME) && rm -f libft/libft.a)
+	@$(call run_and_test, $(RM) $(NAME))
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/30 17:13:01 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:15:39 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_hei_to_num(t_nod *tree, int i)
 {
 	if (!tree)
 		return ;
-	tree->hei = i;
+	tree->height = i;
 	if (tree->left)
 		ft_hei_to_num(tree->left, i);
 	if (tree->right)
