@@ -6,53 +6,97 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/03 18:54:35 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:20:15 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-static int	ft_erro_helper(t_env *env, int reta)
+int			get_ant_nb(char *str)
 {
-	if (reta == -1)
-		return (ft_print_error("Error while reading rooms and links."));
-	if (!env->start || !env->end)
-		return (ft_print_error("Error: Missing Start/End."));
-	return (0);
-}
-*/
+	int64_t	ant_nb;
 
-int		get_ants_nb(char *str)
-{
-	int64_t	ants;
-
-	ants = 0;
+	ant_nb = 0;
 	if (ft_strlen(str) <= 11 && ft_strcheck(str, ft_isdigit) == TRUE)
-		ants = ft_atol(str);
-	return (ants > INT_MAX || ants < 0 ? 0 : (int)ants); 
+		ant_nb = ft_atol(str);
+	return (ant_nb > INT_MAX || ant_nb < 0 ? 0 : (int)ant_nb); 
 }
 
-uint8_t		ft_get_ants(t_env *env)
+int8_t		get_ants(t_state_machine *machine)
 {
 	char	*str;
 
 	str = NULL;
-	if (get_next_line(0, &str, '\n') != FAILURE && str != NULL)
-		env->ants = get_ants_nb(str);
+	if (get_next_line(0, &str, '\n') > 0 && str != NULL)
+		machine->ant_nb = get_ant_nb(str);
 	ft_strdel(&str);
-	return (env->ants == 0 ? FAILURE : SUCCESS);
+	return (machine->ant_nb == 0 ? FAILURE : SUCCESS);
+}
+*/
+
+
+int			get_ant_nb(char *str)
+{
+	int64_t	ant_nb;
+
+	ant_nb = 0;
+	if (ft_strlen(str) <= 11 && ft_strcheck(str, ft_isdigit) == TRUE)
+		ant_nb = ft_atol(str);
+	return (ant_nb > INT_MAX || ant_nb < 0 ? 0 : (int)ant_nb); 
+}
+
+int8_t		get_ant(t_state_machine *machine)
+{
+	static int8_t was_called = FALSE;
+
+	if (was_called == FALSE)
+	{
+		machine->ant_nb = get_ant_nb(str);
+		was_called = TRUE;
+		ft_strdel(&str);
+	}
+	machine->state = ST_STR;
+	return (machine->ant_nb == 0 ? FAILURE : SUCCESS);
+}
+
+int8_t		check_com(t_state_machine *machine)
+{
+	if (machine->str[0] == COMMENT_SIGN && machine->str[1] == COMMENT_SIGN)
+		get_special_com(machine);// CODER CA POTO
+	else
+		machine->state += 1;
+
+}
+
+int8_t		gnl_str(t_state_machine *machine)
+{
+	if (get_next_line(0, &machine->str, '\n') > 0 && machine->str != NULL)
+		machine->state = ST_COMMENT;
+	else
+		machine->state = ST_END;
+	return (machine->state != ST_END ? SUCCESS : FAILURE);
+}
+
+int8_t		parsing(t_state_machine *machine)
+{
+	static t_state_func	state_func[6] = {&gnl_str, &check_com, &get_ant_nb, &get_rooms, &get_links, &parsing_end};
+
+	while (machine->state != ST_END)
+		if (state_func[machine->state](machine) == FAILURE)
+			machine->state = ST_END;
 }
 
 /*
 int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 {
-	char	s_e;
 	char	*ret;
-	int		reta;
+	char	*str;
+	char	s_e;
 
+	str = NULL;
 	s_e = '\0';
-	while ((reta = get_next_line(0, &str, '\n')) > 0 || str)
+	while (get_next_line(0, &str, '\n') > 0 || str != NULL)
 	{
 		if ((ret = ft_strchr(str, '-')) && !ft_strchr(ret + 1, '-'))
 		{
@@ -69,6 +113,6 @@ int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
 			return (ft_print_error("A link is not well formated."));
 		ft_strdel(&str);
 	}
-	return (ft_erro_helper(env, reta));
+	return (FAILURE);
 }
 */

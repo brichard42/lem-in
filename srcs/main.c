@@ -6,15 +6,15 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/03 18:59:26 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:08:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-//static uint8_t	ft_free_spec(t_env env)
+//static int	ft_free_spec(t_state_machine machine)
 //{
-//	ft_free_tree(env.tree);
+//	ft_free_tree(machine.tree);
 //	return (EXIT_FAILURE);
 //}
 
@@ -26,29 +26,29 @@ static int	ft_print_error(void)
 
 int			main(void)
 {
-	t_env	env;
+	t_state_machine	machine;
 
-	ft_bzero(&env, sizeof(t_env));
-	if (ft_get_ants(&env))
+	ft_bzero((void *)&machine, sizeof(t_state_machine));
+	if (get_ants(&machine) == FAILURE)
 		return (ft_print_error());
-	ft_printf("ants = {%d}", env.ants);
-//	if (ft_get_rooms_and_links(&env, str, 0))
-//		return (ft_free_spec(env));
-//	if (ft_calc_dist(&env))
-//		return (ft_free_spec(env));
-//	if (env.end->height == -1)
-//		return (ft_free_spec(env));
-//	if (ft_get_multi_paths(&env))
-//		return (ft_free_spec(env));
-//	ft_print_tree(env.tree);
-//	if (env.start)
-//		ft_printf("start = %s\n", env.start->room);
-//	if (env.end)
-//		ft_printf("end = %s\n", env.end->room);
-//	ft_aff_paths(env.paths);
-//	if (ft_ant_in_paths(env.paths, env.ants, -1))
-//		return (ft_free_spec(env));
-//	ft_free_tree(env.tree);
-//	ft_free_transformed_path(env.paths);
-	return (0);
+	//if (ft_get_rooms_and_links(&machine, 0) == FAILURE)
+		//return (ft_free_spec(machine));
+//	if (ft_calc_dist(&machine))
+//		return (ft_free_spec(machine));
+//	if (machine.end->height == -1)
+//		return (ft_free_spec(machine));
+//	if (ft_get_multi_paths(&machine))
+//		return (ft_free_spec(machine));
+//	ft_print_tree(machine.tree);
+//	if (machine.start)
+//		ft_printf("start = %s\n", machine.start->room);
+//	if (machine.end)
+//		ft_printf("end = %s\n", machine.end->room);
+//	ft_aff_paths(machine.paths);
+//	if (ft_ant_in_paths(machine.paths, machine.ants, -1))
+//		return (ft_free_spec(machine));
+//	ft_free_tree(machine.tree);
+//	ft_free_transformed_path(machine.paths);
+	ft_printf("ants = {%d}%42\n", machine.ant_nb);
+	return (EXIT_SUCCESS);
 }
