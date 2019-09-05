@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/04 18:20:15 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:48:52 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,28 @@ int8_t		get_ants(t_state_machine *machine)
 }
 */
 
+int8_t		get_rooms(t_state_machine *machine, char *str)
+{
+	(void)machine;
+	(void)str;
+	return (FAILURE);
+}
+
+int8_t		get_links(t_state_machine *machine, char *str)
+{
+	(void)machine;
+	(void)str;
+	return (FAILURE);
+}
+
+uint8_t		check_com(t_state_machine *machine, char *str)
+{
+	(void)machine;
+	if (str[0] == COMMENT_SIGN && str[1] == COMMENT_SIGN)
+		//get_special_com(machine, str);// CODER CA POTO
+		ft_putendl("c'est un com spec");
+	return (FALSE);
+}
 
 int			get_ant_nb(char *str)
 {
@@ -46,73 +68,29 @@ int			get_ant_nb(char *str)
 	return (ant_nb > INT_MAX || ant_nb < 0 ? 0 : (int)ant_nb); 
 }
 
-int8_t		get_ant(t_state_machine *machine)
+int8_t		get_ants(t_state_machine *machine, char *str)
 {
-	static int8_t was_called = FALSE;
-
-	if (was_called == FALSE)
+	if (check_com(machine, str) == FALSE)
 	{
 		machine->ant_nb = get_ant_nb(str);
-		was_called = TRUE;
-		ft_strdel(&str);
+		machine->state = ST_ROOM;
 	}
-	machine->state = ST_STR;
+	ft_strdel(&str);
 	return (machine->ant_nb == 0 ? FAILURE : SUCCESS);
 }
 
-int8_t		check_com(t_state_machine *machine)
+int8_t		lem_parsing(t_state_machine *machine)
 {
-	if (machine->str[0] == COMMENT_SIGN && machine->str[1] == COMMENT_SIGN)
-		get_special_com(machine);// CODER CA POTO
-	else
-		machine->state += 1;
-
-}
-
-int8_t		gnl_str(t_state_machine *machine)
-{
-	if (get_next_line(0, &machine->str, '\n') > 0 && machine->str != NULL)
-		machine->state = ST_COMMENT;
-	else
-		machine->state = ST_END;
-	return (machine->state != ST_END ? SUCCESS : FAILURE);
-}
-
-int8_t		parsing(t_state_machine *machine)
-{
-	static t_state_func	state_func[6] = {&gnl_str, &check_com, &get_ant_nb, &get_rooms, &get_links, &parsing_end};
-
-	while (machine->state != ST_END)
-		if (state_func[machine->state](machine) == FAILURE)
-			machine->state = ST_END;
-}
-
-/*
-int			ft_get_rooms_and_links(t_env *env, char *str, int r_l)
-{
-	char	*ret;
-	char	*str;
-	char	s_e;
+	static t_state_func	state_func[3] = {get_ants, get_rooms, get_links};
+	char				*str;
 
 	str = NULL;
-	s_e = '\0';
-	while (get_next_line(0, &str, '\n') > 0 || str != NULL)
+	while (get_next_line(0, &str, '\n') > 0 && str != NULL)
 	{
-		if ((ret = ft_strchr(str, '-')) && !ft_strchr(ret + 1, '-'))
-		{
-			r_l = 1;
-			if (ft_stock_link(env, str))
-				return (ft_free_str(str));
-		}
-		else if (r_l == 0)
-		{
-			if (ft_stock_room(env, str, &s_e))
-				return (ft_free_str(str));
-		}
-		else if (ft_free_str(str))
-			return (ft_print_error("A link is not well formated."));
-		ft_strdel(&str);
+		ft_putendl(str);
+		if (state_func[machine->state](machine, str) == FAILURE)
+			break ;
 	}
-	return (FAILURE);
+	ft_printf("ants = {%d}\n", machine->ant_nb);
+	return (machine->state == ST_LINKS ? SUCCESS : FAILURE);
 }
-*/

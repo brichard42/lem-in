@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/04 18:08:08 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:46:47 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 static int	ft_print_error(void)
 {
-	ft_putendl("ERROR");
+	ft_putendl_fd("ERROR", STDERR_FILENO);
 	return (EXIT_FAILURE);
 }
 
@@ -29,10 +29,9 @@ int			main(void)
 	t_state_machine	machine;
 
 	ft_bzero((void *)&machine, sizeof(t_state_machine));
-	if (get_ants(&machine) == FAILURE)
+	if (lem_parsing(&machine) == FAILURE)
 		return (ft_print_error());
-	//if (ft_get_rooms_and_links(&machine, 0) == FAILURE)
-		//return (ft_free_spec(machine));
+	//NEED TO CHECK IF THERES AT LEAST ONE LINK
 //	if (ft_calc_dist(&machine))
 //		return (ft_free_spec(machine));
 //	if (machine.end->height == -1)
@@ -49,6 +48,5 @@ int			main(void)
 //		return (ft_free_spec(machine));
 //	ft_free_tree(machine.tree);
 //	ft_free_transformed_path(machine.paths);
-	ft_printf("ants = {%d}%42\n", machine.ant_nb);
 	return (EXIT_SUCCESS);
 }

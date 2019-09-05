@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/04 18:20:27 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:46:35 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,20 @@
 # include <stdint.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 enum				e_state
 {
-	ST_COMMENT,
-	ST_STR,
 	ST_ANTS,
 	ST_ROOM,
 	ST_LINKS,
-	ST_END
 };
+
+typedef struct		s_boleans
+{
+	uint8_t			is_start;
+	uint8_t			is_end;
+}					t_boleans;
 
 typedef struct		s_state_machine
 {
@@ -36,15 +40,15 @@ typedef struct		s_state_machine
 	//t_tree_nod		*start;
 	//t_tree_nod		*end;
 	//t_tree_nod		*tree;
-	char			*str;
 	int64_t			ant_nb;
 	enum e_state	state;
-	int32_t			mask;
+	t_boleans		special_com;
 }					t_state_machine;
 
-typedef int8_t		t_state_func(t_state_machine *);
+typedef int8_t		(*t_state_func)(t_state_machine *, char *);
 
-int8_t				get_ants(t_state_machine *machine);
+int8_t				lem_parsing(t_state_machine *machine);
+int8_t				get_ants(t_state_machine *machine, char *str);
 
 /*
 typedef struct		s_tree_nod
