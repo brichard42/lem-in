@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/04 14:17:52 by brichard         ###   ########.fr        #
+#    Updated: 2019/09/09 17:41:39 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME = lem-in
 
 CC = gcc
 
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -fsanitize=address -g3
 
 LDFLAGS = $(addprefix -L, $(LIB_PATH))
 
@@ -27,6 +27,8 @@ LDLIBS = $(subst lib, -l, $(LIB_PATH))
 CPPFLAGS = -I$(INC_PATH)
 
 LIB_PATH = $(basename $(LIB_FILES))
+
+LIB_INC = -I$(addprefix $(LIB_PATH)/, $(INC_PATH))
 
 INC_PATH = includes
 
@@ -109,7 +111,7 @@ $(NAME): $(LIBS) $(OBJS)
 	@$(call run_and_test, $(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $@ $(OBJS))
 
 $(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c  $(INCS) Makefile | $(OBJS_PATH)
-	@$(call run_and_test, $(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<)
+	@$(call run_and_test, $(CC) $(CFLAGS) $(CPPFLAGS) $(LIB_INC) -o $@ -c $<)
 
 $(OBJS_PATH):
 	@$(call run_and_test, mkdir $@)

@@ -6,14 +6,14 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/05 15:46:35 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/09 17:30:17 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "../libft/includes/libft.h"
+# include "libft.h"
 # include "define.h"
 
 # include <stdint.h>
