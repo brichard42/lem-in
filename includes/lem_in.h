@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/09 17:30:17 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/11 16:16:04 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ enum				e_state
 {
 	ST_ANTS,
 	ST_ROOM,
-	ST_LINKS,
+	ST_ROOM_PLUS,
+	ST_LINK,
+	ST_LINK_PLUS
 };
 
 typedef struct		s_boleans

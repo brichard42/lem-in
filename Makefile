@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/09 17:41:39 by brichard         ###   ########.fr        #
+#    Updated: 2019/09/11 14:08:03 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME = lem-in
 
 CC = gcc
 
-CFLAGS = -Werror -Wall -Wextra -fsanitize=address -g3
+CFLAGS = -Werror -Wall -Wextra# -fsanitize=address -g3
 
 LDFLAGS = $(addprefix -L, $(LIB_PATH))
 

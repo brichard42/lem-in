@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/09 17:51:47 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/11 16:16:34 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,23 @@
 
 int8_t		get_links(t_state_machine *machine, char *str)
 {
-	(void)machine;
+	if (machine->state == ST_LINK)
+		machine->state = ST_LINK_PLUS;
 	ft_strdel(&str);
-	return (FAILURE);
+	return (SUCCESS);
 }
 
 int8_t		get_rooms(t_state_machine *machine, char *str)
 {
-	(void)machine;
+	int8_t	return_value;
+
+	return_value = SUCCESS;
+//	if (machine->state == ST_ROOM_PLUS)
+		machine->state = ST_LINK;
+//	else
+//		return_value = FAILURE;
 	ft_strdel(&str);
-	return (FAILURE);
+	return (return_value);
 }
 
 void		get_special_com(t_state_machine *machine, char *str)
@@ -78,19 +85,19 @@ int8_t		get_ants(t_state_machine *machine, char *str)
 
 int8_t		lem_parsing(t_state_machine *machine)
 {
-	static t_state_func	state_func[3] = {get_ants, get_rooms, get_links};
+	static t_state_func	state_func[5] = {get_ants, get_rooms,
+											get_rooms, get_links, get_links};
 	char				*str;
 
 	str = NULL;
-	while (get_next_line(0, &str, '\n') > 0 && str != NULL)
+	while (ft_gnl(0, &str) > 0 && str != NULL)
 	{
 		ft_putendl(str);
 		if (check_com(machine, str) == FALSE)
 			if (state_func[machine->state](machine, str) == FAILURE)
 				break ;
 	}
-	//while (get_next_line(0, &str, '\n') > 0) // AJOUTER OPTION CLEAN AU GNL ET L'APPELER AVEC
-	//	ft_strdel(&str);
+	ft_gnl(-4, NULL);
 	ft_printf("ants = {%d} | is_start = %d | is_end = %d\n", machine->ant_nb, machine->special_com.is_start, machine->special_com.is_end);
-	return (machine->state == ST_LINKS ? SUCCESS : FAILURE);
+	return (machine->state == ST_LINK_PLUS ? SUCCESS : FAILURE);
 }
