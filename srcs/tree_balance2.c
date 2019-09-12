@@ -6,16 +6,16 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:15:06 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/03 15:12:47 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/12 15:52:20 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	ft_bal_l_l(t_nod **tree)
+static void	ft_bal_l_l(t_tree_nod **tree)
 {
-	t_nod	*x;
-	t_nod	*y;
+	t_tree_nod	*x;
+	t_tree_nod	*y;
 
 	x = (*tree)->left;
 	y = x->left;
@@ -27,10 +27,10 @@ static void	ft_bal_l_l(t_nod **tree)
 	*tree = x;
 }
 
-static void	ft_bal_l_r(t_nod **tree)
+static void	ft_bal_l_r(t_tree_nod **tree)
 {
-	t_nod	*x;
-	t_nod	*y;
+	t_tree_nod	*x;
+	t_tree_nod	*y;
 
 	x = (*tree)->left;
 	y = x->right;
@@ -44,10 +44,10 @@ static void	ft_bal_l_r(t_nod **tree)
 	*tree = y;
 }
 
-static void	ft_bal_r_r(t_nod **tree)
+static void	ft_bal_r_r(t_tree_nod **tree)
 {
-	t_nod	*x;
-	t_nod	*y;
+	t_tree_nod	*x;
+	t_tree_nod	*y;
 
 	x = (*tree)->right;
 	y = x->right;
@@ -59,10 +59,10 @@ static void	ft_bal_r_r(t_nod **tree)
 	*tree = x;
 }
 
-static void	ft_bal_r_l(t_nod **tree)
+static void	ft_bal_r_l(t_tree_nod **tree)
 {
-	t_nod *x;
-	t_nod *y;
+	t_tree_nod *x;
+	t_tree_nod *y;
 
 	x = (*tree)->right;
 	y = x->left;
@@ -76,7 +76,7 @@ static void	ft_bal_r_l(t_nod **tree)
 	*tree = y;
 }
 
-void		ft_small_balance(t_nod **tree, int bal)
+void		ft_small_balance(t_tree_nod **tree, int bal)
 {
 	if (bal == 1)
 	{

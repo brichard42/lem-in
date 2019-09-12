@@ -6,32 +6,11 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/11 16:16:34 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/12 19:05:43 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-int8_t		get_links(t_state_machine *machine, char *str)
-{
-	if (machine->state == ST_LINK)
-		machine->state = ST_LINK_PLUS;
-	ft_strdel(&str);
-	return (SUCCESS);
-}
-
-int8_t		get_rooms(t_state_machine *machine, char *str)
-{
-	int8_t	return_value;
-
-	return_value = SUCCESS;
-//	if (machine->state == ST_ROOM_PLUS)
-		machine->state = ST_LINK;
-//	else
-//		return_value = FAILURE;
-	ft_strdel(&str);
-	return (return_value);
-}
 
 void		get_special_com(t_state_machine *machine, char *str)
 {
@@ -65,6 +44,118 @@ uint8_t		check_com(t_state_machine *machine, char *str)
 	return (ret_value);
 }
 
+uint8_t		link_is_valid(char **splited_line)
+{
+	size_t nb_of_arg;
+
+	nb_of_arg = 0;
+	while (splited_line[nb_of_arg++] != NULL);
+	return (nb_of_arg == 3 && ft_strequ(splited_line[0], splited_line[1]) == FALSE);
+}
+uint8_t		room_is_valid(char **splited_line)
+{
+	size_t nb_of_arg;
+
+	nb_of_arg = 0;
+	while (splited_line[nb_of_arg++] != NULL);
+	return (nb_of_arg == 4
+			&& ft_strcheck(splited_line[1], ft_isdigit) == TRUE
+			&& ft_strcheck(splited_line[2], ft_isdigit) == TRUE);
+}
+
+void		del_splited_line(char ***splited_line)
+{
+	int i = 0;
+
+	while ((*splited_line)[i] != 0)
+		ft_strdel(&(*splited_line)[i++]);
+	if ((*splited_line) != NULL)
+	{
+		free((*splited_line));
+		(*splited_line) = NULL;
+	}
+}
+
+int8_t		link_two_rooms(t_state_machine *machine, char **splited_line)
+{
+	t_tree_nod	*a;
+	t_tree_nod	*b;
+	int8_t		ret_value;
+
+	ret_value = FAILURE;
+	a = ft_search_room(machine->room_tree, splited_line[0]);
+	b = ft_search_room(machine->room_tree, splited_line[1]);
+	if (a != NULL && b != NULL)
+		if (ft_link_add(0, &b->link_tree, splited_line[0], a) == SUCCESS
+				&& ft_link_add(0, &a->link_tree, splited_line[1], b) == SUCCESS)
+			ret_value = SUCCESS;
+	return (ret_value);
+}
+
+int8_t		get_links(t_state_machine *machine, char *str)
+{
+	char	**splited_line;
+	int8_t	ret_value;
+
+
+	ret_value = FAILURE;
+	if (ft_strchr(str, WHITE_SPACE) == NULL)
+	{
+		splited_line = ft_strsplit(str, LINK_SEPARATOR);
+		if (splited_line != NULL)
+		{
+			if (link_is_valid(splited_line) == TRUE)
+				ret_value = link_two_rooms(machine, splited_line);
+			del_splited_line(&splited_line);
+		}
+	}
+	if (machine->state == ST_LINK_PLUS)
+		ft_strdel(&str);
+	return (ret_value);
+}
+
+int8_t		put_room_in_tree(t_state_machine *machine, char *str)
+{
+	char 	**splited_line;
+	int8_t	ret_value;
+
+	splited_line = NULL;
+	ret_value = FAILURE;
+	if (str[0] != 'L')
+	{
+		splited_line = ft_strsplit(str, WHITE_SPACE);
+		if (splited_line != NULL)
+		{
+			if (room_is_valid(splited_line) == TRUE)
+				ret_value = ft_node_add(machine, &machine->room_tree, *splited_line);
+			del_splited_line(&splited_line);
+		}
+	}
+	return (ret_value);
+}
+
+int8_t		get_rooms(t_state_machine *machine, char *str)
+{
+	int8_t	return_value;
+
+	return_value = FAILURE;
+	if (ft_strchr(str, '-') == NULL)
+	{
+		return_value = put_room_in_tree(machine, str);
+		if (return_value == SUCCESS)
+			machine->state = ST_ROOM_PLUS;
+	}
+	else if (machine->state == ST_ROOM_PLUS)
+	{
+		machine->state = ST_LINK;
+		return_value = get_links(machine, str);
+		if (return_value == SUCCESS)
+			machine->state = ST_LINK_PLUS;
+	}
+	ft_strdel(&str);
+	return (return_value);
+}
+
 int			get_ant_nb(char *str)
 {
 	int64_t	ant_nb;
@@ -79,6 +170,8 @@ int8_t		get_ants(t_state_machine *machine, char *str)
 {
 	machine->ant_nb = get_ant_nb(str);
 	machine->state = ST_ROOM;
+	machine->special_com.is_start = FALSE;
+	machine->special_com.is_end = FALSE;
 	ft_strdel(&str);
 	return (machine->ant_nb == 0 ? FAILURE : SUCCESS);
 }
@@ -92,12 +185,12 @@ int8_t		lem_parsing(t_state_machine *machine)
 	str = NULL;
 	while (ft_gnl(0, &str) > 0 && str != NULL)
 	{
-		ft_putendl(str);
+		ft_putendl(str);//ADDBUFFER ICI
 		if (check_com(machine, str) == FALSE)
 			if (state_func[machine->state](machine, str) == FAILURE)
 				break ;
 	}
-	ft_gnl(-4, NULL);
-	ft_printf("ants = {%d} | is_start = %d | is_end = %d\n", machine->ant_nb, machine->special_com.is_start, machine->special_com.is_end);
+	ft_gnl(-42, NULL);
 	return (machine->state == ST_LINK_PLUS ? SUCCESS : FAILURE);
 }
+

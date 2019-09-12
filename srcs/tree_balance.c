@@ -6,24 +6,24 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:58:19 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/03 15:13:11 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/12 15:52:20 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	ft_hei(t_nod *tree)
+static int	ft_hei(t_tree_nod *tree)
 {
 	if (tree == NULL)
 		return (0);
 	return (tree->height);
 }
 
-static void	ft_rotate(t_nod **tree, char r_l)
+static void	ft_rotate(t_tree_nod **tree, char r_l)
 {
-	t_nod	*x;
-	t_nod	*y;
-	t_nod	*tmp;
+	t_tree_nod	*x;
+	t_tree_nod	*y;
+	t_tree_nod	*tmp;
 
 	if (r_l == 'l')
 	{
@@ -48,7 +48,7 @@ static void	ft_rotate(t_nod **tree, char r_l)
 	*tree = x;
 }
 
-void		ft_balance_tree(t_nod **tree, char *room)
+void		ft_balance_tree(t_tree_nod **tree, char *room)
 {
 	int	bal;
 
