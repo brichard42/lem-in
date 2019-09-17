@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/17 16:18:32 by brichard         ###   ########.fr        #
+#    Updated: 2019/09/17 16:55:43 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME = lem-in
 SRCS += $(CORE)
 SRCS += $(PARSER)
 
-OBJS = $(patsubst %.c, $(OBJS_PATH)%.o, $(SRCS_FILES))
+OBJS = $(patsubst %.c, $(OBJS_PATH)%.o, $(SRCS))
 
 LIBS += $(addprefix $(LIB_PATH), $(LIB_FILES))
 
@@ -59,7 +59,7 @@ OBJS_DIR += obj/
 
 SRCS_DIR += srcs/
 
-LIB_DIR += $(basename $(LIB_FILES))/
+LIB_DIR += $(basename $(LIB_FILES))
 
 CORE_DIR += core/
 
@@ -70,7 +70,7 @@ PARSING_DIR += parsing/
 #------------------------------------------------------------------------------#
 
 INC_PATH += $(INC_DIR)
-INC_PATH += $(addsuffix $(INC_DIR), $(LIB_DIR))
+INC_PATH += $(addsuffix $(INC_DIR), $(LIB_DIR)/)
 
 OBJS_PATH = $(OBJS_DIR)
 
@@ -101,7 +101,7 @@ DEBUG += -g3
 
 IFLAGS += $(addprefix -I, $(INC_PATH))
 
-LDFLAGS = $(addprefix -L, $(LIB_PATH))
+LDFLAGS = $(addprefix -L , $(LIB_PATH))
 
 LDLIBS = $(subst lib, -l, $(LIB_PATH))
 
@@ -124,9 +124,9 @@ RM = rm -rf
 #                                    CLEAN                                     #
 #------------------------------------------------------------------------------#
 
-CLEAN_LIB += $(addprefix && make clean -C , $(LIB_PATH))
+CLEAN_LIB += $(addprefix make clean -C , $(LIB_PATH))
 
-FCLEAN_LIB += $(addprefix && make fclean -C , $(LIB_PATH))
+FCLEAN_LIB += $(addprefix make fclean -C , $(LIB_PATH))
 
 #------------------------------------------------------------------------------#
 #                                    OUTPUT                                    #
@@ -170,10 +170,10 @@ COM_STRING   = "Compiling"
 all: $(CLEAR) $(NAME)
 
 $(NAME): $(LIBS) $(OBJS_PATH) $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJS) -o $@
+	$(call run_and_test, $(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $@)
 
-$(OBJS): $(OBJS_PATH)%.o : %.c $(INCS) Makefile | $(OBJS_PATH)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LIB_INC) -o $@ -c $<
+$(OBJS): $(OBJS_PATH)%.o : %.c $(INCS) Makefile
+	$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
 $(OBJS_PATH):
 	$(MKDIR) $@
@@ -189,15 +189,15 @@ norme:
 	norminette $(SRCS_PATH) $(INC_PATH) | grep -v 'Warning: Not a valid file' | grep -B 1 -e 'Error' -e 'Warning'
 
 lc:
-	$(RM) $(D_OBJS) && $(RM) $(OBJS_PATH) $(CLEAN_LIB)
+	$(call run_and_test, $(RM) $(OBJS_PATH) && $(CLEAN_LIB))
 
 lfc:
-	$(RM) $(D_OBJS) && $(RM) $(OBJS_PATH) && $(RM) $(NAME) $(FCLEAN_LIB)
+	$(call run_and_test, $(RM) $(OBJS_PATH) && $(RM) $(NAME) && $(FCLEAN_LIB))
 
 clean:
-	$(RM) $(OBJS_PATH)
+	$(call run_and_test, $(RM) $(OBJS_PATH))
 
 fclean: clean
-	$(RM) $(NAME)
+	$(call run_and_test, $(RM) $(NAME))
 
 re: fclean all
