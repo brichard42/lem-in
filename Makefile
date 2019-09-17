@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/17 16:55:43 by brichard         ###   ########.fr        #
+#    Updated: 2019/09/17 17:00:28 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ LIB_DIR += $(basename $(LIB_FILES))
 CORE_DIR += core/
 
 PARSING_DIR += parsing/
+PARSING_DIR += parsing/binary_tree/
 
 #------------------------------------------------------------------------------#
 #                                     PATHS                                    #
