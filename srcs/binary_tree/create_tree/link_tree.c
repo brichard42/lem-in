@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:11:05 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/17 13:36:52 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/17 18:52:23 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_ltree_nod	*ft_link_new(char *link_name, t_tree_nod *linked_room)
 	return (new);
 }
 
-int8_t	ft_link_add(t_ltree_nod *parent, t_ltree_nod **l_tree, char *link_name, t_tree_nod *linked_room)
+int8_t		ft_link_add(t_ltree_nod *parent, t_ltree_nod **l_tree
+									, char *link_name, t_tree_nod *linked_room)
 {
 	if (*l_tree == NULL)
 	{

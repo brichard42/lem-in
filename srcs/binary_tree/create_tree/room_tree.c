@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 13:51:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/17 13:51:28 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/17 19:17:12 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,29 @@ t_tree_nod	*ft_room_new(char *room_name)
 	return (new);
 }
 
-int8_t		ft_room_add(t_state_machine *machine, t_tree_nod **room_tree, char *room_name)
+static void	set_start_end(t_state_machine *machine, t_tree_nod *current)
+{
+	if (machine->special_com.is_end == TRUE)
+	{
+		machine->end = current;
+		machine->special_com.is_end = FALSE;
+	}
+	else
+	{
+		machine->start = current;
+		machine->special_com.is_start = FALSE;
+	}
+}
+
+int8_t		ft_room_add(t_state_machine *machine, t_tree_nod **room_tree
+															, char *room_name)
 {
 	if (*room_tree == NULL)
 	{
 		*room_tree = ft_room_new(room_name);
-		if (machine->special_com.is_end == TRUE)
-		{
-			machine->end = *room_tree;
-			machine->special_com.is_end = FALSE;
-		}
-		else if (machine->special_com.is_start == TRUE)
-		{
-			machine->start = *room_tree;
-			machine->special_com.is_start = FALSE;
-		}
+		if (machine->special_com.is_end == TRUE
+				|| machine->special_com.is_start == TRUE)
+			set_start_end(machine, *room_tree);
 		return (*room_tree == NULL ? FAILURE : SUCCESS);
 	}
 	else if (ft_strcmp(room_name, (*room_tree)->room_name) < 0)

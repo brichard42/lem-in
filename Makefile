@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/17 17:00:28 by brichard         ###   ########.fr        #
+#    Updated: 2019/09/17 18:51:13 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@
 NAME = lem-in
 
 SRCS += $(CORE)
+SRCS += $(BINARY_TREE)
 SRCS += $(PARSER)
+SRCS += $(ALGO)
+SRCS += $(MEMORY)
 
 OBJS = $(patsubst %.c, $(OBJS_PATH)%.o, $(SRCS))
 
@@ -42,12 +45,24 @@ INC_FILES += define.h
 
 CORE += main.c
 
+BINARY_TREE += room_tree.c
+BINARY_TREE += link_tree.c
+BINARY_TREE += balance_room_tree.c
+BINARY_TREE += balance_room_tree_2.c
+BINARY_TREE += tree_search.c
+BINARY_TREE += print_tree.c
+BINARY_TREE += ft_free_room_tree.c
+BINARY_TREE += ft_free_link_tree.c
+
 PARSER += parsing.c
-PARSER += room_tree.c
-PARSER += link_tree.c
-PARSER += balance_room_tree.c
-PARSER += balance_room_tree_2.c
-PARSER += tree_search.c
+PARSER += get_ants.c
+PARSER += get_rooms.c
+PARSER += get_links.c
+PARSER += com_parser.c
+
+MEMORY += del_splited_line.c
+
+ALGO += 
 
 #------------------------------------------------------------------------------#
 #                                  DIRECTORIES                                 #
@@ -64,7 +79,16 @@ LIB_DIR += $(basename $(LIB_FILES))
 CORE_DIR += core/
 
 PARSING_DIR += parsing/
-PARSING_DIR += parsing/binary_tree/
+PARSING_DIR += parsing/com_parser/
+PARSING_DIR += parsing/get_functions/
+
+BINARY_TREE_DIR += binary_tree/
+BINARY_TREE_DIR += binary_tree/balance/
+BINARY_TREE_DIR += binary_tree/create_tree/
+BINARY_TREE_DIR += binary_tree/tree_tools/
+BINARY_TREE_DIR += binary_tree/delete_tree/
+
+MEMORY_FUNCTIONS_DIR += memory_functions/
 
 #------------------------------------------------------------------------------#
 #                                     PATHS                                    #
@@ -77,6 +101,8 @@ OBJS_PATH = $(OBJS_DIR)
 
 _SRCS_PATH += $(CORE_DIR)
 _SRCS_PATH += $(PARSING_DIR)
+_SRCS_PATH += $(BINARY_TREE_DIR)
+_SRCS_PATH += $(MEMORY_FUNCTIONS_DIR)
 
 SRCS_PATH += $(SRCS_DIR)
 SRCS_PATH += $(addprefix $(SRCS_DIR), $(_SRCS_PATH))
@@ -195,10 +221,10 @@ lc:
 lfc:
 	$(call run_and_test, $(RM) $(OBJS_PATH) && $(RM) $(NAME) && $(FCLEAN_LIB))
 
-clean:
+clean: $(CLEAR)
 	$(call run_and_test, $(RM) $(OBJS_PATH))
 
-fclean: clean
+fclean: $(CLEAR) clean
 	$(call run_and_test, $(RM) $(NAME))
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/17 13:50:28 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/17 18:43:13 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ typedef int8_t		(*t_state_func)(t_state_machine *, char *);
 
 int8_t				lem_parsing(t_state_machine *machine);
 int8_t				get_ants(t_state_machine *machine, char *str);
+int8_t				get_rooms(t_state_machine *machine, char *str);
+int8_t				get_links(t_state_machine *machine, char *str);
+uint8_t				check_com(t_state_machine *machine, char *str);
 
 int8_t				ft_stock_room(t_state_machine *machine, char *str);
 
@@ -83,6 +86,12 @@ void				ft_small_balance(t_tree_nod **tree, int bal);
 
 t_tree_nod			*ft_search_room(t_tree_nod *room_tree, char *key);
 
+void				del_splited_line(char ***splited_line);
+void				ft_free_link_tree(t_ltree_nod *link_tree);
+void				ft_free_room_tree(t_tree_nod *room_tree);
+
+void				ft_print_link_tree(t_ltree_nod *link_tree);
+void				ft_print_room_tree(t_tree_nod *room_tree);
 /*
 typedef struct		s_path
 {
