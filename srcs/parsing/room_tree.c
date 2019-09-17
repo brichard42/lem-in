@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree.c                                             :+:      :+:    :+:   */
+/*   room_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/18 14:04:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/12 15:47:26 by brichard         ###   ########.fr       */
+/*   Created: 2019/09/17 13:51:25 by brichard          #+#    #+#             */
+/*   Updated: 2019/09/17 13:51:28 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-#include "../libft/includes/ft_printf.h"
-
-t_tree_nod	*ft_node_new(char *room)
+t_tree_nod	*ft_room_new(char *room_name)
 {
 	t_tree_nod *new;
 
 	if (!(new = (t_tree_nod *)ft_memalloc(sizeof(t_tree_nod))))
 		return (NULL);
-	if (!(new->room = ft_strdup(room)))
+	if (!(new->room_name = ft_strdup(room_name)))
 	{
 		ft_memdel((void **)&new);
 		return (NULL);
@@ -28,11 +26,11 @@ t_tree_nod	*ft_node_new(char *room)
 	return (new);
 }
 
-int8_t		ft_node_add(t_state_machine *machine, t_tree_nod **room_tree, char *room)
+int8_t		ft_room_add(t_state_machine *machine, t_tree_nod **room_tree, char *room_name)
 {
 	if (*room_tree == NULL)
 	{
-		*room_tree = ft_node_new(room);
+		*room_tree = ft_room_new(room_name);
 		if (machine->special_com.is_end == TRUE)
 		{
 			machine->end = *room_tree;
@@ -45,16 +43,16 @@ int8_t		ft_node_add(t_state_machine *machine, t_tree_nod **room_tree, char *room
 		}
 		return (*room_tree == NULL ? FAILURE : SUCCESS);
 	}
-	else if (ft_strcmp(room, (*room_tree)->room) < 0)
+	else if (ft_strcmp(room_name, (*room_tree)->room_name) < 0)
 	{
-		if (ft_node_add(machine, &(*room_tree)->left, room) == FAILURE)
+		if (ft_room_add(machine, &(*room_tree)->left, room_name) == FAILURE)
 			return (FAILURE);
 	}
-	else if (ft_strcmp(room, (*room_tree)->room) > 0)
+	else if (ft_strcmp(room_name, (*room_tree)->room_name) > 0)
 	{
-		if (ft_node_add(machine, &(*room_tree)->right, room) == FAILURE)
+		if (ft_room_add(machine, &(*room_tree)->right, room_name) == FAILURE)
 			return (FAILURE);
 	}
-	ft_balance_tree(room_tree, room);
+	ft_balance_tree(room_tree, room_name);
 	return (SUCCESS);
 }

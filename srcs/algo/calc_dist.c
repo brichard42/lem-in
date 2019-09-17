@@ -6,17 +6,17 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/03 15:17:13 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/17 13:36:52 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int				ft_count_links(t_link *count, int n_hei)
+int				ft_count_links(t_ltree_nod *count, int n_hei)
 {
 	int		i;
-	t_link	*left;
-	t_link	*right;
+	t_ltree_nod	*left;
+	t_ltree_nod	*right;
 
 	i = 0;
 	right = count->right;
@@ -32,11 +32,11 @@ int				ft_count_links(t_link *count, int n_hei)
 	return (i);
 }
 
-static int		ft_set_links(t_link *to_put, t_nod **n_tab, int i, int n_hei)
+static int		ft_set_links(t_ltree_nod *to_put, t_nod **n_tab, int i, int n_hei)
 {
 	t_nod	*current_room;
-	t_link	*left;
-	t_link	*right;
+	t_ltree_nod	*left;
+	t_ltree_nod	*right;
 
 	left = to_put->left;
 	right = to_put->right;

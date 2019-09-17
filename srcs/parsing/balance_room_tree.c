@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:58:19 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/12 15:52:20 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/17 13:20:23 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_rotate(t_tree_nod **tree, char r_l)
 	*tree = x;
 }
 
-void		ft_balance_tree(t_tree_nod **tree, char *room)
+void		ft_balance_tree(t_tree_nod **tree, char *room_name)
 {
 	int	bal;
 
@@ -58,16 +58,16 @@ void		ft_balance_tree(t_tree_nod **tree, char *room)
 	if ((bal == 1 && (*tree)->right == NULL)
 			|| (bal == -1 && ((*tree)->left == NULL)))
 		ft_small_balance(tree, bal);
-	else if (bal > 1 && ft_strcmp(room, (*tree)->left->room) < 0)
+	else if (bal > 1 && ft_strcmp(room_name, (*tree)->left->room_name) < 0)
 		ft_rotate(tree, RIGHT);
-	else if (bal < -1 && ft_strcmp(room, (*tree)->right->room) > 0)
+	else if (bal < -1 && ft_strcmp(room_name, (*tree)->right->room_name) > 0)
 		ft_rotate(tree, LEFT);
-	else if (bal > 1 && ft_strcmp(room, (*tree)->left->room) > 0)
+	else if (bal > 1 && ft_strcmp(room_name, (*tree)->left->room_name) > 0)
 	{
 		ft_rotate(&(*tree)->left, LEFT);
 		ft_rotate(tree, RIGHT);
 	}
-	else if (bal < -1 && ft_strcmp(room, (*tree)->right->room) < 0)
+	else if (bal < -1 && ft_strcmp(room_name, (*tree)->right->room_name) < 0)
 	{
 		ft_rotate(&(*tree)->right, RIGHT);
 		ft_rotate(tree, LEFT);

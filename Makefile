@@ -6,75 +6,131 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/12 18:39:10 by brichard         ###   ########.fr        #
+#    Updated: 2019/09/17 16:18:32 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-################################################################################
-#                                   VARIABLES                                  #
-################################################################################
+#------------------------------------------------------------------------------#
+#                                 BUILD TARGETS                                #
+#------------------------------------------------------------------------------#
 
 NAME = lem-in
 
+SRCS += $(CORE)
+SRCS += $(PARSER)
+
+OBJS = $(patsubst %.c, $(OBJS_PATH)%.o, $(SRCS_FILES))
+
+LIBS += $(addprefix $(LIB_PATH), $(LIB_FILES))
+
+#------------------------------------------------------------------------------#
+#                                   LIB_FILES                                  #
+#------------------------------------------------------------------------------#
+
+LIB_FILES += libft.a
+
+#------------------------------------------------------------------------------#
+#                                   INC_FILES                                  #
+#------------------------------------------------------------------------------#
+
+INC_FILES += lem_in.h
+INC_FILES += define.h
+
+#------------------------------------------------------------------------------#
+#                                   SRCS_FILES                                 #
+#------------------------------------------------------------------------------#
+
+CORE += main.c
+
+PARSER += parsing.c
+PARSER += room_tree.c
+PARSER += link_tree.c
+PARSER += balance_room_tree.c
+PARSER += balance_room_tree_2.c
+PARSER += tree_search.c
+
+#------------------------------------------------------------------------------#
+#                                  DIRECTORIES                                 #
+#------------------------------------------------------------------------------#
+
+INC_DIR += includes/
+
+OBJS_DIR += obj/
+
+SRCS_DIR += srcs/
+
+LIB_DIR += $(basename $(LIB_FILES))/
+
+CORE_DIR += core/
+
+PARSING_DIR += parsing/
+
+#------------------------------------------------------------------------------#
+#                                     PATHS                                    #
+#------------------------------------------------------------------------------#
+
+INC_PATH += $(INC_DIR)
+INC_PATH += $(addsuffix $(INC_DIR), $(LIB_DIR))
+
+OBJS_PATH = $(OBJS_DIR)
+
+_SRCS_PATH += $(CORE_DIR)
+_SRCS_PATH += $(PARSING_DIR)
+
+SRCS_PATH += $(SRCS_DIR)
+SRCS_PATH += $(addprefix $(SRCS_DIR), $(_SRCS_PATH))
+
+LIB_PATH += $(LIB_DIR)
+
+#------------------------------------------------------------------------------#
+#                                     VPATH                                    #
+#------------------------------------------------------------------------------#
+
+vpath %.c $(SRCS_PATH)
+vpath %.h $(INC_PATH)
+
+#------------------------------------------------------------------------------#
+#                                  COMPILATION                                 #
+#------------------------------------------------------------------------------#
+
 CC = gcc
 
-CFLAGS = -Werror -Wall -Wextra# -fsanitize=address -g3
+DEBUG += $(CFLAGS)
+DEBUG += -fsanitize=address
+DEBUG += -g3
+
+IFLAGS += $(addprefix -I, $(INC_PATH))
 
 LDFLAGS = $(addprefix -L, $(LIB_PATH))
 
 LDLIBS = $(subst lib, -l, $(LIB_PATH))
 
-CPPFLAGS = -I$(INC_PATH)
+CFLAGS += -Werror
+CFLAGS += -Wall
+CFLAGS += -Wextra
+CFLAGS += $(IFLAGS)
 
-LIB_PATH = $(basename $(LIB_FILES))
+#------------------------------------------------------------------------------#
+#                                   COMMANDS                                   #
+#------------------------------------------------------------------------------#
 
-LIB_INC = -I$(addprefix $(LIB_PATH)/, $(INC_PATH))
+CLEAR = clear
 
-INC_PATH = includes
+MKDIR = mkdir -p
 
-SRCS_PATH = srcs
+RM = rm -rf
 
-OBJS_PATH = .obj
+#------------------------------------------------------------------------------#
+#                                    CLEAN                                     #
+#------------------------------------------------------------------------------#
 
-OBJS_FILES = $(SRCS_FILES:.c=.o)
+CLEAN_LIB += $(addprefix && make clean -C , $(LIB_PATH))
 
-OBJS = $(addprefix $(OBJS_PATH)/, $(OBJS_FILES))
+FCLEAN_LIB += $(addprefix && make fclean -C , $(LIB_PATH))
 
-LIBS = $(addprefix $(LIB_PATH)/, $(LIB_FILES))
-
-INCS = $(addprefix $(INC_PATH)/, $(INC_FILES))
-
-CLEAN_LIB = $(addprefix && make clean -C , $(LIB_PATH))
-
-FCLEAN_LIB = $(addprefix && make fclean -C , $(LIB_PATH))
-
-################################################################################
-#                                   LIB_FILES                                  #
-################################################################################
-
-LIB_FILES =		libft.a
-
-################################################################################
-#                                   INC_FILES                                  #
-################################################################################
-
-INC_FILES =		lem_in.h \
-				define.h
-################################################################################
-#                                   SRCS_FILES                                 #
-################################################################################
-
-SRCS_FILES =	main.c \
-				parsing.c \
-				tree.c \
-				tree_balance.c \
-				tree_balance2.c \
-				link_tree.c \
-				tree_search.c
-
-################################################################################
-#                                    COlORS                                    #
-################################################################################
+#------------------------------------------------------------------------------#
+#                                    OUTPUT                                    #
+#------------------------------------------------------------------------------#
 
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m
@@ -104,40 +160,44 @@ ERROR_STRING = "[ERROR]"
 WARN_STRING  = "[WARNING]"
 COM_STRING   = "Compiling"
 
-################################################################################
+#------------------------------------------------------------------------------#
 #                                   COMMANDS                                   #
-################################################################################
+#------------------------------------------------------------------------------#
 
 .PHONY: all clean fclean re
+.SILENT:
 
-all: $(NAME)
+all: $(CLEAR) $(NAME)
 
-$(NAME): $(LIBS) $(OBJS)
-	@$(call run_and_test, $(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $@ $(OBJS))
+$(NAME): $(LIBS) $(OBJS_PATH) $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJS) -o $@
 
-$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c  $(INCS) Makefile | $(OBJS_PATH)
-	@$(call run_and_test, $(CC) $(CFLAGS) $(CPPFLAGS) $(LIB_INC) -o $@ -c $<)
+$(OBJS): $(OBJS_PATH)%.o : %.c $(INCS) Makefile | $(OBJS_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LIB_INC) -o $@ -c $<
 
 $(OBJS_PATH):
-	@$(call run_and_test, mkdir $@)
+	$(MKDIR) $@
 
 $(LIBS):
-	@echo "$(COM_COLOR)Compiling $(OBJ_COLOR)Libraries$(NO_COLOR)"
-	@make -C $(LIB_PATH)
+	echo "$(COM_COLOR)Compiling $(OBJ_COLOR)Libraries$(NO_COLOR)"
+	make -C $(LIB_PATH)
+
+$(CLEAR):
+	$@
 
 norme:
-	@$(call run_and_test, norminette $(SRCS_PATH) $(INC_PATH) | grep -v 'Warning: Not a valid file' | grep -B 1 -e 'Error' -e 'Warning')
+	norminette $(SRCS_PATH) $(INC_PATH) | grep -v 'Warning: Not a valid file' | grep -B 1 -e 'Error' -e 'Warning'
 
 lc:
-	@$(call run_and_test, $(RM) $(D_OBJS) && rm -rf $(OBJS_PATH) $(CLEAN_LIB))
+	$(RM) $(D_OBJS) && $(RM) $(OBJS_PATH) $(CLEAN_LIB)
 
 lfc:
-	@$(call run_and_test, $(RM) $(D_OBJS) && rm -rf $(OBJS_PATH) && $(RM) $(NAME) $(FCLEAN_LIB))
+	$(RM) $(D_OBJS) && $(RM) $(OBJS_PATH) && $(RM) $(NAME) $(FCLEAN_LIB)
 
 clean:
-	@$(call run_and_test, rm -rf $(OBJS_PATH))
+	$(RM) $(OBJS_PATH)
 
 fclean: clean
-	@$(call run_and_test, $(RM) $(NAME))
+	$(RM) $(NAME)
 
 re: fclean all

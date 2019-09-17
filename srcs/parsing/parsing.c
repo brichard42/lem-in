@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/12 19:05:43 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/17 13:52:23 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int8_t		put_room_in_tree(t_state_machine *machine, char *str)
 		if (splited_line != NULL)
 		{
 			if (room_is_valid(splited_line) == TRUE)
-				ret_value = ft_node_add(machine, &machine->room_tree, *splited_line);
+				ret_value = ft_room_add(machine, &machine->room_tree, *splited_line);
 			del_splited_line(&splited_line);
 		}
 	}
