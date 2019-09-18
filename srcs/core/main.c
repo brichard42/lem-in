@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/17 18:41:47 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/18 16:13:45 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,23 @@ int			main(void)
 	else
 		ft_printf("end:\tNONE\n");
 	ft_printf("ant_nb:\t%-20d\n", machine.ant_nb);
-	//NEED TO CHECK IF THERES AT LEAST ONE LINK
-//	if (ft_calc_dist(&machine))
-//		return (ft_free_spec(machine));
-//	if (machine.end->height == -1)
-//		return (ft_free_spec(machine));
-//	if (ft_get_multi_paths(&machine))
-//		return (ft_free_spec(machine));
-//	ft_print_tree(machine.tree);
-//	if (machine.start)
-//		ft_printf("start = %s\n", machine.start->room_name);
-//	if (machine.end)
-//		ft_printf("end = %s\n", machine.end->room_name);
-//	ft_aff_paths(machine.paths);
-//	if (ft_ant_in_paths(machine.paths, machine.ants, -1))
-//		return (ft_free_spec(machine));
-//	ft_free_transformed_path(machine.paths);
 	ft_free_room_tree(machine.room_tree);
 	return (EXIT_SUCCESS);
 }
+/*
+**    if (ft_calc_dist(&machine))
+**    	return (ft_free_spec(machine));
+**    if (machine.end->height == -1)
+**    	return (ft_free_spec(machine));
+**    if (ft_get_multi_paths(&machine))
+**    	return (ft_free_spec(machine));
+**    ft_print_tree(machine.tree);
+**    if (machine.start)
+**    	ft_printf("start = %s\n", machine.start->room_name);
+**    if (machine.end)
+**    	ft_printf("end = %s\n", machine.end->room_name);
+**    ft_aff_paths(machine.paths);
+**    if (ft_ant_in_paths(machine.paths, machine.ants, -1))
+**    	return (ft_free_spec(machine));
+**    ft_free_transformed_path(machine.paths);
+*/
