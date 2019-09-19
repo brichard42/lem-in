@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/18 16:20:45 by brichard         ###   ########.fr        #
+#    Updated: 2019/09/19 17:24:34 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ PARSER += com_parser.c
 
 MEMORY += del_splited_line.c
 
-ALGO += 
+ALGO += calc_dist.c
 
 #------------------------------------------------------------------------------#
 #                                  DIRECTORIES                                 #
@@ -90,6 +90,7 @@ BINARY_TREE_DIR += binary_tree/delete_tree/
 
 MEMORY_FUNCTIONS_DIR += memory_functions/
 
+ALGO_DIR += algo/
 #------------------------------------------------------------------------------#
 #                                     PATHS                                    #
 #------------------------------------------------------------------------------#
@@ -103,6 +104,7 @@ _SRCS_PATH += $(CORE_DIR)
 _SRCS_PATH += $(PARSING_DIR)
 _SRCS_PATH += $(BINARY_TREE_DIR)
 _SRCS_PATH += $(MEMORY_FUNCTIONS_DIR)
+_SRCS_PATH += $(ALGO_DIR)
 
 SRCS_PATH += $(SRCS_DIR)
 SRCS_PATH += $(addprefix $(SRCS_DIR), $(_SRCS_PATH))

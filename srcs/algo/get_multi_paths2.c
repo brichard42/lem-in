@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:25:34 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/03 15:11:49 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:55:10 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_nod	*ft_best_link(t_nod **tab_link)
 	return (NULL);
 }
 
-int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
+int				ft_get_next_node(t_path *path, t_nod **node, t_program_data *program_data)
 {
 	t_nod	*new;
 	t_nod	**links;
@@ -76,7 +76,7 @@ int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 		return (ft_ret_i_del_links(links, 2));
 	if (!(new = ft_best_link(links)))
 		return (ft_ret_i_del_links(links, 1));
-	if (new != env->start)
+	if (new != program_data->start)
 		new->mark++;
 	ft_memdel((void **)&links);
 	if (ft_create_path(&path, new))
@@ -85,7 +85,7 @@ int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 	return (0);
 }
 
-t_path			**ft_check_paths(t_path **old_paths, t_env *env, int num)
+t_path			**ft_check_paths(t_path **old_paths, t_program_data *program_data, int num)
 {
 	t_path	**new_paths;
 	t_path	*tmp;
@@ -101,7 +101,7 @@ t_path			**ft_check_paths(t_path **old_paths, t_env *env, int num)
 		tmp = old_paths[i];
 		while (tmp->next)
 			tmp = tmp->next;
-		if (tmp->node == env->start)
+		if (tmp->node == program_data->start)
 			new_paths[j++] = old_paths[i];
 		i++;
 	}

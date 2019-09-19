@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:17:41 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/17 18:31:28 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:40:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static int	get_ant_nb(char *str)
 
 int8_t		get_ants(t_state_machine *machine, char *str)
 {
-	machine->ant_nb = get_ant_nb(str);
+	machine->program_data.ant_nb = get_ant_nb(str);
 	machine->state = ST_ROOM;
 	machine->special_com.is_start = FALSE;
 	machine->special_com.is_end = FALSE;
 	ft_strdel(&str);
-	return (machine->ant_nb == 0 ? FAILURE : SUCCESS);
+	return (machine->program_data.ant_nb == 0 ? FAILURE : SUCCESS);
 }

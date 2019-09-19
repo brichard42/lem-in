@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 08:51:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/03 15:09:04 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:55:10 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_nod	***free_ret_nod(t_nod ***n_path)
 	return (NULL);
 }
 
-t_nod			***ft_transform_paths(t_path **path, t_env *env)
+t_nod			***ft_transform_paths(t_path **path, t_program_data *program_data)
 {
 	t_nod	***n_path;
 	int		i;
@@ -45,7 +45,7 @@ t_nod			***ft_transform_paths(t_path **path, t_env *env)
 		if (!(n_path[i] = (t_nod **)ft_memalloc(sizeof(t_nod *) * (count + 2))))
 			return (free_ret_nod(n_path));
 		ft_transform(n_path[i], path[i], 0, 1);
-		n_path[i][count + 1] = env->end;
+		n_path[i][count + 1] = program_data->end;
 	}
 	return (n_path);
 }

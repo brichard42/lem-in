@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/17 18:43:13 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:34:26 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 # define LEM_IN_H
 
 # include "libft.h"
-# include "define.h"
 
 # include <stdint.h>
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
 
+/*
+**	----------All Project's Defines---------------------------------------------
+*/
+# include "define.h"
+
+/*
+**	----------Enum of States for the State Machine------------------------------
+*/
 enum				e_state
 {
 	ST_ANTS,
@@ -30,12 +37,18 @@ enum				e_state
 	ST_LINK_PLUS
 };
 
+/*
+**	----------Typedef Booleans for Special Comments on Parsing------------------
+*/
 typedef struct		s_boleans
 {
 	uint8_t				is_start;
 	uint8_t				is_end;
 }					t_boleans;
 
+/*
+**	----------Typedef Link Binary_tree Data_struct------------------------------
+*/
 typedef struct		s_ltree_nod
 {
 	char				*link_name;
@@ -45,53 +58,82 @@ typedef struct		s_ltree_nod
 	struct s_tree_nod	*linked_room;
 }					t_ltree_nod;
 
+/*
+**	---------Typedef Room Binary_tree Data_struct-------------------------------
+*/
 typedef struct		s_tree_nod
 {
 	char				*room_name;
 	struct s_tree_nod	*right;
 	struct s_tree_nod	*left;
 	struct s_ltree_nod	*link_tree;
-	uint64_t			height;
+	int64_t				height;
 	uint64_t			mark;
 }						t_tree_nod;
 
-typedef struct		s_state_machine
+/*
+**	----------Typedef Algo Data_struct------------------------------------------
+*/
+typedef struct		s_data
 {
 	//t_tree_nod		***paths;
 	t_tree_nod			*room_tree;
 	t_tree_nod			*start;
 	t_tree_nod			*end;
 	int64_t				ant_nb;
+}					t_data;
+
+/*
+**	----------Typedef State_machine Data_struct---------------------------------
+*/
+typedef struct		s_state_machine
+{
+	t_data				program_data;
 	enum e_state		state;
 	t_boleans			special_com;
 }					t_state_machine;
 
+/*
+**	----------Typedef State_machine Functions----------------------------------
+*/
 typedef int8_t		(*t_state_func)(t_state_machine *, char *);
 
+/*
+**	Parser
+*/
 int8_t				lem_parsing(t_state_machine *machine);
+
 int8_t				get_ants(t_state_machine *machine, char *str);
 int8_t				get_rooms(t_state_machine *machine, char *str);
 int8_t				get_links(t_state_machine *machine, char *str);
-uint8_t				check_com(t_state_machine *machine, char *str);
 
-int8_t				ft_stock_room(t_state_machine *machine, char *str);
+uint8_t				check_com(t_state_machine *machine, char *str);
 
 int8_t				ft_room_add(t_state_machine *machine,
 								t_tree_nod **room_tree, char *room);
 int8_t				ft_link_add(t_ltree_nod *parent, t_ltree_nod **l_tree,
 									char *link_name, t_tree_nod *r_tree);
 
+void				del_splited_line(char ***splited_line);
+
+/*
+**	----------Binary_tree-------------------------------------------------------
+*/
 void				ft_balance_tree(t_tree_nod **tree, char *room);
 void				ft_small_balance(t_tree_nod **tree, int bal);
-
 t_tree_nod			*ft_search_room(t_tree_nod *room_tree, char *key);
 
-void				del_splited_line(char ***splited_line);
 void				ft_free_link_tree(t_ltree_nod *link_tree);
 void				ft_free_room_tree(t_tree_nod *room_tree);
 
 void				ft_print_link_tree(t_ltree_nod *link_tree);
 void				ft_print_room_tree(t_tree_nod *room_tree);
+
+/*
+**	----------Algo--------------------------------------------------------------
+*/
+int8_t				ft_calc_dist(t_data *program_data);
+
 /*
 typedef struct		s_path
 {
@@ -102,7 +144,6 @@ typedef struct		s_path
 
 void				ft_print_tree(t_tree_nod *tree); // TO TEJ
 void				ft_aff_paths(t_tree_nod ***the_paths); // TO TEJ
-int					ft_get_rooms_and_links(t_env *env, char *str, int r_l);
 int					ft_get_path(t_env *env);
 int					ft_get_multi_paths(t_env *env);
 int					ft_node_in_path(t_path *path, int i);
@@ -113,7 +154,6 @@ int					ft_create_path(t_path **path, t_tree_nod *new);
 
 int					ft_path_counter(t_path **paths);
 void				ft_hei_to_num(t_tree_nod *tree, int i);
-int					ft_calc_dist(t_env *env);
 int					ft_count_links(t_ltree_nod *count, int n_hei);
 int					ft_get_next_tree_node(t_path *path, t_tree_nod **node, t_env *env);
 t_path				**ft_check_paths(t_path **old_paths, t_env *env, int num);
@@ -133,10 +173,6 @@ void				ft_free_path(t_path **path, int j);
 int					ft_free_paths_nodes(t_path **paths, t_tree_nod **nodes);
 int					ft_free_str(char *str);
 int					ft_ret_i_del_links(t_tree_nod **links, int i);
-
-int					ft_stock_link(t_env *env, char *str);
-
-int					ft_print_error(char *str);
 */
 
 #endif

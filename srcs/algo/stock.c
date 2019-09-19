@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:05:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/03 16:20:49 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:55:10 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_stock_ret(char **tab, int i)
 		return (1);
 }
 
-int			ft_stock_link(t_env *env, char *str)
+int			ft_stock_link(t_program_data *program_data, char *str)
 {
 	char	**tab;
 	t_nod	*a;
@@ -41,8 +41,8 @@ int			ft_stock_link(t_env *env, char *str)
 		return (ft_stock_ret(tab, 1));
 	if (ft_strequ(tab[0], tab[1]))
 		return (ft_stock_ret(tab, 3));
-	if (!(a = ft_search_room(env->tree, tab[0]))
-			|| !(b = ft_search_room(env->tree, tab[1])))
+	if (!(a = ft_search_room(program_data->tree, tab[0]))
+			|| !(b = ft_search_room(program_data->tree, tab[1])))
 		return (ft_stock_ret(tab, 2));
 	if (ft_link_add(NULL, &b->links, tab[0], a)
 			|| ft_link_add(NULL, &a->links, tab[1], b))
@@ -51,7 +51,7 @@ int			ft_stock_link(t_env *env, char *str)
 	return (0);
 }
 
-int			ft_stock_room(t_env *env, char *str, char *s_e)
+int			ft_stock_room(t_program_data *program_data, char *str, char *s_e)
 {
 	char **tab;
 
@@ -72,7 +72,7 @@ int			ft_stock_room(t_env *env, char *str, char *s_e)
 	if (ft_count_tab(tab) != 3
 			|| !ft_str_is_digit(tab[1]) || !ft_str_is_digit(tab[2]))
 		return (ft_stock_ret(tab, 0));
-	else if (ft_node_add(env, &env->tree, tab[0], *s_e))
+	else if (ft_node_add(program_data, &program_data->tree, tab[0], *s_e))
 		return (ft_stock_ret(tab, 0));
 	if (*s_e != '\0')
 		*s_e = '\0';

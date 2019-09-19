@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/03 15:11:49 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:55:10 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static int	ft_get_the_nods(t_path **paths, t_nod **nodes, t_link *link, int i)
 	return (i);
 }
 
-static int	ft_path_helper(t_path *path, t_nod **node, t_env *env)
+static int	ft_path_helper(t_path *path, t_nod **node, t_program_data *program_data)
 {
 	int ret;
 
-	ret = ft_get_next_node(path, node, env);
+	ret = ft_get_next_node(path, node, program_data);
 	if (ret == 1)
 		return (1);
 	if (ret == 2)
@@ -50,23 +50,23 @@ static int	ft_path_helper(t_path *path, t_nod **node, t_env *env)
 	return (0);
 }
 
-static int	ft_path_finder(t_path **paths, t_nod **nodes, t_env *env)
+static int	ft_path_finder(t_path **paths, t_nod **nodes, t_program_data *program_data)
 {
 	int	j;
 	int	i;
 
 	j = 0;
 	i = ft_path_counter(paths);
-	env->start->mark = 0;
-	env->end->mark = 1;
+	program_data->start->mark = 0;
+	program_data->end->mark = 1;
 	while (j < i)
 	{
 		while (nodes[j]->height > 0)
 		{
 			while (paths[j])
 			{
-				if (nodes[j] != env->start)
-					if (ft_path_helper(paths[j], &nodes[j], env) == 1)
+				if (nodes[j] != program_data->start)
+					if (ft_path_helper(paths[j], &nodes[j], program_data) == 1)
 						return (1);
 				j++;
 			}
@@ -77,7 +77,7 @@ static int	ft_path_finder(t_path **paths, t_nod **nodes, t_env *env)
 	return (0);
 }
 
-int			ft_get_multi_paths(t_env *env)
+int			ft_get_multi_paths(t_program_data *program_data)
 {
 	t_path	**paths;
 	t_nod	**nodes;
@@ -85,21 +85,21 @@ int			ft_get_multi_paths(t_env *env)
 	int		num_link;
 
 	i = -1;
-	num_link = ft_count_links(env->end->links, -1);
+	num_link = ft_count_links(program_data->end->links, -1);
 	if (!(paths = (t_path **)ft_memalloc(sizeof(t_path *) * (num_link + 1))))
 		return (1);
 	if (!(nodes = (t_nod **)ft_memalloc(sizeof(t_nod *) * (num_link + 1))))
 		return (ft_free_paths_nodes(paths, NULL));
 	while (++i < num_link)
-		if (ft_create_path(&paths[i], ft_node_new(env->end->room)))
+		if (ft_create_path(&paths[i], ft_node_new(program_data->end->room)))
 			return (ft_free_paths_nodes(paths, nodes));
-	if (!(ft_get_the_nods(paths, nodes, env->end->links, 0)))
+	if (!(ft_get_the_nods(paths, nodes, program_data->end->links, 0)))
 		return (ft_free_paths_nodes(paths, nodes));
-	if (ft_path_finder(paths, nodes, env))
+	if (ft_path_finder(paths, nodes, program_data))
 		return (ft_free_paths_nodes(paths, nodes));
-	if (!(paths = ft_check_paths(paths, env, num_link)))
+	if (!(paths = ft_check_paths(paths, program_data, num_link)))
 		return (ft_free_paths_nodes(paths, nodes));
-	if (!(env->paths = ft_transform_paths(paths, env)))
+	if (!(program_data->paths = ft_transform_paths(paths, program_data)))
 		return (ft_free_paths_nodes(paths, nodes));
 	ft_memdel((void **)&nodes);
 	ft_free_path(paths, 1);

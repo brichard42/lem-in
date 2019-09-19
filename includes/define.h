@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:13:54 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/12 17:50:42 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:50:19 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 # define SUCCESS		0
 # define TRUE			1
 # define FALSE			0
+# define NO_DISTANCE	-1
 
+/*
+**	Right or Left indicator
+*/
 # define LEFT			'l'
 # define RIGHT			'r'
 
