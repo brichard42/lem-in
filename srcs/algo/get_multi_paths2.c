@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:25:34 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/19 16:55:10 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:26:31 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ static int		ft_get_links(t_nod **tab_link, t_link *link, int i)
 {
 	if (!link)
 		return (0);
-	if (!link->linked_room->mark)
-	{
-		tab_link[i] = link->linked_room;
-		i++;
-	}
+	if (!link->l_room->u)
+		tab_link[i++] = link->l_room;
 	if (link->left)
 		i = ft_get_links(tab_link, link->left, i);
 	if (link->right)
@@ -36,7 +33,8 @@ static t_nod	**ft_get_unvisited_links(t_nod *node)
 	num_link = ft_count_links(node->links, -1);
 	if (!(links = (t_nod **)ft_memalloc(sizeof(t_nod *) * (num_link + 1))))
 		return (NULL);
-	ft_get_links(links, node->links, 0);
+	if (ft_get_links(links, node->links, 0) == 0)
+		return (NULL);
 	return (links);
 }
 
@@ -48,36 +46,36 @@ static t_nod	*ft_best_link(t_nod **tab_link)
 	i = 1;
 	if (!tab_link[0])
 		return (NULL);
-	min_hei = tab_link[0]->height;
+	min_hei = tab_link[0]->hei;
 	while (tab_link[i])
 	{
-		if (tab_link[i]->height < min_hei)
-			min_hei = tab_link[i]->height;
+		if (tab_link[i]->hei < min_hei)
+			min_hei = tab_link[i]->hei;
 		i++;
 	}
 	i = 0;
 	while (tab_link[i])
 	{
-		if (tab_link[i]->height == min_hei)
+		if (tab_link[i]->hei == min_hei)
 			return (tab_link[i]);
 		i++;
 	}
 	return (NULL);
 }
 
-int				ft_get_next_node(t_path *path, t_nod **node, t_program_data *program_data)
+int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 {
 	t_nod	*new;
 	t_nod	**links;
 
 	if (!(links = ft_get_unvisited_links(*node)))
-		return (1);
-	if (!links[0])
+		return (2);
+	if (!links[0] && !links[1])
 		return (ft_ret_i_del_links(links, 2));
 	if (!(new = ft_best_link(links)))
 		return (ft_ret_i_del_links(links, 1));
-	if (new != program_data->start)
-		new->mark++;
+	if (new != env->start)
+		new->u++;
 	ft_memdel((void **)&links);
 	if (ft_create_path(&path, new))
 		return (1);
@@ -85,7 +83,7 @@ int				ft_get_next_node(t_path *path, t_nod **node, t_program_data *program_data
 	return (0);
 }
 
-t_path			**ft_check_paths(t_path **old_paths, t_program_data *program_data, int num)
+t_path			**ft_check_paths(t_path **old_paths, t_env *env, int num)
 {
 	t_path	**new_paths;
 	t_path	*tmp;
@@ -101,8 +99,10 @@ t_path			**ft_check_paths(t_path **old_paths, t_program_data *program_data, int 
 		tmp = old_paths[i];
 		while (tmp->next)
 			tmp = tmp->next;
-		if (tmp->node == program_data->start)
+		if (tmp->node == env->start)
 			new_paths[j++] = old_paths[i];
+		else
+			ft_free_path_helper(old_paths[i], 0);
 		i++;
 	}
 	if (i == j)

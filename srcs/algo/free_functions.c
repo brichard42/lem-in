@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:01:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/31 09:27:57 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/07 01:44:42 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_nod		**ft_free_ret_nod(t_nod **to_f)
 	return (NULL);
 }
 
-static void	ft_free_link(t_link *link)
+void	ft_free_link(t_link *link)
 {
 	if (!link)
 		return ;
@@ -43,7 +43,7 @@ void		ft_free_tree(t_nod *tree)
 	ft_memdel((void **)&tree);
 }
 
-static void	ft_free_path_helper(t_path *path, int i)
+void	ft_free_path_helper(t_path *path, int i)
 {
 	if (!path)
 		return ;

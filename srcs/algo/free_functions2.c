@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:16:56 by tlandema          #+#    #+#             */
-/*   Updated: 2019/07/31 09:27:21 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/08 02:31:07 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int		ft_ret_i_del_links(t_nod **links, int i)
 	return (i);
 }
 
-int		ft_free_paths_nodes(t_path **paths, t_nod **nodes)
+t_nod		***ft_free_paths_nodes(t_path **paths, t_nod **nodes)
 {
 	if (paths)
 		ft_free_path(paths, 0);
 	ft_memdel((void **)&nodes);
-	return (1);
+	return (NULL);
 }
 
 void	ft_free_transformed_path(t_nod ***paths)
@@ -43,6 +43,7 @@ void	ft_free_transformed_path(t_nod ***paths)
 	{
 		while (paths[++i])
 		{
+			j = 0;
 			while (paths[i][j])
 				j++;
 			ft_memdel((void **)&paths[i][j - 1]->room);
