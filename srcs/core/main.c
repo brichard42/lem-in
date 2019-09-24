@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/19 17:52:55 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/24 11:28:39 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ int			main(void)
     	return (FAILURE);
     if (machine.program_data.end->height == NO_DISTANCE)
     	return (ft_print_error(&machine));
-					ft_printf("\n\n_______________________AFTER CALC_DIST___________________\n\n");
-					ft_print_room_tree(machine.program_data.room_tree);
-					if (machine.program_data.start != NULL)
-						ft_printf("start:\t%-20s\n", machine.program_data.start->room_name);
-					else
-						ft_printf("start:\nNONE\n");
-					if (machine.program_data.end != NULL)
-						ft_printf("end:\t%-20s\n", machine.program_data.end->room_name);
-					else
-						ft_printf("end:\tNONE\n");
-					ft_printf("ant_nb:\t%-20d\n", machine.program_data.ant_nb);
+					//ft_printf("\n\n_______________________AFTER CALC_DIST___________________\n\n");
+					//ft_print_room_tree(machine.program_data.room_tree);
+					//if (machine.program_data.start != NULL)
+						//ft_printf("start:\t%-20s\n", machine.program_data.start->room_name);
+					//else
+						//ft_printf("start:\nNONE\n");
+					//if (machine.program_data.end != NULL)
+						//ft_printf("end:\t%-20s\n", machine.program_data.end->room_name);
+					//else
+						//ft_printf("end:\tNONE\n");
+					//ft_printf("ant_nb:\t%-20d\n", machine.program_data.ant_nb);
 	ft_free_room_tree(machine.program_data.room_tree);
 	return (EXIT_SUCCESS);
 }
