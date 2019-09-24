@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 16:46:50 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/09 05:50:43 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/24 14:44:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	*ft_path_to_neg(t_nod ***paths, int n_path)
+static int	*ft_path_to_neg(t_tree_nod ***paths, int n_path)
 {
 	int i;
 	int j;
@@ -25,36 +25,36 @@ static int	*ft_path_to_neg(t_nod ***paths, int n_path)
 	{
 		j = 0;
 		while (paths[i][j])
-			paths[i][j++]->hei = -1;
+			paths[i][j++]->height = -1;
 		sizes[i] = j;
 	}
 	return (sizes);
 }
 
-static void	ft_sender(int name, t_nod **path, int p_size)
+static void	ft_sender(int name, t_tree_nod **path, int p_size)
 {
 	int i;
 
 	i = p_size;
 	while (--i > 1)
 	{
-		if (path[i] && path[i]->hei != -1)
+		if (path[i] && path[i]->height != -1)
 		{
-			ft_aff_one_move(path[i]->hei, path[i]->room);
+			ft_aff_one_move(path[i]->height, path[i]->room_name);
 			if (path[i + 1])
-				path[i + 1]->hei = path[i]->hei;
-			path[i]->hei = -1;
+				path[i + 1]->height = path[i]->height;
+			path[i]->height = -1;
 		}
 	}
 	if (name != -1)
 	{
-		ft_aff_one_move(name, path[i]->room);
+		ft_aff_one_move(name, path[i]->room_name);
 		if (path[2])
-			path[2]->hei = name;
+			path[2]->height = name;
 	}
 }
 
-static int	ft_empty_paths(t_nod ***paths, int *sizes)
+static int	ft_empty_paths(t_tree_nod ***paths, int *sizes)
 {
 	int i;
 	int j;
@@ -67,13 +67,13 @@ static int	ft_empty_paths(t_nod ***paths, int *sizes)
 		j = sizes[i];
 		while (--j > 1)
 		{
-			if (paths[i][j]->hei != -1)
+			if (paths[i][j]->height != -1)
 			{
 				a = 1;
-				ft_aff_one_move(paths[i][j]->hei, paths[i][j]->room);
+				ft_aff_one_move(paths[i][j]->height, paths[i][j]->room_name);
 				if (paths[i][j + 1])
-					paths[i][j + 1]->hei = paths[i][j]->hei;
-				paths[i][j]->hei = -1;
+					paths[i][j + 1]->height = paths[i][j]->height;
+				paths[i][j]->height = -1;
 			}
 		}
 		i++;
@@ -81,7 +81,7 @@ static int	ft_empty_paths(t_nod ***paths, int *sizes)
 	return (a);
 }
 
-int			ft_send_ants(t_nod ***paths, int *tab_i, int n_path, int ant_name)
+int			ft_send_ants(t_tree_nod ***paths, int *tab_i, int n_path, int ant_name)
 {
 	int	i;
 	int	*sizes;

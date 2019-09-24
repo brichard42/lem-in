@@ -6,42 +6,11 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:01:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/07 01:44:42 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:02:09 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-t_nod		**ft_free_ret_nod(t_nod **to_f)
-{
-	ft_memdel((void **)&to_f);
-	return (NULL);
-}
-
-void	ft_free_link(t_link *link)
-{
-	if (!link)
-		return ;
-	if (link->right)
-		ft_free_link(link->right);
-	if (link->left)
-		ft_free_link(link->left);
-	ft_strdel(&link->name);
-	ft_memdel((void **)&link);
-}
-
-void		ft_free_tree(t_nod *tree)
-{
-	if (!tree)
-		return ;
-	if (tree->left)
-		ft_free_tree(tree->left);
-	if (tree->right)
-		ft_free_tree(tree->right);
-	ft_free_link(tree->links);
-	ft_strdel(&tree->room);
-	ft_memdel((void **)&tree);
-}
 
 void	ft_free_path_helper(t_path *path, int i)
 {
@@ -51,7 +20,7 @@ void	ft_free_path_helper(t_path *path, int i)
 		ft_free_path_helper(path->next, 1);
 	if (!i)
 	{
-		ft_memdel((void **)&path->node->room);
+		ft_memdel((void **)&path->node->room_name);
 		ft_memdel((void **)&path->node);
 	}
 	ft_memdel((void **)&path);

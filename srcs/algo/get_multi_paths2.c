@@ -6,18 +6,18 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:25:34 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/23 16:26:31 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/24 14:54:11 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		ft_get_links(t_nod **tab_link, t_link *link, int i)
+static int		ft_get_links(t_tree_nod **tab_link, t_ltree_nod *link, int i)
 {
 	if (!link)
 		return (0);
-	if (!link->l_room->u)
-		tab_link[i++] = link->l_room;
+	if (!link->linked_room->u)
+		tab_link[i++] = link->linked_room;
 	if (link->left)
 		i = ft_get_links(tab_link, link->left, i);
 	if (link->right)
@@ -25,48 +25,48 @@ static int		ft_get_links(t_nod **tab_link, t_link *link, int i)
 	return (i);
 }
 
-static t_nod	**ft_get_unvisited_links(t_nod *node)
+static t_tree_nod	**ft_get_unvisited_links(t_tree_nod *node)
 {
 	int		num_link;
-	t_nod	**links;
+	t_tree_nod	**link_tree;
 
-	num_link = ft_count_links(node->links, -1);
-	if (!(links = (t_nod **)ft_memalloc(sizeof(t_nod *) * (num_link + 1))))
+	num_link = ft_count_links(node->link_tree, -1);
+	if (!(link_tree = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (num_link + 1))))
 		return (NULL);
-	if (ft_get_links(links, node->links, 0) == 0)
+	if (ft_get_links(link_tree, node->link_tree, 0) == 0)
 		return (NULL);
-	return (links);
+	return (link_tree);
 }
 
-static t_nod	*ft_best_link(t_nod **tab_link)
+static t_tree_nod	*ft_best_link(t_tree_nod **tab_link)
 {
 	int i;
-	int min_hei;
+	int min_height;
 
 	i = 1;
 	if (!tab_link[0])
 		return (NULL);
-	min_hei = tab_link[0]->hei;
+	min_height = tab_link[0]->height;
 	while (tab_link[i])
 	{
-		if (tab_link[i]->hei < min_hei)
-			min_hei = tab_link[i]->hei;
+		if (tab_link[i]->height < min_height)
+			min_height = tab_link[i]->height;
 		i++;
 	}
 	i = 0;
 	while (tab_link[i])
 	{
-		if (tab_link[i]->hei == min_hei)
+		if (tab_link[i]->height == min_height)
 			return (tab_link[i]);
 		i++;
 	}
 	return (NULL);
 }
 
-int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
+int				ft_get_next_node(t_path *path, t_tree_nod **node, t_data *program_data)
 {
-	t_nod	*new;
-	t_nod	**links;
+	t_tree_nod	*new;
+	t_tree_nod	**links;
 
 	if (!(links = ft_get_unvisited_links(*node)))
 		return (2);
@@ -74,7 +74,7 @@ int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 		return (ft_ret_i_del_links(links, 2));
 	if (!(new = ft_best_link(links)))
 		return (ft_ret_i_del_links(links, 1));
-	if (new != env->start)
+	if (new != program_data->start)
 		new->u++;
 	ft_memdel((void **)&links);
 	if (ft_create_path(&path, new))
@@ -83,7 +83,7 @@ int				ft_get_next_node(t_path *path, t_nod **node, t_env *env)
 	return (0);
 }
 
-t_path			**ft_check_paths(t_path **old_paths, t_env *env, int num)
+t_path			**ft_check_paths(t_path **old_paths, t_data *program_data, int num)
 {
 	t_path	**new_paths;
 	t_path	*tmp;
@@ -99,7 +99,7 @@ t_path			**ft_check_paths(t_path **old_paths, t_env *env, int num)
 		tmp = old_paths[i];
 		while (tmp->next)
 			tmp = tmp->next;
-		if (tmp->node == env->start)
+		if (tmp->node == program_data->start)
 			new_paths[j++] = old_paths[i];
 		else
 			ft_free_path_helper(old_paths[i], 0);

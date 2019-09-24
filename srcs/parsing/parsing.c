@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 11:28:39 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:02:50 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int8_t		lem_parsing(t_state_machine *machine)
 			if (state_func[machine->state](machine, str) == FAILURE)
 				break ;
 	}
-	ft_printf("state = %d\n", machine->state);
 	ft_gnl(-42, NULL);
-	return (machine->state == ST_LINK_PLUS ? SUCCESS : FAILURE);
+	return (machine->state != ST_LINK_PLUS
+			|| machine->program_data.end == NULL
+			|| machine->program_data.start == NULL ? FAILURE : SUCCESS);
 }

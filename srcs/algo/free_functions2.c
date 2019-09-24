@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:16:56 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/08 02:31:07 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/24 14:35:42 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int		ft_free_str(char *str)
 	return (1);
 }
 
-int		ft_ret_i_del_links(t_nod **links, int i)
+int		ft_ret_i_del_links(t_tree_nod **link_tree, int i)
 {
-	ft_memdel((void **)&links);
+	ft_memdel((void **)&link_tree);
 	return (i);
 }
 
-t_nod		***ft_free_paths_nodes(t_path **paths, t_nod **nodes)
+t_tree_nod		***ft_free_paths_nodes(t_path **paths, t_tree_nod **nodes)
 {
 	if (paths)
 		ft_free_path(paths, 0);
@@ -32,7 +32,7 @@ t_nod		***ft_free_paths_nodes(t_path **paths, t_nod **nodes)
 	return (NULL);
 }
 
-void	ft_free_transformed_path(t_nod ***paths)
+void	ft_free_transformed_path(t_tree_nod ***paths)
 {
 	int	i;
 	int j;
@@ -46,7 +46,7 @@ void	ft_free_transformed_path(t_nod ***paths)
 			j = 0;
 			while (paths[i][j])
 				j++;
-			ft_memdel((void **)&paths[i][j - 1]->room);
+			ft_memdel((void **)&paths[i][j - 1]->room_name);
 			ft_memdel((void **)&paths[i][j - 1]);
 			ft_memdel((void **)&paths[i]);
 		}

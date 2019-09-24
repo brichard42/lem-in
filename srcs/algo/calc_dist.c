@@ -6,51 +6,48 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/08 01:22:54 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:28:41 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int				ft_count_links(t_link *count, int n_hei)
+t_tree_nod		**ft_free_ret_nod(t_tree_nod **to_f)
 {
-	int		i;
-	t_link	*left;
-	t_link	*right;
-
-	i = 0;
-	if (!count)
-		return (0);
-	else
-		i++;
-	right = count->right;
-	left = count->left;
-	if (left)
-		i = i + ft_count_links(left, n_hei);
-	if (right)
-		i = i + ft_count_links(right, n_hei);
-	return (i);
+	ft_memdel((void **)&to_f);
+	return (NULL);
 }
 
-static int		ft_set_links(t_link *to_put, t_nod **n_tab, int i, int n_hei)
+static void	ft_height_to_num(t_tree_nod *tree, int i)
 {
-	t_nod	*current_room;
-	t_link	*left;
-	t_link	*right;
+	if (!tree)
+		return ;
+	tree->height = i;
+	if (tree->left)
+		ft_height_to_num(tree->left, i);
+	if (tree->right)
+		ft_height_to_num(tree->right, i);
+}
+
+static int		ft_set_links(t_ltree_nod *to_put, t_tree_nod **n_tab, int i, int n_height)
+{
+	t_tree_nod	*current_room;
+	t_ltree_nod	*left;
+	t_ltree_nod	*right;
 
 	left = to_put->left;
 	right = to_put->right;
-	current_room = to_put->l_room;
-	if (to_put && (current_room->hei > n_hei || current_room->hei == -1))
+	current_room = to_put->linked_room;
+	if (to_put && (current_room->height > n_height || current_room->height == -1))
 		n_tab[i++] = current_room;
 	if (left)
-		i = ft_set_links(left, n_tab, i, n_hei);
+		i = ft_set_links(left, n_tab, i, n_height);
 	if (right)
-		i = ft_set_links(right, n_tab, i, n_hei);
+		i = ft_set_links(right, n_tab, i, n_height);
 	return (i);
 }
 
-static void		ft_get_links(t_nod **curr, t_nod **n_tab, int n_hei, t_nod *end)
+static void		ft_get_links(t_tree_nod **curr, t_tree_nod **n_tab, int n_height, t_tree_nod *end)
 {
 	int	j;
 	int	i;
@@ -60,49 +57,49 @@ static void		ft_get_links(t_nod **curr, t_nod **n_tab, int n_hei, t_nod *end)
 	while (curr[j])
 	{
 		if (curr[j] != end)
-			i = ft_set_links(curr[j]->links, n_tab, i, n_hei);
+			i = ft_set_links(curr[j]->link_tree, n_tab, i, n_height);
 		j++;
 	}
 }
 
-static t_nod	**ft_get_current(t_nod **curr, int n_hei, t_nod *end)
+static t_tree_nod	**ft_get_current(t_tree_nod **curr, int n_height, t_tree_nod *end)
 {
 	int		i;
 	int		count;
-	t_nod	**n_tab;
+	t_tree_nod	**n_tab;
 
 	count = 0;
 	i = 0;
 	while (curr[i])
-		count = count + ft_count_links(curr[i++]->links, n_hei);
+		count = count + ft_count_links(curr[i++]->link_tree, n_height);
 	if (count == 0)
 		return (ft_free_ret_nod(curr));
-	if (!(n_tab = (t_nod **)ft_memalloc(sizeof(t_nod *) * (count + 1))))
+	if (!(n_tab = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (count + 1))))
 		return (ft_free_ret_nod(curr));
-	ft_get_links(curr, n_tab, n_hei, end);
+	ft_get_links(curr, n_tab, n_height, end);
 	i = -1;
 	while (n_tab[++i])
-		n_tab[i]->hei = n_hei;
+		n_tab[i]->height = n_height;
 	ft_memdel((void **)&curr);
 	return (n_tab);
 }
 
-int				ft_calc_dist(t_env *env)
+int8_t				ft_calc_dist(t_data *program_data)
 {
-	t_nod	**curr;
+	t_tree_nod	**curr;
 	int		i;
 
 	i = 1;
-	ft_hei_to_num(env->tree, -1);
-	env->start->hei = 0;
-	if (!(curr = (t_nod **)ft_memalloc(sizeof(t_nod *) * 2)))
+	ft_height_to_num(program_data->room_tree, -1);
+	program_data->start->height = 0;
+	if (!(curr = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * 2)))
 		return (1);
-	curr[0] = env->start;
+	curr[0] = program_data->start;
 	while (curr)
 	{
-		if (!(curr = ft_get_current(curr, i, env->end)))
+		if (!(curr = ft_get_current(curr, i, program_data->end)))
 			break ;
 		i++;
 	}
 	return (0);
-}
+	

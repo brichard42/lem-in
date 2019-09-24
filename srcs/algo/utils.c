@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/08 07:37:29 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/24 14:57:14 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_aff_one_move(int ant, char *path)
 	ft_putchar(' ');
 }
 
-void	ft_aff_paths(t_nod ***the_paths) //remove me for 5 function in file
+void	ft_aff_paths(t_tree_nod ***the_paths) //remove me for 5 function in file
 {
 	int i;
 	int	j;
@@ -41,12 +41,12 @@ void	ft_aff_paths(t_nod ***the_paths) //remove me for 5 function in file
 		j = -1;
 		ft_putendl("THE PATH");
 		while (the_paths[i][++j])
-			ft_putendl(the_paths[i][j]->room);
+			ft_putendl(the_paths[i][j]->room_name);
 		ft_putendl("C'ETAIT THE PATH");
 	}
 }
 
-int		ft_create_path(t_path **path, t_nod *new)
+int		ft_create_path(t_path **path, t_tree_nod *new)
 {
 	if (!*path)
 	{
@@ -61,17 +61,6 @@ int		ft_create_path(t_path **path, t_nod *new)
 		(*path)->size++;
 	}
 	return (0);
-}
-
-void	ft_hei_to_num(t_nod *tree, int i)
-{
-	if (!tree)
-		return ;
-	tree->hei = i;
-	if (tree->left)
-		ft_hei_to_num(tree->left, i);
-	if (tree->right)
-		ft_hei_to_num(tree->right, i);
 }
 
 int		ft_path_counter(t_path **paths)
