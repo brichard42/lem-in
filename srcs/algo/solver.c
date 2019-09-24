@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 03:07:53 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 15:19:09 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/24 16:02:26 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,12 +148,12 @@ int8_t				ft_solver(t_data *program_data)
 		pathss[i] = ft_get_multi_paths(program_data);
 		ft_delete_links(pathss, program_data);
 	}
-	if (!(program_data->paths = ft_best_path(pathss, program_data)))
+	if (!(program_data->path_tab = ft_best_path(pathss, program_data)))
 		return (FAILURE);
 	//ft_putstr(program_data->paths[0][1]->room_name);
 	i = -1;
 	while (pathss[++i])
-		if (pathss[i] != program_data->paths)
+		if (pathss[i] != program_data->path_tab)
 			ft_free_transformed_path(pathss[i]);
 	ft_memdel((void **)&pathss);
 	return (SUCCESS);

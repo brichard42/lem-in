@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:25:34 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 14:54:11 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:41:49 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		ft_get_links(t_tree_nod **tab_link, t_ltree_nod *link, int i)
 {
 	if (!link)
 		return (0);
-	if (!link->linked_room->u)
+	if (!link->linked_room->mark)
 		tab_link[i++] = link->linked_room;
 	if (link->left)
 		i = ft_get_links(tab_link, link->left, i);
@@ -75,7 +75,7 @@ int				ft_get_next_node(t_path *path, t_tree_nod **node, t_data *program_data)
 	if (!(new = ft_best_link(links)))
 		return (ft_ret_i_del_links(links, 1));
 	if (new != program_data->start)
-		new->u++;
+		new->mark++;
 	ft_memdel((void **)&links);
 	if (ft_create_path(&path, new))
 		return (1);

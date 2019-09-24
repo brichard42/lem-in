@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/24 15:24:55 by brichard         ###   ########.fr        #
+#    Updated: 2019/09/24 16:15:12 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,19 +62,18 @@ PARSER += com_parser.c
 
 MEMORY += del_splited_line.c
 
-#ALGO += ants_in_path.c
-#ALGO += ants_sender.c
+ALGO += ants_in_path.c
+ALGO += ants_sender.c
 ALGO += calc_dist.c
 ALGO += ft_count_links.c
-#ALGO += deletor.c
-#ALGO += free_functions.c
-#ALGO += free_functions2.c
+ALGO += deletor.c
+ALGO += free_functions.c
+ALGO += free_functions2.c
 ALGO += get_multi_paths.c
 ALGO += get_multi_paths2.c
 ALGO += get_multi_paths3.c
 ALGO += solver.c
-#ALGO += utils.c
-#ALGO += utils2.c
+ALGO += utils.c
 
 #------------------------------------------------------------------------------#
 #                                  DIRECTORIES                                 #

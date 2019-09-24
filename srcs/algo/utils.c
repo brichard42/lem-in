@@ -6,11 +6,28 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 03:55:20 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 14:57:14 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:52:58 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void        ft_aff_last_room(t_path *path)
+{
+	t_path  *tmp;
+
+	tmp = path->next;
+	ft_putstr(tmp->node->room_name);
+	ft_putchar(' ');
+	ft_putnbr(tmp->node->height);
+	ft_putchar(' ');
+	while (tmp->next)
+		tmp = tmp->next;
+	ft_putnbr(tmp->node->height);
+	ft_putchar(' ');
+	ft_putstr(tmp->node->room_name);
+	ft_putchar('\n');
+}
 
 int		ft_node_in_path(t_path *path, int i)
 {

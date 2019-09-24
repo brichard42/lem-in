@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 15:17:02 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/24 16:19:01 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	ft_print_error(t_state_machine *machine)
 	//else
 		//ft_printf("end:\tNONE\n");
 	//ft_printf("ant_nb:\t%-20d\n", machine.program_data.ant_nb);
-//	ft_aff_paths(program_data.paths);
 
 int			main(void)
 {
@@ -39,14 +38,16 @@ int			main(void)
 	ft_bzero((void *)&machine, sizeof(t_state_machine));
 	if (lem_parsing(&machine) == FAILURE)
 		return (ft_print_error(&machine));
+	ft_putchar('\n');
 	if (ft_calc_dist(&machine.program_data) == FAILURE)
 		return (ft_print_error(&machine));
 	if (machine.program_data.end->height == NO_DISTANCE)
 		return (ft_print_error(&machine));
 	if (ft_solver(&machine.program_data))
 		return (ft_print_error(&machine));
-	//if (ft_ant_in_paths(machine.program_data.paths, machine.program_data.ant_nb, -1))
-		//return (ft_print_error(&machine));
+//	ft_aff_paths(machine.program_data.path_tab);
+	if (ft_ant_in_paths(machine.program_data.path_tab, machine.program_data.ant_nb, -1))
+		return (ft_print_error(&machine));
 	ft_free_room_tree(machine.program_data.room_tree);
 	return (EXIT_SUCCESS);
 }

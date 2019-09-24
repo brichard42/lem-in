@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 15:27:52 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/24 16:17:28 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct		s_path
 {
 	t_tree_nod		*node;
 	struct s_path	*next;
-	size_t			size;
+	int32_t			size;
 }					t_path;
 
 /*
@@ -134,6 +134,8 @@ void				ft_balance_tree(t_tree_nod **tree, char *room);
 void				ft_small_balance(t_tree_nod **tree, int bal);
 t_tree_nod			*ft_search_room(t_tree_nod *room_tree, char *key);
 
+t_tree_nod			*ft_room_new(char *room_name);
+
 void				ft_free_link_tree(t_ltree_nod *link_tree);
 void				ft_free_room_tree(t_tree_nod *room_tree);
 
@@ -147,12 +149,25 @@ int					ft_count_links(t_ltree_nod *count, int n_height);
 int8_t				ft_calc_dist(t_data *program_data);
 int8_t				ft_solver(t_data *program_data);
 t_tree_nod			***ft_get_multi_paths(t_data *program_data);
-
+int					ft_create_path(t_path **path, t_tree_nod *new);
+int					ft_get_next_node(t_path *path, t_tree_nod **node, t_data *program_data);
+int					ft_path_counter(t_path **paths);
+t_path				**ft_check_paths(t_path **old_paths, t_data *program_data, int num);
+t_tree_nod          ***ft_transform_paths(t_path **path, t_data *program_data);
+void				ft_aff_paths(t_tree_nod ***the_paths); // TO DEL
+int					ft_ant_in_paths(t_tree_nod ***paths, int ants, int i);
+int					ft_send_ants(t_tree_nod ***paths, int *tab_i, int n_path, int ant_name);
+void				ft_aff_one_move(int ant, char *path);
 /*
 **	----------Free_function-----------------------------------------------------
 */
 t_tree_nod			**ft_free_ret_nod(t_tree_nod **to_f);
 void				ft_free_path(t_path **path, int j);
 void				ft_free_path_helper(t_path *path, int i);
+t_tree_nod			***ft_free_paths_nodes(t_path **paths, t_tree_nod **nodes);
+int					ft_ret_i_del_links(t_tree_nod **links, int ok);
+void				ft_free_transformed_path(t_tree_nod ***paths);
+int					ft_node_in_path(t_path *path, int i);
+void				ft_delete_links(t_tree_nod ****pathss, t_data *program_data);
 
 #endif

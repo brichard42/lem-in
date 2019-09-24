@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 14:54:11 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:57:42 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_get_the_nods(t_path **paths, t_tree_nod **nodes, t_ltree_nod *link
 	current_room = link->linked_room;
 	if (link)
 	{
-		current_room->u = 1;
+		current_room->mark = 1;
 		if (ft_create_path(&paths[i], current_room))
 			return (0);
 		nodes[i] = current_room;
@@ -58,8 +58,8 @@ static int  ft_path_finder(t_path **paths, t_tree_nod **nodes, t_data *program_d
 
 	j = 0;
 	i = ft_path_counter(paths);
-	program_data->start->u = 0;
-	program_data->end->u = 1;
+	program_data->start->mark = 0;
+	program_data->end->mark = 1;
 	while (j < i)
 	{
 		while (nodes[j]->height > 0 && paths[j]->size != -2)
@@ -81,54 +81,14 @@ static int  ft_path_finder(t_path **paths, t_tree_nod **nodes, t_data *program_d
 	}
 	return (0);
 }
-/*
-static void	suppr_lnk(t_ltree_nod **new, t_ltree_nod *link, t_tree_nod *to_suppr)
-{
-	if (!link || !to_suppr)
-		return ;
-	if (link->linked_room && link->linked_room != to_suppr)
-		ft_link_add(NULL, new, link->linked_room->room_name, link->linked_room);
-	if (link->left)
-		suppr_lnk(new, link->left, to_suppr);
-	if (link->right)
-		suppr_lnk(new, link->right, to_suppr);
-}
 
-static void	remove_lnk(t_path **paths, t_tree_nod *start)
-{
-	int		i;
-	t_path	*tmp;
-	t_ltree_nod	*new;
-
-	i = 0;
-	if (!paths)
-		return ;
-	while (paths[i])
-	{
-		new = NULL;
-		tmp = paths[i]->next;
-		while (tmp && tmp->node != start)
-		{
-			if (tmp->next->node != start)
-			{
-				suppr_lnk(&new, tmp->node->link_tree, tmp->next->node);
-				ft_free_link(tmp->node->link_tree);
-				tmp->node->link_tree = new;
-				new = NULL;
-			}
-			tmp = tmp->next;
-		}
-		i++;
-	}
-}
-*/
 static void    ft_tree_to_null(t_tree_nod *tree) // TO DELETE
 {
 	if (tree->right)
 		ft_tree_to_null(tree->right);
 	if (tree->left)
 		ft_tree_to_null(tree->left);
-	tree->u = 0;
+	tree->mark = 0;
 }
 
 t_tree_nod			***ft_get_multi_paths(t_data *program_data)
@@ -146,7 +106,7 @@ t_tree_nod			***ft_get_multi_paths(t_data *program_data)
 	if (!(nodes = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (num_link + 1))))
 		return (ft_free_paths_nodes(paths, NULL));
 	while (++i < num_link)
-		if (ft_create_path(&paths[i], ft_node_new(program_data->end->room_name)))
+		if (ft_create_path(&paths[i], ft_room_new(program_data->end->room_name)))
 			return (ft_free_paths_nodes(paths, nodes));
 	if (!(ft_get_the_nods(paths, nodes, program_data->end->link_tree, 0)))
 		return (ft_free_paths_nodes(paths, nodes));
@@ -156,8 +116,7 @@ t_tree_nod			***ft_get_multi_paths(t_data *program_data)
 		return (ft_free_paths_nodes(paths, nodes));
 	if (!(tmp = ft_transform_paths(paths, program_data)))
 		return (ft_free_paths_nodes(paths, nodes));
-	//remove_lnk(paths, program_data->start);
-	ft_tree_to_null(program_data->tree);
+	ft_tree_to_null(program_data->room_tree);
 	ft_memdel((void **)&nodes);
 	ft_free_path(paths, 1);
 	return (tmp);
