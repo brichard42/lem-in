@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/24 16:15:12 by tlandema         ###   ########.fr        #
+#    Updated: 2019/09/25 13:50:19 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS += $(BINARY_TREE)
 SRCS += $(PARSER)
 SRCS += $(ALGO)
 SRCS += $(MEMORY)
+SRCS += $(PRINT)
 
 OBJS = $(patsubst %.c, $(OBJS_PATH)%.o, $(SRCS))
 
@@ -61,19 +62,23 @@ PARSER += get_links.c
 PARSER += com_parser.c
 
 MEMORY += del_splited_line.c
+MEMORY += free_path.c
+MEMORY += free_with_ret_value.c
+MEMORY += ft_free_transformed_path.c
+MEMORY += deletor.c
 
 ALGO += ants_in_path.c
 ALGO += ants_sender.c
 ALGO += calc_dist.c
 ALGO += ft_count_links.c
-ALGO += deletor.c
-ALGO += free_functions.c
-ALGO += free_functions2.c
 ALGO += get_multi_paths.c
-ALGO += get_multi_paths2.c
 ALGO += get_multi_paths3.c
+ALGO += ft_check_paths.c
+ALGO += ft_get_next_node.c
 ALGO += solver.c
-ALGO += utils.c
+ALGO += path_functions.c
+
+PRINT += print_functions.c
 
 #------------------------------------------------------------------------------#
 #                                  DIRECTORIES                                 #
@@ -102,6 +107,10 @@ BINARY_TREE_DIR += binary_tree/delete_tree/
 MEMORY_FUNCTIONS_DIR += memory_functions/
 
 ALGO_DIR += algo/
+ALGO_DIR += algo/path_finding/
+
+PRINT_DIR += print/
+
 #------------------------------------------------------------------------------#
 #                                     PATHS                                    #
 #------------------------------------------------------------------------------#
@@ -116,6 +125,7 @@ _SRCS_PATH += $(PARSING_DIR)
 _SRCS_PATH += $(BINARY_TREE_DIR)
 _SRCS_PATH += $(MEMORY_FUNCTIONS_DIR)
 _SRCS_PATH += $(ALGO_DIR)
+_SRCS_PATH += $(PRINT_DIR)
 
 SRCS_PATH += $(SRCS_DIR)
 SRCS_PATH += $(addprefix $(SRCS_DIR), $(_SRCS_PATH))

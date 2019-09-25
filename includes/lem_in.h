@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 16:17:28 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/09/25 13:40:23 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int					ft_count_links(t_ltree_nod *count, int n_height);
 int8_t				ft_calc_dist(t_data *program_data);
 int8_t				ft_solver(t_data *program_data);
 t_tree_nod			***ft_get_multi_paths(t_data *program_data);
-int					ft_create_path(t_path **path, t_tree_nod *new);
+int8_t				ft_create_path(t_path **path, t_tree_nod *new);
 int					ft_get_next_node(t_path *path, t_tree_nod **node, t_data *program_data);
 int					ft_path_counter(t_path **paths);
 t_path				**ft_check_paths(t_path **old_paths, t_data *program_data, int num);
@@ -165,7 +165,7 @@ t_tree_nod			**ft_free_ret_nod(t_tree_nod **to_f);
 void				ft_free_path(t_path **path, int j);
 void				ft_free_path_helper(t_path *path, int i);
 t_tree_nod			***ft_free_paths_nodes(t_path **paths, t_tree_nod **nodes);
-int					ft_ret_i_del_links(t_tree_nod **links, int ok);
+int					ft_free_tree_nod_with_ret(t_tree_nod **link_tree, int i);
 void				ft_free_transformed_path(t_tree_nod ***paths);
 int					ft_node_in_path(t_path *path, int i);
 void				ft_delete_links(t_tree_nod ****pathss, t_data *program_data);
