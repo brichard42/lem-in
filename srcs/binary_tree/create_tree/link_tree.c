@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:11:05 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/01 11:52:35 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/01 12:55:02 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int8_t				ft_link_add(t_llist_nod **l_list, t_tree_nod *linked_room)
 		*l_list = ft_link_new(linked_room);
 		return (*l_list == NULL ? FAILURE : SUCCESS);
 	}
-	else if (!(*l_list)->next || (*l_list)->next->linked_room != linked_room)
+	else if (!(*l_list)->next && (*l_list)->linked_room != linked_room)
 		ft_link_add(&(*l_list)->next, linked_room);
 	return (SUCCESS);
 }
