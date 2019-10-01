@@ -6,48 +6,32 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:11:05 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/17 18:52:23 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:52:35 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_ltree_nod	*ft_link_new(char *link_name, t_tree_nod *linked_room)
+static t_llist_nod	*ft_link_new(t_tree_nod *linked_room)
 {
-	t_ltree_nod *new;
+	t_llist_nod *new;
 
 	if (!linked_room)
 		return (NULL);
-	if (!(new = (t_ltree_nod *)ft_memalloc(sizeof(t_ltree_nod))))
+	if (!(new = (t_llist_nod *)ft_memalloc(sizeof(t_llist_nod))))
 		return (NULL);
-	if (!(new->link_name = ft_strdup(link_name)))
-	{
-		ft_memdel((void **)&new);
-		return (NULL);
-	}
 	new->linked_room = linked_room;
 	return (new);
 }
 
-int8_t		ft_link_add(t_ltree_nod *parent, t_ltree_nod **l_tree
-									, char *link_name, t_tree_nod *linked_room)
+int8_t				ft_link_add(t_llist_nod **l_list, t_tree_nod *linked_room)
 {
-	if (*l_tree == NULL)
+	if (*l_list == NULL)
 	{
-		*l_tree = ft_link_new(link_name, linked_room);
-		if (*l_tree != NULL)
-			(*l_tree)->parent = parent;
-		return (*l_tree == NULL ? FAILURE : SUCCESS);
+		*l_list = ft_link_new(linked_room);
+		return (*l_list == NULL ? FAILURE : SUCCESS);
 	}
-	else if (ft_strcmp(link_name, (*l_tree)->link_name) < 0)
-	{
-		if ((ft_link_add(*l_tree, &(*l_tree)->left, link_name, linked_room)))
-			return (FAILURE);
-	}
-	else if (ft_strcmp(link_name, (*l_tree)->link_name) > 0)
-	{
-		if ((ft_link_add(*l_tree, &(*l_tree)->right, link_name, linked_room)))
-			return (FAILURE);
-	}
+	else if (!(*l_list)->next || (*l_list)->next->linked_room != linked_room)
+		ft_link_add(&(*l_list)->next, linked_room);
 	return (SUCCESS);
 }

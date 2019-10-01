@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:13:42 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/19 16:40:08 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:31:01 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int8_t	link_two_rooms(t_state_machine *machine, char **splited_line)
 	a = ft_search_room(machine->program_data.room_tree, splited_line[0]);
 	b = ft_search_room(machine->program_data.room_tree, splited_line[1]);
 	if (a != NULL && b != NULL)
-		if (ft_link_add(0, &b->link_tree, splited_line[0], a) == SUCCESS
-				&& ft_link_add(0, &a->link_tree, splited_line[1], b) == SUCCESS)
+		if (ft_link_add(&b->link_list, a) == SUCCESS
+				&& ft_link_add(&a->link_list, b) == SUCCESS)
 			ret_value = SUCCESS;
 	return (ret_value);
 }

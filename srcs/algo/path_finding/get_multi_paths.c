@@ -6,20 +6,18 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 23:18:41 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/25 12:30:19 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:47:00 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	ft_get_the_nods(t_path **paths, t_tree_nod **nodes, t_ltree_nod *link, int i)
+static int	ft_get_the_nods(t_path **paths, t_tree_nod **nodes, t_llist_nod *link, int i)
 {
 	t_tree_nod	*current_room;
-	t_ltree_nod	*left;
-	t_ltree_nod	*right;
+	t_llist_nod	*next;
 
-	right = link->right;
-	left = link->left;
+	next = link->next;
 	current_room = link->linked_room;
 	if (link)
 	{
@@ -29,11 +27,8 @@ static int	ft_get_the_nods(t_path **paths, t_tree_nod **nodes, t_ltree_nod *link
 		nodes[i] = current_room;
 		i++;
 	}
-	if (left)
-		if (!(i = ft_get_the_nods(paths, nodes, left, i)))
-			return (0);
-	if (right)
-		if (!(i = ft_get_the_nods(paths, nodes, right, i)))
+	if (next)
+		if (!(i = ft_get_the_nods(paths, nodes, next, i)))
 			return (0);
 	return (i);
 }
@@ -100,7 +95,7 @@ t_tree_nod			***ft_get_multi_paths(t_data *program_data)
 	int		num_link;
 
 	i = -1;
-	num_link = ft_count_links(program_data->end->link_tree, -1);
+	num_link = ft_count_links(program_data->end->link_list, -1);
 	if (!(paths = (t_path **)ft_memalloc(sizeof(t_path *) * (num_link + 1))))
 		return (NULL);
 	if (!(nodes = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (num_link + 1))))
@@ -108,7 +103,7 @@ t_tree_nod			***ft_get_multi_paths(t_data *program_data)
 	while (++i < num_link)
 		if (ft_create_path(&paths[i], ft_room_new(program_data->end->room_name)) == FAILURE)
 			return (ft_free_paths_nodes(paths, nodes));
-	if (!(ft_get_the_nods(paths, nodes, program_data->end->link_tree, 0)))
+	if (!(ft_get_the_nods(paths, nodes, program_data->end->link_list, 0)))
 		return (ft_free_paths_nodes(paths, nodes));
 	if (ft_path_finder(paths, nodes, program_data))
 		return (ft_free_paths_nodes(paths, nodes));

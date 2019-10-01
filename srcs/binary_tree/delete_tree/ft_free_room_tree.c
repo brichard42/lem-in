@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:46:31 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/17 18:46:33 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:37:58 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ft_free_room_tree(t_tree_nod *room_tree)
 			ft_free_room_tree(room_tree->left);
 		if (room_tree->right)
 			ft_free_room_tree(room_tree->right);
-		ft_free_link_tree(room_tree->link_tree);
+		ft_free_link_list(room_tree->link_list);
 		ft_strdel(&room_tree->room_name);
 		ft_memdel((void **)&room_tree);
 	}

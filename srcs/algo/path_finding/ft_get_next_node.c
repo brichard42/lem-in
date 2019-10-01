@@ -6,22 +6,20 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:43:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/25 13:46:43 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:48:48 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		ft_get_links(t_tree_nod **tab_link, t_ltree_nod *link, int i)
+static int		ft_get_links(t_tree_nod **tab_link, t_llist_nod *link, int i)
 {
 	if (!link)
 		return (0);
 	if (!link->linked_room->mark)
 		tab_link[i++] = link->linked_room;
-	if (link->left)
-		i = ft_get_links(tab_link, link->left, i);
-	if (link->right)
-		i = ft_get_links(tab_link, link->right, i);
+	if (link->next)
+		i = ft_get_links(tab_link, link->next, i);
 	return (i);
 }
 
@@ -55,10 +53,10 @@ static t_tree_nod	**ft_get_unvisited_links(t_tree_nod *node)
 	int		num_link;
 	t_tree_nod	**link_tree;
 
-	num_link = ft_count_links(node->link_tree, -1);
+	num_link = ft_count_links(node->link_list, -1);
 	if (!(link_tree = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (num_link + 1))))
 		return (NULL);
-	if (ft_get_links(link_tree, node->link_tree, 0) == 0)
+	if (ft_get_links(link_tree, node->link_list, 0) == 0)
 		return (NULL);
 	return (link_tree);
 }

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 15:33:15 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:53:58 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,17 @@ static void	ft_height_to_num(t_tree_nod *tree, int i)
 		ft_height_to_num(tree->right, i);
 }
 
-static int		ft_set_links(t_ltree_nod *to_put, t_tree_nod **n_tab, int i, int n_height)
+static int		ft_set_links(t_llist_nod *to_put, t_tree_nod **n_tab, int i, int n_height)
 {
 	t_tree_nod	*current_room;
-	t_ltree_nod	*left;
-	t_ltree_nod	*right;
+	t_llist_nod	*next;
 
-	left = to_put->left;
-	right = to_put->right;
+	next = to_put->next;
 	current_room = to_put->linked_room;
 	if (to_put && (current_room->height > n_height || current_room->height == -1))
 		n_tab[i++] = current_room;
-	if (left)
-		i = ft_set_links(left, n_tab, i, n_height);
-	if (right)
-		i = ft_set_links(right, n_tab, i, n_height);
+	if (next)
+		i = ft_set_links(next, n_tab, i, n_height);
 	return (i);
 }
 
@@ -57,7 +53,7 @@ static void		ft_get_links(t_tree_nod **curr, t_tree_nod **n_tab, int n_height, t
 	while (curr[j])
 	{
 		if (curr[j] != end)
-			i = ft_set_links(curr[j]->link_tree, n_tab, i, n_height);
+			i = ft_set_links(curr[j]->link_list, n_tab, i, n_height);
 		j++;
 	}
 }
@@ -71,7 +67,7 @@ static t_tree_nod	**ft_get_current(t_tree_nod **curr, int n_height, t_tree_nod *
 	count = 0;
 	i = 0;
 	while (curr[i])
-		count = count + ft_count_links(curr[i++]->link_tree, n_height);
+		count = count + ft_count_links(curr[i++]->link_list, n_height);
 	if (count == 0)
 		return (ft_free_ret_nod(curr));
 	if (!(n_tab = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (count + 1))))

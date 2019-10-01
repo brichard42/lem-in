@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/25 13:40:23 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:59:36 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,11 @@ typedef struct		s_boleans
 /*
 **	----------Typedef Link Binary_tree Data_struct------------------------------
 */
-typedef struct		s_ltree_nod
+typedef struct		s_llist_nod
 {
-	char				*link_name;
-	struct s_ltree_nod	*right;
-	struct s_ltree_nod	*left;
-	struct s_ltree_nod	*parent;
+	struct s_llist_nod	*next;
 	struct s_tree_nod	*linked_room;
-}					t_ltree_nod;
+}					t_llist_nod;
 
 
 /*
@@ -67,7 +64,7 @@ typedef struct		s_tree_nod
 	char				*room_name;
 	struct s_tree_nod	*right;
 	struct s_tree_nod	*left;
-	struct s_ltree_nod	*link_tree;
+	struct s_llist_nod	*link_list;
 	int64_t				height;
 	uint64_t			mark;
 }						t_tree_nod;
@@ -122,8 +119,7 @@ uint8_t				check_com(t_state_machine *machine, char *str);
 
 int8_t				ft_room_add(t_state_machine *machine,
 								t_tree_nod **room_tree, char *room);
-int8_t				ft_link_add(t_ltree_nod *parent, t_ltree_nod **l_tree,
-									char *link_name, t_tree_nod *r_tree);
+int8_t				ft_link_add(t_llist_nod **l_tree, t_tree_nod *r_tree);
 
 void				del_splited_line(char ***splited_line);
 
@@ -136,16 +132,16 @@ t_tree_nod			*ft_search_room(t_tree_nod *room_tree, char *key);
 
 t_tree_nod			*ft_room_new(char *room_name);
 
-void				ft_free_link_tree(t_ltree_nod *link_tree);
+void				ft_free_link_list(t_llist_nod *link_tree);
 void				ft_free_room_tree(t_tree_nod *room_tree);
 
-void				ft_print_link_tree(t_ltree_nod *link_tree);
+void				ft_print_link_list(t_llist_nod *link_tree);
 void				ft_print_room_tree(t_tree_nod *room_tree);
 
 /*
 **	----------Algo--------------------------------------------------------------
 */
-int					ft_count_links(t_ltree_nod *count, int n_height);
+int					ft_count_links(t_llist_nod *count, int n_height);
 int8_t				ft_calc_dist(t_data *program_data);
 int8_t				ft_solver(t_data *program_data);
 t_tree_nod			***ft_get_multi_paths(t_data *program_data);

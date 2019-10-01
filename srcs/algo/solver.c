@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 03:07:53 by tlandema          #+#    #+#             */
-/*   Updated: 2019/09/24 16:02:26 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:57:44 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		ft_amount_of_path(t_ltree_nod *end_l, t_ltree_nod *start_l)
+static int		ft_amount_of_path(t_llist_nod *end_l, t_llist_nod *start_l)
 {
 	int	n_el;
 	int	n_sl;
@@ -140,10 +140,10 @@ int8_t				ft_solver(t_data *program_data)
 	int		i;
 
 	i = -1;
-	n_path = ft_amount_of_path(program_data->end->link_tree, program_data->start->link_tree);
+	n_path = ft_amount_of_path(program_data->end->link_list, program_data->start->link_list);
 	if (!(pathss = (t_tree_nod ****)ft_memalloc(sizeof(t_tree_nod ***) * (n_path + 1))))
 		return (FAILURE);
-	while (++i < n_path) //careful 1 = n_path
+	while (++i < 1) //careful 1 = n_path
 	{
 		pathss[i] = ft_get_multi_paths(program_data);
 		ft_delete_links(pathss, program_data);
