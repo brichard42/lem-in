@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:20:57 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/01 11:58:59 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/01 13:32:00 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int				ft_count_links(t_llist_nod *count, int n_height)
 	i = 0;
 	if (!count)
 		return (0);
-	else
-		i++;
+	i++;
 	next = count->next;
 	if (next)
 		i = i + ft_count_links(next, n_height);
