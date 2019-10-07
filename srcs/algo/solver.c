@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 03:07:53 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/01 11:57:44 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/07 11:01:07 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int		ft_out_of_2(t_data *program_data, t_tree_nod ***a, t_tree_nod ***b)
 	int red;
 	int most_effective;
 
-	if (!b)
+	if (b == NULL)
 		return (0);
 	red = ft_get_small_path_size(a, b);
 	c_a = ft_get_the_num(a, red);

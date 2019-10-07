@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/01 13:37:00 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/07 17:18:11 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int			main(void)
 	ft_bzero((void *)&machine, sizeof(t_state_machine));
 	if (lem_parsing(&machine) == FAILURE)
 		return (ft_print_error(&machine));
-	ft_print_link_list(machine.program_data.end->link_list);
-	ft_putchar('\n');
+//	ft_print_link_list(machine.program_data.end->link_list);
+//	ft_putchar('\n');
 	if (ft_calc_dist(&machine.program_data) == FAILURE)
 		return (ft_print_error(&machine));
-	ft_putnbr(machine.program_data.end->height);
+//	ft_putnbr(machine.program_data.end->height);
 	if (machine.program_data.end->height == NO_DISTANCE)
 		return (ft_print_error(&machine));
 	if (ft_solver(&machine.program_data))

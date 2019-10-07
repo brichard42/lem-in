@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/01 11:59:36 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/07 13:37:28 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct		s_boleans
 */
 typedef struct		s_llist_nod
 {
-	struct s_llist_nod	*next;
 	struct s_tree_nod	*linked_room;
+	struct s_llist_nod	*next;
 }					t_llist_nod;
 
 

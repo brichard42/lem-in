@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/09/25 13:50:19 by brichard         ###   ########.fr        #
+#    Updated: 2019/10/07 17:10:38 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ NAME = lem-in
 
 SRCS += $(CORE)
 SRCS += $(BINARY_TREE)
+SRCS += $(LINKED_LIST)
 SRCS += $(PARSER)
 SRCS += $(ALGO)
 SRCS += $(MEMORY)
@@ -47,13 +48,15 @@ INC_FILES += define.h
 CORE += main.c
 
 BINARY_TREE += room_tree.c
-BINARY_TREE += link_tree.c
 BINARY_TREE += balance_room_tree.c
 BINARY_TREE += balance_room_tree_2.c
 BINARY_TREE += tree_search.c
 BINARY_TREE += print_tree.c
 BINARY_TREE += ft_free_room_tree.c
-BINARY_TREE += ft_free_link_tree.c
+
+LINKED_LIST += link_list.c
+LINKED_LIST += free_link_list.c
+LINKED_LIST += print_list.c
 
 PARSER += parsing.c
 PARSER += get_ants.c
@@ -104,6 +107,11 @@ BINARY_TREE_DIR += binary_tree/create_tree/
 BINARY_TREE_DIR += binary_tree/tree_tools/
 BINARY_TREE_DIR += binary_tree/delete_tree/
 
+LINKED_LIST_DIR += linked_list/
+LINKED_LIST_DIR += linked_list/create_list/
+LINKED_LIST_DIR += linked_list/list_tools/
+LINKED_LIST_DIR += linked_list/delete_list/
+
 MEMORY_FUNCTIONS_DIR += memory_functions/
 
 ALGO_DIR += algo/
@@ -123,6 +131,7 @@ OBJS_PATH = $(OBJS_DIR)
 _SRCS_PATH += $(CORE_DIR)
 _SRCS_PATH += $(PARSING_DIR)
 _SRCS_PATH += $(BINARY_TREE_DIR)
+_SRCS_PATH += $(LINKED_LIST_DIR)
 _SRCS_PATH += $(MEMORY_FUNCTIONS_DIR)
 _SRCS_PATH += $(ALGO_DIR)
 _SRCS_PATH += $(PRINT_DIR)
