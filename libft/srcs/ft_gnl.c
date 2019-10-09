@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 17:17:36 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/09 17:09:13 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/09 17:51:58 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ static char		*ft_strchr_addr(const char *s, int c)
 {
 	while (*s != (char)c)
 		if ((*s++) == '\0')
+		{
+			--s;
 			break;
+		}
 	return ((char *)s);
 }
 
@@ -41,9 +44,9 @@ static int		read_till_newline(const int fd, t_gnl *data)
 		buff[ret_read] = '\0';
 		data->str = ft_strjoin(data->str, buff);
 		ft_strdel(&data->start);
+		data->start = data->str;
 		if (data->str == NULL || ft_strchr(buff, '\n') != NULL)
 			break ;
-		data->start = data->str;
 	}
 	return (data->str == NULL ? FAILURE : ret_read);
 }
