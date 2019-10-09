@@ -6,21 +6,29 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 17:17:36 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/09 11:42:11 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/09 17:09:13 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_gnl.h"
 
+static char		*ft_strchr_addr(const char *s, int c)
+{
+	while (*s != (char)c)
+		if ((*s++) == '\0')
+			break;
+	return ((char *)s);
+}
+
 static char		*get_end_of_line(char *str, int ret_read)
 {
 	char	*newline_addr;
 
-	newline_addr = ft_strchr(str, '\n');
-	if (ret_read == 0 && newline_addr == NULL && *str == '\0')
+	newline_addr = ft_strchr_addr(str, '\n');
+	if (ret_read == 0 && *newline_addr == '\0' && *str == '\0')
 		return (NULL);
 	else
-		return (newline_addr == NULL ? ft_strchr(str, '\0') : newline_addr);
+		return (newline_addr);
 }
 
 static int		read_till_newline(const int fd, t_gnl *data)
