@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 17:19:13 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/12 11:09:19 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/09 11:42:00 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define GNL_BUFF_SIZE 8196
+typedef struct	s_gnl
+{
+	char		*start;
+	char		*str;
+}				t_gnl;
 
-int8_t	ft_gnl(const int fd, char **line);
+# define GNL_BUFF_SIZE 8195
+
+int8_t			ft_gnl(const int fd, char **line);
 
 # define END_OF_FILE	0
 # define READ_DONE		1
