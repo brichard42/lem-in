@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 12:01:28 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/01 11:22:15 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/02 14:57:19 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void        ft_aff_last_room(t_path *path)
 	tmp = path->next;
 	ft_putstr(tmp->node->room_name);
 	ft_putchar(' ');
-	ft_putnbr(tmp->node->height);
+//	ft_putnbr(tmp->node->height);
 	ft_putchar(' ');
 	while (tmp->next)
 		tmp = tmp->next;
-	ft_putnbr(tmp->node->height);
+//	ft_putnbr(tmp->node->height);
 	ft_putchar(' ');
 	ft_putstr(tmp->node->room_name);
 	ft_putchar('\n');

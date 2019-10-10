@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/01 13:35:29 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/02 10:57:39 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static void		ft_get_links(t_tree_nod **curr, t_tree_nod **n_tab, int n_height, t
 	{
 		if (curr[j] != end)
 			i = ft_set_links(curr[j]->link_list, n_tab, i, n_height);
-		else
-			ft_putchar('a');
 		j++;
 	}
 }

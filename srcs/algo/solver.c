@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 03:07:53 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 08:59:20 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/10 11:58:14 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,6 @@ static int		ft_out_of_2(t_data *program_data, t_tree_nod ***a, t_tree_nod ***b)
 	red = ft_get_small_path_size(a, b);
 	c_a = ft_get_the_num(a, red);
 	c_b = ft_get_the_num(b, red);
-	//ft_putnbr(c_a);
-	//ft_putchar(' ');
-	//ft_putnbr(c_b);
-	//ft_putchar('\n');
 	most_effective = c_a >= c_b ? c_a : c_b;
 	if (program_data->ant_nb < most_effective)
 		return (1);
@@ -120,7 +116,6 @@ static t_tree_nod	***ft_best_path(t_tree_nod ****pathss, t_data *program_data)
 				j++;
 			if (!pathss[j])
 				return (pathss[i]);
-//			ft_putnbr(j);
 			if (ft_out_of_2(program_data, pathss[i], pathss[j]))
 				j++;
 			else

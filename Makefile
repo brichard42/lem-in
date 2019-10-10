@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/10 08:50:00 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/10 11:59:46 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS += $(BINARY_TREE)
 SRCS += $(LINKED_LIST)
 SRCS += $(PARSER)
 SRCS += $(ALGO)
+SRCS += $(ALGO2)
 SRCS += $(MEMORY)
 SRCS += $(PRINT)
 
@@ -81,6 +82,16 @@ ALGO += ft_get_next_node.c
 ALGO += solver.c
 ALGO += path_functions.c
 
+ALGO2 += bfs.c
+ALGO2 += algo.c
+ALGO2 += doors.c
+ALGO2 += simulator.c
+ALGO2 += push_front.c
+ALGO2 += path_memory.c
+ALGO2 += del_functions.c
+ALGO2 += path_collector.c
+
+
 PRINT += print_functions.c
 
 #------------------------------------------------------------------------------#
@@ -117,6 +128,8 @@ MEMORY_FUNCTIONS_DIR += memory_functions/
 ALGO_DIR += algo/
 ALGO_DIR += algo/path_finding/
 
+ALGO2_DIR += algo2/
+
 PRINT_DIR += print/
 
 #------------------------------------------------------------------------------#
@@ -135,6 +148,7 @@ _SRCS_PATH += $(LINKED_LIST_DIR)
 _SRCS_PATH += $(MEMORY_FUNCTIONS_DIR)
 _SRCS_PATH += $(ALGO_DIR)
 _SRCS_PATH += $(PRINT_DIR)
+_SRCS_PATH += $(ALGO2_DIR)
 
 SRCS_PATH += $(SRCS_DIR)
 SRCS_PATH += $(addprefix $(SRCS_DIR), $(_SRCS_PATH))
@@ -229,10 +243,10 @@ COM_STRING   = "Compiling"
 all: $(CLEAR) $(NAME)
 
 $(NAME): $(LIBS) $(OBJS_PATH) $(OBJS)
-	$(call run_and_test, $(CC) $(OBJS) $(DEBUG) $(LDFLAGS) $(LDLIBS) -o $@)
+	$(call run_and_test, $(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $@)
 
 $(OBJS): $(OBJS_PATH)%.o : %.c $(INCS) Makefile
-	$(call run_and_test, $(CC) $(DEBUG) -c $< -o $@)
+	$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
 $(OBJS_PATH):
 	$(MKDIR) $@

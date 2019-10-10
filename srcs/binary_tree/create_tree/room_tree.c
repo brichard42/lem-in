@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 13:51:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/19 16:40:08 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/02 11:24:36 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ static void	set_start_end(t_state_machine *machine, t_tree_nod *current)
 	if (machine->special_com.is_end == TRUE)
 	{
 		machine->program_data.end = current;
+		current->type = END;
 		machine->special_com.is_end = FALSE;
 	}
 	else
 	{
 		machine->program_data.start = current;
+		current->type = START;
 		machine->special_com.is_start = FALSE;
 	}
 }

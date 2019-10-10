@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 17:17:36 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/09 17:51:58 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/10 12:06:53 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static char		*ft_strchr_addr(const char *s, int c)
 {
 	while (*s != (char)c)
-		if ((*s++) == '\0')
-		{
-			--s;
+	{
+		if (*s == '\0')
 			break;
-		}
+		++s;
+	}
 	return ((char *)s);
 }
 

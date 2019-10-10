@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 00:08:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/01 11:22:40 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/10 07:16:52 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,7 @@ static void	ft_reduce_paths(t_tree_nod ***paths)
 	i = 0;
 	red = paths[0][1]->height - 1;
 	while (paths[i])
-	{
-		//ft_putnbr(paths[i][1]->height);
-		//ft_putchar(' ');
 		paths[i++][1]->height -= red;
-		//ft_putnbr(paths[i - 1][1]->height);
-		//ft_putchar('\n');
-	}
 }
 
 static void	ft_swap_paths(t_tree_nod ***a, t_tree_nod ***b)
@@ -46,7 +40,10 @@ static void	ft_sort_paths(t_tree_nod ***paths)
 	i = 0;
 	j = 0;
 	while (paths[j])
+	{
+		ft_path_len(paths[j]);
 		j++;
+	}
 	while (i < j)
 	{
 		while (paths[i])
@@ -77,8 +74,8 @@ int			ft_ant_in_paths(t_tree_nod ***paths, int ants, int i)
 	n_path = 0;
 	while (paths[n_path])
 		n_path++;
-	//if (paths == NULL || paths[0] == NULL)
-	//	return (1);
+	if (paths == NULL || paths[0] == NULL)
+		return (1);
 	ft_sort_paths(paths);
 	min = paths[0][1]->height;
 	if (!(tab_i = (int *)ft_memalloc(sizeof(int) * (n_path + 1))))

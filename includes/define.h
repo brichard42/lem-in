@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:13:54 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/19 17:50:19 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/02 11:26:10 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # define TRUE			1
 # define FALSE			0
 # define NO_DISTANCE	-1
+
+/* Type of node
+**
+*/
+
+# define START			2
+# define END			3
 
 /*
 **	Right or Left indicator

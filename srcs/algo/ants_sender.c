@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 16:46:50 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/01 11:22:40 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/10 07:16:10 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,8 @@ int			ft_send_ants(t_tree_nod ***paths, int *tab_i, int n_path, int ant_name)
 	int	i;
 	int	*sizes;
 
-	i = -1;
 	if (!(sizes = ft_path_to_neg(paths, n_path)))
 		return (1);
-	//while (sizes[++i])
-	//{
-//		ft_putnbr(sizes[i]);
-//		ft_putchar (' ');
-//	}
-//	ft_putchar('\n');
 	i = -1;
 	while (++i <= n_path)
 	{
