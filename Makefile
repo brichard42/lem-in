@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/10 11:59:46 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/10 14:54:02 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,7 +169,7 @@ vpath %.h $(INC_PATH)
 CC = gcc
 
 DEBUG += $(CFLAGS)
-#DEBUG += -fsanitize=address
+DEBUG += -fsanitize=address,undefined
 DEBUG += -g3
 
 IFLAGS += $(addprefix -I, $(INC_PATH))
@@ -243,10 +243,10 @@ COM_STRING   = "Compiling"
 all: $(CLEAR) $(NAME)
 
 $(NAME): $(LIBS) $(OBJS_PATH) $(OBJS)
-	$(call run_and_test, $(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $@)
+	$(call run_and_test, $(CC) $(OBJS) $(DEBUG) $(LDFLAGS) $(LDLIBS) -o $@)
 
 $(OBJS): $(OBJS_PATH)%.o : %.c $(INCS) Makefile
-	$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
+	$(call run_and_test, $(CC) $(DEBUG) -c $< -o $@)
 
 $(OBJS_PATH):
 	$(MKDIR) $@
