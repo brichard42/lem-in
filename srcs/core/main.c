@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/07 17:18:11 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/10 08:50:48 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int			main(void)
 //	ft_aff_paths(machine.program_data.path_tab);
 	if (ft_ant_in_paths(machine.program_data.path_tab, machine.program_data.ant_nb, -1))
 		return (ft_print_error(&machine));
+	ft_free_transformed_path(machine.program_data.path_tab);
 	ft_free_room_tree(machine.program_data.room_tree);
 	return (EXIT_SUCCESS);
 }
