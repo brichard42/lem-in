@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 11:54:52 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/10 14:02:40 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,38 +19,45 @@ static int	ft_print_error(t_state_machine *machine)
 	return (EXIT_FAILURE);
 }
 
-	/* TRUC D'AFFICHAGE :
-	 * ft_printf("\n\n___________________AFTER PARSING_______________________\n\n");
-	ft_print_room_tree(machine.program_data.room_tree);
-	if (machine.program_data.start != NULL)
-		ft_printf("start:\t%-20s\n", machine.program_data.start->room_name);
-	else
-		ft_printf("start:\nNONE\n");
-	if (machine.program_data.end != NULL)
-		ft_printf("end:\t%-20s\n", machine.program_data.end->room_name);
-	else
-		ft_printf("end:\tNONE\n");
-	ft_printf("ant_nb:\t%-20d\n", machine.program_data.ant_nb);*/
+static int8_t		edmond(t_data *program_data)
+{
+	ft_algorithm(program_data);
+	program_data->path_tab = ft_path_collector(program_data, program_data->start);
+	return (SUCCESS);
+}
 
-int			main(void)
+static int8_t		home_made(t_data *program_data)
+{
+	if (ft_calc_dist(program_data) == FAILURE)
+		return (FAILURE);
+	if (program_data->end->height == NO_DISTANCE)
+		return (FAILURE);
+	if (ft_solver(program_data))
+		return (FAILURE);
+	return (SUCCESS);
+//	ft_aff_paths(machine.program_data.path_tab);
+}
+
+int			main(int argc, char **argv)
 {
 	t_state_machine	machine;
 
 	ft_bzero((void *)&machine, sizeof(t_state_machine));
 	if (lem_parsing(&machine) == FAILURE)
 		return (ft_print_error(&machine));
-	ft_algorithm(&machine.program_data);
-	machine.program_data.path_tab = ft_path_collector(&machine.program_data, machine.program_data.start);
+	if (argc > 1 && ft_strequ(argv[1], "--homemade"))
+	{
+		if (home_made(&machine.program_data) == FAILURE)
+			return (ft_print_error(&machine));
+	}
+	else
+	{
+		if (edmond(&machine.program_data) == FAILURE)
+			return (ft_print_error(&machine));
+	}
 	ft_putchar('\n');
-//	if (ft_calc_dist(&machine.program_data) == FAILURE)
-//		return (ft_print_error(&machine));
-//	if (machine.program_data.end->height == NO_DISTANCE)
-//		return (ft_print_error(&machine));
-//	if (ft_solver(&machine.program_data))
-//		return (ft_print_error(&machine));
-//	ft_aff_paths(machine.program_data.path_tab);
 	if (ft_ant_in_paths(machine.program_data.path_tab, machine.program_data.ant_nb, -1))
-		return (ft_print_error(&machine));
+		return (FAILURE);
 	ft_free_transformed_path(machine.program_data.path_tab);
 	ft_free_room_tree(machine.program_data.room_tree);
 	return (EXIT_SUCCESS);
