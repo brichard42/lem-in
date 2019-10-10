@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:43:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/01 11:48:48 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/10 09:08:13 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ static t_tree_nod	**ft_get_unvisited_links(t_tree_nod *node)
 	if (!(link_tree = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (num_link + 1))))
 		return (NULL);
 	if (ft_get_links(link_tree, node->link_list, 0) == 0)
+	{
+		ft_memdel((void **)&link_tree);
 		return (NULL);
+	}
 	return (link_tree);
 }
 
@@ -72,9 +75,9 @@ int				ft_get_next_node(t_path *path, t_tree_nod **node, t_data *program_data)
 		return (ft_free_tree_nod_with_ret(links, 2));
 	if (!(new = ft_best_link(links)))
 		return (ft_free_tree_nod_with_ret(links, 1));
+	ft_memdel((void **)&links);
 	if (new != program_data->start)
 		new->mark++;
-	ft_memdel((void **)&links);
 	if (ft_create_path(&path, new) == FAILURE)
 		return (1);
 	*node = new;

@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 03:07:53 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/07 11:01:07 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/10 08:59:20 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		ft_amount_of_path(t_llist_nod *end_l, t_llist_nod *start_l)
+/*static int		ft_amount_of_path(t_llist_nod *end_l, t_llist_nod *start_l)
 {
 	int	n_el;
 	int	n_sl;
@@ -131,30 +131,20 @@ static t_tree_nod	***ft_best_path(t_tree_nod ****pathss, t_data *program_data)
 		i++;
 	}
 	return (pathss[0]);
-}
+}*/
 
-int8_t				ft_solver(t_data *program_data)
+int8_t				ft_solver(t_data *data)
 {
-	t_tree_nod	****pathss;
-	int		n_path;
-	int		i;
+	//int		n_path;
+	//int		i;
 
-	i = -1;
-	n_path = ft_amount_of_path(program_data->end->link_list, program_data->start->link_list);
-	if (!(pathss = (t_tree_nod ****)ft_memalloc(sizeof(t_tree_nod ***) * (n_path + 1))))
-		return (FAILURE);
-	while (++i < 1) //careful 1 = n_path
-	{
-		pathss[i] = ft_get_multi_paths(program_data);
-		ft_delete_links(pathss, program_data);
-	}
-	if (!(program_data->path_tab = ft_best_path(pathss, program_data)))
-		return (FAILURE);
-	//ft_putstr(program_data->paths[0][1]->room_name);
-	i = -1;
-	while (pathss[++i])
-		if (pathss[i] != program_data->path_tab)
-			ft_free_transformed_path(pathss[i]);
-	ft_memdel((void **)&pathss);
+	data->path_tab = ft_get_multi_paths(data);
+	//if (!(program_data->path_tab = ft_best_path(pathss, program_data)))
+	//	return (FAILURE);
+	//i = -1;
+	//while (pathss[++i])
+	//	if (pathss[i] != program_data->path_tab)
+	//		ft_free_transformed_path(pathss[i]);
+	//ft_memdel((void **)&pathss);
 	return (SUCCESS);
 }
