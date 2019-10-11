@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/12 01:48:40 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/12 01:57:08 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,7 +127,7 @@ MEMORY_FUNCTIONS_DIR += memory_functions/
 ALGO_DIR += algo/
 ALGO_DIR += algo/path_finding/
 
-ALGO2_DIR += algo2/
+ALGO2_DIR += algo_edmond/
 
 PRINT_DIR += print/
 
