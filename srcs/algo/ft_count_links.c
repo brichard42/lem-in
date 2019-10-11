@@ -6,15 +6,15 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:20:57 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/01 13:32:00 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/12 01:42:22 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int				ft_count_links(t_llist_nod *count, int n_height)
+int	ft_count_links(t_llist_nod *count, int n_height)
 {
-	int		i;
+	int			i;
 	t_llist_nod	*next;
 
 	i = 0;

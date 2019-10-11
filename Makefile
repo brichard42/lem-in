@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/10 14:54:02 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/12 01:48:40 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,8 +69,8 @@ MEMORY += del_splited_line.c
 MEMORY += free_path.c
 MEMORY += free_with_ret_value.c
 MEMORY += ft_free_transformed_path.c
-MEMORY += deletor.c
 
+ALGO += start_to_end.c
 ALGO += ants_in_path.c
 ALGO += ants_sender.c
 ALGO += calc_dist.c
@@ -79,7 +79,6 @@ ALGO += get_multi_paths.c
 ALGO += get_multi_paths3.c
 ALGO += ft_check_paths.c
 ALGO += ft_get_next_node.c
-ALGO += solver.c
 ALGO += path_functions.c
 
 ALGO2 += bfs.c

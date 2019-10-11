@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 07:40:13 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/12 01:32:48 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_path_transformer(t_data *data, t_tree_nod *path)
 	}
 }
 
-static void	ft_best_path(t_data *data, t_list *paths)
+static int8_t	ft_best_path(t_data *data, t_list *paths)
 {
 	int			size_min;
 	int			size;
@@ -54,6 +54,8 @@ static void	ft_best_path(t_data *data, t_list *paths)
 
 	size_min = 0;
 	the_path = NULL;
+	if (data->flow == 1 && !paths)
+		return (FAILURE);
 	while (paths)
 	{
 		node = (t_tree_nod *)(paths->content);
@@ -66,9 +68,10 @@ static void	ft_best_path(t_data *data, t_list *paths)
 		paths = paths->next;
 	}
 	ft_path_transformer(data, the_path);
+	return (SUCCESS);
 }
 
-void		ft_algorithm(t_data *data)
+int8_t		ft_algorithm(t_data *data)
 {
 	while (data->tmpath || data->flow == 0)
 	{
@@ -76,9 +79,11 @@ void		ft_algorithm(t_data *data)
 		ft_del_list(&data->tmpath);
 		data->start->last_visit = data->flow;
 		ft_bfs(data, data->start, data->flow);
-		ft_best_path(data, data->tmpath);
+		if (ft_best_path(data, data->tmpath) == FAILURE)
+			return (FAILURE);
 		ft_add_node_memory(data, data->tmpath, data->flow);
 		ft_add_doors(data, data->start, data->flow);
 		ft_simulator(data, data->start, data->flow, data->ant_nb);
 	}
+	return (SUCCESS);
 }
