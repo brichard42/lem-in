@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 08:01:24 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 11:20:20 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ int						ft_ant_in_paths(t_tree_nod ***paths, int ants, int i);
 int						ft_send_ants(t_tree_nod ***paths, int *tab_i,
 						int n_path, int ant_name);
 void					ft_aff_one_move(int ant, char *path);
+void					options(t_data *data, char **argv);
 /*
 **	----------Free_function-----------------------------------------------------
 */

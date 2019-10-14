@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:35:59 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/14 07:54:38 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 10:54:46 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_tree_nod	**ft_free_ret_nod(t_tree_nod **to_f)
 {
-	ft_memdel((void **)to_f);
+	ft_memdel((void **)&to_f);
 	return (NULL);
 }
 

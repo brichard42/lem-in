@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/12 16:24:46 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/14 11:19:19 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS += $(ALGO)
 SRCS += $(ALGO2)
 SRCS += $(MEMORY)
 SRCS += $(PRINT)
+SRCS += $(OPTIONS)
 
 OBJS = $(patsubst %.c, $(OBJS_PATH)%.o, $(SRCS))
 
@@ -90,6 +91,7 @@ ALGO2 += path_memory.c
 ALGO2 += del_functions.c
 ALGO2 += path_collector.c
 
+OPTIONS += options.c
 
 PRINT += print_functions.c
 
@@ -129,6 +131,8 @@ ALGO_DIR += algo/path_finding/
 
 ALGO2_DIR += algo_edmond/
 
+OPTIONS_DIR += options/
+
 PRINT_DIR += print/
 
 #------------------------------------------------------------------------------#
@@ -148,6 +152,7 @@ _SRCS_PATH += $(MEMORY_FUNCTIONS_DIR)
 _SRCS_PATH += $(ALGO_DIR)
 _SRCS_PATH += $(PRINT_DIR)
 _SRCS_PATH += $(ALGO2_DIR)
+_SRCS_PATH += $(OPTIONS_DIR)
 
 SRCS_PATH += $(SRCS_DIR)
 SRCS_PATH += $(addprefix $(SRCS_DIR), $(_SRCS_PATH))
