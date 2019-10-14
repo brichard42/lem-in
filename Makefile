@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/12 01:57:08 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/12 16:24:46 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ ALGO += ants_sender.c
 ALGO += calc_dist.c
 ALGO += ft_count_links.c
 ALGO += get_multi_paths.c
-ALGO += get_multi_paths3.c
+ALGO += get_multi_paths2.c
 ALGO += ft_check_paths.c
 ALGO += ft_get_next_node.c
 ALGO += path_functions.c

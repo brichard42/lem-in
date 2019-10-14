@@ -6,13 +6,13 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:30:13 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/25 13:32:50 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/12 16:32:43 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_tree_nod		***ft_free_paths_nodes(t_path **paths, t_tree_nod **nodes)
+t_tree_nod	***ft_free_paths_nodes(t_path **paths, t_tree_nod **nodes)
 {
 	if (paths)
 		ft_free_path(paths, 0);
@@ -20,7 +20,7 @@ t_tree_nod		***ft_free_paths_nodes(t_path **paths, t_tree_nod **nodes)
 	return (NULL);
 }
 
-void	ft_free_path_helper(t_path *path, int i)
+void		ft_free_path_helper(t_path *path, int i)
 {
 	if (!path)
 		return ;

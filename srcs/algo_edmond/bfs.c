@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:35:01 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/11 22:18:12 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/12 16:38:11 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static uint8_t	ft_good_link(t_tree_nod *parent, t_tree_nod *child, int flow)
 			return (1);
 		return (0);
 	}
-	return (1); //THINGS TO ADD HERE OBVIOUSLY
+	return (1);
 }
 
 static void		ft_child_updater(t_list **tmpath, t_tree_nod *parent,

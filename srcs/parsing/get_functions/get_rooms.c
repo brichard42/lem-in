@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:16:18 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/19 16:40:08 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/12 16:30:59 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static int8_t	put_room_in_tree(t_state_machine *machine, char *str)
 		if (splited_line != NULL)
 		{
 			if (room_is_valid(splited_line) == TRUE)
-				ret_value = ft_room_add(machine, &machine->program_data.room_tree
-															, *splited_line);
+				ret_value = ft_room_add(machine,
+				&machine->program_data.room_tree, *splited_line);
 			del_splited_line(&splited_line);
 		}
 	}

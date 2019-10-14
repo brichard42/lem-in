@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 15:09:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 15:20:32 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/12 16:32:15 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int8_t		lem_parsing(t_state_machine *machine)
 	str = NULL;
 	while (ft_gnl(0, &str) > 0 && str != NULL)
 	{
-		ft_putendl(str);//ADDBUFFER ICI
+		ft_putendl(str);
 		if (check_com(machine, str) == FALSE)
 			if (state_func[machine->state](machine, str) == FAILURE)
 				break ;

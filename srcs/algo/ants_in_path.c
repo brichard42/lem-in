@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 00:08:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 07:16:52 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/12 17:21:24 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int			ft_ant_in_paths(t_tree_nod ***paths, int ants, int i)
 		n_path++;
 	if (paths == NULL || paths[0] == NULL)
 		return (1);
+		ft_putchar('a');
 	ft_sort_paths(paths);
 	min = paths[0][1]->height;
 	if (!(tab_i = (int *)ft_memalloc(sizeof(int) * (n_path + 1))))

@@ -6,28 +6,11 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 12:01:28 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/02 14:57:19 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/12 16:31:24 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-void        ft_aff_last_room(t_path *path)
-{
-	t_path  *tmp;
-
-	tmp = path->next;
-	ft_putstr(tmp->node->room_name);
-	ft_putchar(' ');
-//	ft_putnbr(tmp->node->height);
-	ft_putchar(' ');
-	while (tmp->next)
-		tmp = tmp->next;
-//	ft_putnbr(tmp->node->height);
-	ft_putchar(' ');
-	ft_putstr(tmp->node->room_name);
-	ft_putchar('\n');
-}
 
 void	ft_aff_one_move(int ant, char *path)
 {
@@ -38,7 +21,7 @@ void	ft_aff_one_move(int ant, char *path)
 	ft_putchar(' ');
 }
 
-void	ft_aff_paths(t_tree_nod ***the_paths) //remove me for 5 function in file
+void	ft_aff_paths(t_tree_nod ***the_paths)
 {
 	int i;
 	int	j;

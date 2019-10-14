@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 07:52:07 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 11:31:16 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/12 17:12:07 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ static t_tree_nod	*ft_node_with_flow(t_list *mem_list, int flow)
 	return (NULL);
 }
 
-static int			ft_get_sub_path(t_tree_nod **path, t_tree_nod *door, int flow, int size)
+static int			ft_get_sub_path(t_tree_nod **path, t_tree_nod *door,
+					int flow, int size)
 {
 	int			i;
 	t_tree_nod	*node;
-	
+
 	i = 2;
 	node = door;
 	path[1] = node;

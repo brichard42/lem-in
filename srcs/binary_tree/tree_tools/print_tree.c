@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:42:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/07 16:58:41 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/12 16:37:47 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_print_room_tree(t_tree_nod *room_tree)
 		ft_print_room_tree(room_tree->right);
 	if (room_tree->left)
 		ft_print_room_tree(room_tree->left);
-	ft_printf("|\t%-30s\t|\tHeight in Tree: %d\t|\n", room_tree->room_name, room_tree->height);
+	ft_printf("|\t%-30s\t|\tHeight in Tree: %d\t|\n", room_tree->room_name,
+			room_tree->height);
 	ft_print_link_list(room_tree->link_list);
 }
