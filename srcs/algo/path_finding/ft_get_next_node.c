@@ -6,17 +6,18 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:43:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/10 09:08:13 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 07:08:52 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		ft_get_links(t_tree_nod **tab_link, t_llist_nod *link, int i)
+static int			ft_get_links(t_tree_nod **tab_link, t_llist_nod *link,
+					int i)
 {
 	if (!link)
 		return (0);
-	if (!link->linked_room->mark)
+	if (!link->linked_room->last_visit)
 		tab_link[i++] = link->linked_room;
 	if (link->next)
 		i = ft_get_links(tab_link, link->next, i);
@@ -50,11 +51,12 @@ static t_tree_nod	*ft_best_link(t_tree_nod **tab_link)
 
 static t_tree_nod	**ft_get_unvisited_links(t_tree_nod *node)
 {
-	int		num_link;
+	int			num_link;
 	t_tree_nod	**link_tree;
 
 	num_link = ft_count_links(node->link_list, -1);
-	if (!(link_tree = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (num_link + 1))))
+	if (!(link_tree = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) *
+			(num_link + 1))))
 		return (NULL);
 	if (ft_get_links(link_tree, node->link_list, 0) == 0)
 	{
@@ -64,7 +66,8 @@ static t_tree_nod	**ft_get_unvisited_links(t_tree_nod *node)
 	return (link_tree);
 }
 
-int				ft_get_next_node(t_path *path, t_tree_nod **node, t_data *program_data)
+int					ft_get_next_node(t_path *path, t_tree_nod **node,
+					t_data *program_data)
 {
 	t_tree_nod	*new;
 	t_tree_nod	**links;
@@ -77,7 +80,7 @@ int				ft_get_next_node(t_path *path, t_tree_nod **node, t_data *program_data)
 		return (ft_free_tree_nod_with_ret(links, 1));
 	ft_memdel((void **)&links);
 	if (new != program_data->start)
-		new->mark++;
+		new->last_visit++;
 	if (ft_create_path(&path, new) == FAILURE)
 		return (1);
 	*node = new;

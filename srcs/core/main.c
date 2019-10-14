@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/12 17:21:53 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 06:53:27 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int8_t	edmond(t_data *program_data)
 	if ((ft_algorithm(program_data) == FAILURE))
 		return (FAILURE);
 	if (!(program_data->path_tab =
-			ft_path_collector(program_data, program_data->start)))
+			ft_path_collector(program_data, program_data->start, 0)))
 		return (FAILURE);
 	return (SUCCESS);
 }
@@ -35,7 +35,7 @@ static int8_t	home_made(t_data *program_data)
 		return (FAILURE);
 	if (program_data->end->height == NO_DISTANCE)
 		return (FAILURE);
-	if (!(program_data->path_tab = ft_get_multi_paths(program_data)))
+	if (!(program_data->path_tab = ft_get_multi_paths(program_data, -1)))
 		return (FAILURE);
 	return (SUCCESS);
 }
@@ -60,7 +60,7 @@ int				main(int argc, char **argv)
 				return (ft_print_error(&machine));
 		}
 		if (ft_ant_in_paths(machine.program_data.path_tab,
-				machine.program_data.ant_nb, -1))
+				machine.program_data.ant_nb, -1) == FAILURE)
 			return (FAILURE);
 	}
 	ft_putchar('\n');

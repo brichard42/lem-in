@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:35:01 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/09 09:44:06 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 05:50:30 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	ft_del_list(t_list **list)
 
 void	ft_del_spe(t_list *elem, t_list **start)
 {
-    t_list              *parse;
+	t_list	*parse;
 
-    if (elem && start && *start)
-    {
+	if (elem && start && *start)
+	{
 		elem->content = NULL;
 		if (*start == elem)
 		{

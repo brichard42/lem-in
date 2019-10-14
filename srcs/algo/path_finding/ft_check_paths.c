@@ -6,20 +6,19 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:49:26 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/25 13:49:51 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/14 07:19:40 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_path			**ft_check_paths(t_path **old_paths, t_data *program_data, int num)
+t_path			**ft_check_paths(t_path **old_paths, t_data *program_data,
+				int num, int i)
 {
 	t_path	**new_paths;
 	t_path	*tmp;
-	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
 	if (!(new_paths = (t_path **)ft_memalloc(sizeof(t_path *) * num + 1)))
 		return (NULL);

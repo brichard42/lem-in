@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 12:14:02 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/10 05:32:59 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 06:48:55 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	ft_path_len(t_tree_nod **path)
 {
 	int i;
 
-	i = -1;
-	while (path[++i]);
+	i = 0;
+	while (path[i])
+		i++;
 	path[1]->height = i;
 }

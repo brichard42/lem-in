@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:13:54 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/02 11:26:10 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 08:02:40 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # define FALSE			0
 # define NO_DISTANCE	-1
 
-/* Type of node
-**
+/*
+**	Type of node
 */
 
 # define START			2

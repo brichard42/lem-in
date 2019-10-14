@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 00:54:05 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 07:45:09 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 05:47:09 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,22 @@ t_door		*ft_door_data_collector(t_list *data, int flow)
 	return (NULL);
 }
 
-void		ft_add_doors(t_data *data, t_tree_nod *start, int flow)
+int8_t		ft_add_doors(t_tree_nod *start, int flow)
 {
 	t_list			*start_mem;
 	t_tree_nod		*door;
 	t_door			*info;
 
-	(void)data;//needed for the protection 
 	start_mem = start->mem_data;
 	while (start_mem)
 	{
 		door = ((t_mem *)(start_mem->content))->node;
-		info = (t_door *)ft_memalloc(sizeof(t_door));//PROTECTION NEEDED
+		if (!(info = (t_door *)ft_memalloc(sizeof(t_door))))
+			return (FAILURE);
 		info->flow = flow;
 		info->size = ft_size_collector(door);
 		ft_push_front((void *)info, &(door->door_data));
 		start_mem = start_mem->next;
 	}
+	return (SUCCESS);
 }

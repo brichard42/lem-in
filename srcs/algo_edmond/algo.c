@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/12 01:32:48 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 05:51:25 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	ft_path_size(t_tree_nod *start)
+static int		ft_path_size(t_tree_nod *start)
 {
 	t_tree_nod	*node;
 	int			value;
@@ -27,7 +27,7 @@ static int	ft_path_size(t_tree_nod *start)
 	return (value);
 }
 
-static void	ft_path_transformer(t_data *data, t_tree_nod *path)
+static void		ft_path_transformer(t_data *data, t_tree_nod *path)
 {
 	t_tree_nod	*node;
 	t_list		**tmpath_address;
@@ -71,7 +71,7 @@ static int8_t	ft_best_path(t_data *data, t_list *paths)
 	return (SUCCESS);
 }
 
-int8_t		ft_algorithm(t_data *data)
+int8_t			ft_algorithm(t_data *data)
 {
 	while (data->tmpath || data->flow == 0)
 	{
@@ -81,8 +81,10 @@ int8_t		ft_algorithm(t_data *data)
 		ft_bfs(data, data->start, data->flow);
 		if (ft_best_path(data, data->tmpath) == FAILURE)
 			return (FAILURE);
-		ft_add_node_memory(data, data->tmpath, data->flow);
-		ft_add_doors(data, data->start, data->flow);
+		if ((ft_add_node_memory(data->tmpath, data->flow) == FAILURE))
+			return (FAILURE);
+		if ((ft_add_doors(data->start, data->flow) == FAILURE))
+			return (FAILURE);
 		ft_simulator(data, data->start, data->flow, data->ant_nb);
 	}
 	return (SUCCESS);

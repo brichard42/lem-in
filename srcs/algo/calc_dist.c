@@ -6,19 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:12:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/02 10:57:39 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 07:18:17 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_tree_nod		**ft_free_ret_nod(t_tree_nod **to_f)
-{
-	ft_memdel((void **)&to_f);
-	return (NULL);
-}
-
-static void	ft_height_to_num(t_tree_nod *tree, int i)
+static void			ft_height_to_num(t_tree_nod *tree, int i)
 {
 	if (!tree)
 		return ;
@@ -29,21 +23,24 @@ static void	ft_height_to_num(t_tree_nod *tree, int i)
 		ft_height_to_num(tree->right, i);
 }
 
-static int		ft_set_links(t_llist_nod *to_put, t_tree_nod **n_tab, int i, int n_height)
+static int			ft_set_links(t_llist_nod *to_put, t_tree_nod **n_tab, int i,
+					int n_height)
 {
 	t_tree_nod	*current_room;
 	t_llist_nod	*next;
 
 	next = to_put->next;
 	current_room = to_put->linked_room;
-	if (to_put && (current_room->height > n_height || current_room->height == -1))
+	if (to_put && (current_room->height > n_height
+			|| current_room->height == -1))
 		n_tab[i++] = current_room;
 	if (next)
 		i = ft_set_links(next, n_tab, i, n_height);
 	return (i);
 }
 
-static void		ft_get_links(t_tree_nod **curr, t_tree_nod **n_tab, int n_height, t_tree_nod *end)
+static void			ft_get_links(t_tree_nod **curr, t_tree_nod **n_tab,
+					int n_height, t_tree_nod *end)
 {
 	int	j;
 	int	i;
@@ -58,10 +55,11 @@ static void		ft_get_links(t_tree_nod **curr, t_tree_nod **n_tab, int n_height, t
 	}
 }
 
-static t_tree_nod	**ft_get_current(t_tree_nod **curr, int n_height, t_tree_nod *end)
+static t_tree_nod	**ft_get_current(t_tree_nod **curr, int n_height,
+					t_tree_nod *end)
 {
-	int		i;
-	int		count;
+	int			i;
+	int			count;
 	t_tree_nod	**n_tab;
 
 	count = 0;
@@ -70,7 +68,8 @@ static t_tree_nod	**ft_get_current(t_tree_nod **curr, int n_height, t_tree_nod *
 		count = count + ft_count_links(curr[i++]->link_list, n_height);
 	if (count == 0)
 		return (ft_free_ret_nod(curr));
-	if (!(n_tab = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) * (count + 1))))
+	if (!(n_tab = (t_tree_nod **)ft_memalloc(sizeof(t_tree_nod *) *
+			(count + 1))))
 		return (ft_free_ret_nod(curr));
 	ft_get_links(curr, n_tab, n_height, end);
 	i = -1;
@@ -83,7 +82,7 @@ static t_tree_nod	**ft_get_current(t_tree_nod **curr, int n_height, t_tree_nod *
 int8_t				ft_calc_dist(t_data *program_data)
 {
 	t_tree_nod	**curr;
-	int		i;
+	int			i;
 
 	i = 1;
 	ft_height_to_num(program_data->room_tree, -1);
@@ -98,4 +97,4 @@ int8_t				ft_calc_dist(t_data *program_data)
 		i++;
 	}
 	return (0);
-}	
+}

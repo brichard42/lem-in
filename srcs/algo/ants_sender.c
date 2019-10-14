@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 16:46:50 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 07:16:10 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 06:20:09 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static int	ft_empty_paths(t_tree_nod ***paths, int *sizes)
 	return (a);
 }
 
-int			ft_send_ants(t_tree_nod ***paths, int *tab_i, int n_path, int ant_name)
+int			ft_send_ants(t_tree_nod ***paths, int *tab_i, int n_path,
+			int ant_name)
 {
 	int	i;
 	int	*sizes;

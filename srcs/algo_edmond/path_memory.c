@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 20:40:48 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/10 11:34:26 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/14 05:42:44 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,18 @@ t_tree_nod	*ft_mem_node_collector(t_list *memory)
 	return (NULL);
 }
 
-void		ft_add_node_memory(t_data *data, t_list *tmpath, int flow)
+int8_t		ft_add_node_memory(t_list *tmpath, int flow)
 {
 	t_tree_nod	*current;
 	t_tree_nod	*next;
 	t_mem		*mem;
 
-	(void)data;
 	while (tmpath && tmpath->next)
 	{
 		current = (t_tree_nod *)(tmpath->content);
 		next = (t_tree_nod *)(tmpath->next->content);
-		/*if (!(*/mem = (t_mem *)ft_memalloc(sizeof(t_mem));/*))*/
-			//add some sweet protection;
+		if (!(mem = (t_mem *)ft_memalloc(sizeof(t_mem))))
+			return (FAILURE);
 		mem->flow = flow;
 		if (next->mem_data
 				&& ((t_mem *)(next->mem_data->content))->node == current)
@@ -46,4 +45,5 @@ void		ft_add_node_memory(t_data *data, t_list *tmpath, int flow)
 		}
 		tmpath = tmpath->next;
 	}
+	return (SUCCESS);
 }
