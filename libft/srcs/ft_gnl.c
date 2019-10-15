@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 17:17:36 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/14 08:06:07 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 18:07:58 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int8_t			ft_gnl(const int fd, char **line)
 		{
 			ret_gnl = END_OF_FILE;
 			eol = get_end_of_line(data.str, ret_read);
-			if (eol != NULL)
+			if (eol != NULL && *eol != '\0')
 			{
 				ret_gnl = READ_DONE;
 				if (!(*line = ft_strsub(data.str, START, eol - data.str)))
 					ret_gnl = FAILURE;
-				data.str = eol + (*eol == '\n' ? SKIP_NEWLINE : NO_SKIP);
+				data.str = eol + SKIP_NEWLINE;
 			}
 		}
 	}

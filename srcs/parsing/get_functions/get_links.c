@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:13:42 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/15 17:19:31 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 18:06:06 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,25 @@ static int8_t	link_two_rooms(t_state_machine *machine, char **splited_line)
 			&& ft_link_add(&a->link_list, b) == SUCCESS ? SUCCESS : FAILURE);
 }
 
+static int8_t	check_double_dash(char *str)
+{
+	int8_t	dash;
+
+	dash = 0;
+	while (*str != '\0' && dash < 2)
+		if (*str++ == '-')
+			++dash;
+	return (dash < 2 ? SUCCESS : FAILURE);
+}
+
 int8_t			get_links(t_state_machine *machine, char *str)
 {
 	char	**splited_line;
 	int8_t	ret_value;
 
 	ret_value = FAILURE;
-	if (ft_strchr(str, WHITE_SPACE) == NULL)
+	if (check_double_dash(str) == SUCCESS &&
+			ft_strchr(str, WHITE_SPACE) == NULL)
 	{
 		splited_line = ft_strsplit(str, LINK_SEPARATOR);
 		if (splited_line != NULL)
