@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:13:42 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/12 16:31:47 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:19:31 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static uint8_t	link_is_valid(char **splited_line)
 	nbarg = 0;
 	while (splited_line[nbarg] != NULL)
 		nbarg++;
-	return (nbarg == 2 && ft_strequ(splited_line[0], splited_line[1]) == FALSE);
+	return (nbarg == 2);
 }
 
 static int8_t	link_two_rooms(t_state_machine *machine, char **splited_line)

@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/14 11:19:19 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/15 14:09:44 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ ALGO2 += path_collector.c
 OPTIONS += options.c
 
 PRINT += print_functions.c
+PRINT += buffer.c
 
 #------------------------------------------------------------------------------#
 #                                  DIRECTORIES                                 #

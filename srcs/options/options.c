@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:03:37 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 11:50:54 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:57:25 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ft_check_option(char *str)
 {
-	static int option = 0;
-	int i;
+	static int	option = 0;
+	int			i;
 
 	i = -1;
 	while (str[++i])
@@ -37,8 +37,8 @@ void		options(t_data *data, char **argv)
 	i = -1;
 	while (argv[++i])
 		if (argv[i][0] == '-')
-			ret = ft_check_option(&argv[i][0]);
-	if (ret == 1)
+			ret = ft_check_option(&argv[i][1]);
+	if (ret == 1 && !ft_strequ(argv[1], "-homemade"))
 	{
 		ft_printf("- The Edmond-Karp algorithm performed in ");
 		ft_printf("%d different residual graph.\n", data->flow - 1);

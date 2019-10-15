@@ -6,13 +6,19 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 16:46:50 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 06:20:09 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:56:43 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	*ft_path_to_neg(t_tree_nod ***paths, int n_path)
+static int8_t	ft_free_sizes_ret_i(int *sizes, int8_t ret)
+{
+	ft_memdel((void **)&sizes);
+	return (ret);
+}
+
+static int		*ft_path_to_neg(t_tree_nod ***paths, int n_path)
 {
 	int i;
 	int j;
@@ -31,7 +37,7 @@ static int	*ft_path_to_neg(t_tree_nod ***paths, int n_path)
 	return (sizes);
 }
 
-static void	ft_sender(int name, t_tree_nod **path, int p_size)
+static int8_t	ft_sender(int name, t_tree_nod **path, int p_size)
 {
 	int i;
 
@@ -40,7 +46,9 @@ static void	ft_sender(int name, t_tree_nod **path, int p_size)
 	{
 		if (path[i] && path[i]->height != -1)
 		{
-			ft_aff_one_move(path[i]->height, path[i]->room_name);
+			if (ft_buff_one_move(path[i]->height,
+					path[i]->room_name) == FAILURE)
+				return (FAILURE);
 			if (path[i + 1])
 				path[i + 1]->height = path[i]->height;
 			path[i]->height = -1;
@@ -48,19 +56,21 @@ static void	ft_sender(int name, t_tree_nod **path, int p_size)
 	}
 	if (name != -1)
 	{
-		ft_aff_one_move(name, path[i]->room_name);
+		if (ft_buff_one_move(name, path[i]->room_name) == FAILURE)
+			return (FAILURE);
 		if (path[2])
 			path[2]->height = name;
 	}
+	return (SUCCESS);
 }
 
-static int	ft_empty_paths(t_tree_nod ***paths, int *sizes)
+static int		ft_empty_paths(t_tree_nod ***paths, int *sizes)
 {
 	int i;
 	int j;
 	int a;
 
-	a = 0;
+	a = SUCCESS;
 	i = 0;
 	while (paths[i])
 	{
@@ -69,8 +79,10 @@ static int	ft_empty_paths(t_tree_nod ***paths, int *sizes)
 		{
 			if (paths[i][j]->height != -1)
 			{
-				a = 1;
-				ft_aff_one_move(paths[i][j]->height, paths[i][j]->room_name);
+				a = 2;
+				if (ft_buff_one_move(paths[i][j]->height,
+						paths[i][j]->room_name) == FAILURE)
+					return (FAILURE);
 				if (paths[i][j + 1])
 					paths[i][j + 1]->height = paths[i][j]->height;
 				paths[i][j]->height = -1;
@@ -81,32 +93,31 @@ static int	ft_empty_paths(t_tree_nod ***paths, int *sizes)
 	return (a);
 }
 
-int			ft_send_ants(t_tree_nod ***paths, int *tab_i, int n_path,
-			int ant_name)
+int8_t			ft_send_ants(t_tree_nod ***paths, int *tab_i, int n_path,
+				int ant_name)
 {
 	int	i;
 	int	*sizes;
 
 	if (!(sizes = ft_path_to_neg(paths, n_path)))
-		return (1);
+		return (FAILURE);
 	i = -1;
 	while (++i <= n_path)
-	{
 		while (tab_i[i] > 0)
 		{
 			while (tab_i[i] != 0)
 			{
-				ft_sender(ant_name++, paths[i], sizes[i]);
+				if (ft_sender(ant_name++, paths[i], sizes[i]) == FAILURE)
+					return (FAILURE);
 				if (!tab_i[i + 1])
-					ft_empty_paths(&paths[i + 1], &sizes[i + 1]);
+					if (ft_empty_paths(&paths[i + 1], &sizes[i + 1]) == FAILURE)
+						return (FAILURE);
 				--tab_i[i++];
 			}
-			ft_putchar('\n');
+			ft_buffer("\n", 0);
 			i = 0;
 		}
-	}
-	while (ft_empty_paths(paths, sizes))
-		ft_putchar('\n');
-	ft_memdel((void **)&sizes);
-	return (0);
+	while ((i = ft_empty_paths(paths, sizes)) != FAILURE && i != SUCCESS)
+		ft_buffer("\n", 0);
+	return (ft_free_sizes_ret_i(sizes, i));
 }

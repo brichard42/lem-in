@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 11:03:10 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:04:11 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ static int8_t	choose_the_algo(t_data *program_data, int argc, char *arg1)
 			if (edmond(program_data) == FAILURE)
 				return (FAILURE);
 		}
+		ft_buffer("\n", 0);
 		if (ft_ant_in_paths(program_data->path_tab,
 				program_data->ant_nb, -1) == FAILURE)
 			return (FAILURE);
+		ft_buffer("\n", 1);
 	}
-	ft_putchar('\n');
 	return (SUCCESS);
 }
 
@@ -68,6 +69,7 @@ int				main(int argc, char **argv)
 	t_state_machine	machine;
 
 	ft_bzero((void *)&machine, sizeof(t_state_machine));
+	ft_buffer(NULL, 2);
 	if (lem_parsing(&machine) == FAILURE)
 		return (ft_print_error(&machine));
 	if (choose_the_algo(&machine.program_data, argc, argv[1]))

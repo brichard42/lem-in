@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 11:20:20 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:18:19 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int8_t					ft_room_add(t_state_machine *machine,
 int8_t					ft_link_add(t_llist_nod **l_tree, t_tree_nod *r_tree);
 
 void					del_splited_line(char ***splited_line);
+void					ft_buffer(char *str, uint8_t ok);
 
 /*
 **	----------Binary_tree-------------------------------------------------------
@@ -201,9 +202,9 @@ t_tree_nod				***ft_transform_paths(t_path **path,
 						t_data *program_data);
 void					ft_aff_paths(t_tree_nod ***the_paths);
 int						ft_ant_in_paths(t_tree_nod ***paths, int ants, int i);
-int						ft_send_ants(t_tree_nod ***paths, int *tab_i,
+int8_t					ft_send_ants(t_tree_nod ***paths, int *tab_i,
 						int n_path, int ant_name);
-void					ft_aff_one_move(int ant, char *path);
+int8_t					ft_buff_one_move(int ant, char *path);
 void					options(t_data *data, char **argv);
 /*
 **	----------Free_function-----------------------------------------------------

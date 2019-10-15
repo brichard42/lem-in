@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:13:54 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/14 08:02:40 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 14:06:52 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define TRUE			1
 # define FALSE			0
 # define NO_DISTANCE	-1
+# define SIZE_OF_BUFF	32768
 
 /*
 **	Type of node

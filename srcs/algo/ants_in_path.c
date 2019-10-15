@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 00:08:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 07:33:56 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:47:48 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,11 @@ int			ft_ant_in_paths(t_tree_nod ***paths, int ants, int i)
 	{
 		i = -1;
 		while (ants && ++i < n_path)
-		{
 			if (paths[i][1]->height <= min && ++tab_i[i] && ants--)
 				paths[i][1]->height++;
-		}
 		min++;
 	}
-	if (ft_send_ants(paths, tab_i, n_path, 1))
+	if (ft_send_ants(paths, tab_i, n_path, 1) == FAILURE)
 		return (ft_free_tab_i(tab_i));
 	ft_memdel((void **)&tab_i);
 	return (SUCCESS);

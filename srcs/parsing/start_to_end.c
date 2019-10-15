@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 01:16:29 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/12 01:24:51 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:12:16 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int8_t	ft_print_all_in_one(int ants, char *end_name)
 
 	i = 1;
 	while (i <= ants)
-		ft_aff_one_move(i++, end_name);
+		ft_buff_one_move(i++, end_name);
+	ft_buffer("\n", 1);
 	return (SUCCESS);
 }
 
