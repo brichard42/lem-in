@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:35:01 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/12 16:38:11 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 14:30:45 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,25 @@ static uint8_t	ft_bfs_updater(t_list **checking, t_list **to_check)
 	*checking = *to_check;
 	*to_check = NULL;
 	if (*checking == NULL)
-		return (0);
-	return (1);
+		return (FALSE);
+	return (TRUE);
 }
 
 static uint8_t	ft_ok_link(t_tree_nod *parent, t_tree_nod *child)
 {
 	if (child->type == START || parent->type == END)
-		return (1);
+		return (TRUE);
 	if (parent->type == START && child->type == END)
 	{
 		if (child->parent == NULL)
 		{
 			child->parent = parent;
-			return (0);
+			return (FALSE);
 		}
 		else
-			return (1);
+			return (TRUE);
 	}
-	return (0);
+	return (FALSE);
 }
 
 static uint8_t	ft_good_link(t_tree_nod *parent, t_tree_nod *child, int flow)
@@ -44,64 +44,68 @@ static uint8_t	ft_good_link(t_tree_nod *parent, t_tree_nod *child, int flow)
 
 	child_mem = child->mem_data;
 	if (ft_ok_link(parent, child) || child->last_visit == flow)
-		return (0);
+		return (FALSE);
 	if (flow == parent->residue)
 	{
 		if (ft_mem_node_collector(child_mem) == parent)
 			child->residue = flow;
-		return (1);
+		return (TRUE);
 	}
 	if (ft_mem_node_collector(child_mem) == parent)
 	{
 		child->residue = flow;
-		return (1);
+		return (TRUE);
 	}
 	if (ft_mem_node_collector(parent->mem_data))
 	{
 		if (parent->type == START && !ft_mem_node_collector(child_mem))
-			return (1);
-		return (0);
+			return (TRUE);
+		return (FALSE);
 	}
-	return (1);
+	return (TRUE);
 }
 
-static void		ft_child_updater(t_list **tmpath, t_tree_nod *parent,
+static int8_t	ft_child_updater(t_list **tmpath, t_tree_nod *parent,
 				t_tree_nod *child, int flow)
 {
 	if (child->type == END)
-		ft_push_front((void *)parent, tmpath);
+	{
+		if (ft_push_front((void *)parent, tmpath) == FAILURE)
+			return (FAILURE);
+	}
 	else
 	{
 		child->last_visit = flow;
 		child->parent = parent;
 	}
+	return (SUCCESS);
 }
 
-void			ft_bfs(t_data *data, t_tree_nod *start, int flow)
+int8_t			ft_bfs(t_data *data, t_tree_nod *start, int flow)
 {
-	t_llist_nod		*links;
-	t_list			*to_check;
-	t_list			*checking;
-	t_tree_nod		*child;
-	t_tree_nod		*parent;
+	t_bfs		bfs;
 
-	to_check = NULL;
-	ft_push_front((void *)start, &to_check);
-	while (ft_bfs_updater(&checking, &to_check))
-		while (checking)
+	ft_bzero((void *)&bfs, sizeof(t_bfs));
+	if (ft_push_front((void *)start, &bfs.to_check) == FAILURE)
+		return (FAILURE);
+	while (ft_bfs_updater(&bfs.checking, &bfs.to_check))
+		while (bfs.checking)
 		{
-			parent = (t_tree_nod *)(checking->content);
-			links = parent->link_list;
-			while (links)
+			bfs.parent = (t_tree_nod *)(bfs.checking->content);
+			bfs.links = bfs.parent->link_list;
+			while (bfs.links)
 			{
-				child = (t_tree_nod *)(links->linked_room);
-				if (ft_good_link(parent, child, flow))
+				bfs.child = (t_tree_nod *)(bfs.links->linked_room);
+				if (ft_good_link(bfs.parent, bfs.child, flow) == TRUE)
 				{
-					ft_child_updater(&data->tmpath, parent, child, flow);
-					ft_push_front((void *)child, &to_check);
+					if (ft_child_updater(&data->tmpath, bfs.parent, bfs.child,
+					flow) == FAILURE || ft_push_front((void *)bfs.child,
+					&bfs.to_check) == FAILURE)
+						return (FAILURE);
 				}
-				links = links->next;
+				bfs.links = bfs.links->next;
 			}
-			ft_del_first(&checking);
+			ft_del_first(&bfs.checking);
 		}
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/15 16:18:19 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 14:12:39 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,22 @@ typedef struct			s_data
 	t_tree_nod			*start;
 	t_tree_nod			*end;
 	t_list				*tmpath;
-	int64_t				ant_nb;
+	int					ant_nb;
 	int					the_flow;
 	int					the_cost;
 	int					flow;
 }						t_data;
+/*
+**	----------Typedef Bfs Data_struct------------------------------------------
+*/
+typedef struct			s_bfs
+{
+	t_llist_nod     *links;
+    t_list          *to_check;
+    t_list          *checking;
+    t_tree_nod      *child;
+    t_tree_nod      *parent;
+}						t_bfs;
 
 /*
 **	----------Typedef State_machine Data_struct---------------------------------
@@ -170,7 +181,7 @@ void					ft_print_room_tree(t_tree_nod *room_tree);
 ** -----------Algo2-------------------------------------------------------------
 */
 int8_t					ft_algorithm(t_data *data);
-void					ft_bfs(t_data *data, t_tree_nod *start, int count);
+int8_t					ft_bfs(t_data *data, t_tree_nod *start, int count);
 int8_t					ft_add_node_memory(t_list *tmpath, int flow);
 int8_t					ft_add_doors(t_tree_nod *start, int flow);
 t_tree_nod				***ft_path_collector(t_data *data, t_tree_nod *start,
@@ -179,7 +190,7 @@ t_tree_nod				*ft_mem_node_collector(t_list *mem);
 t_door					*ft_door_data_collector(t_list *data, int flow);
 void					ft_simulator(t_data *data, t_tree_nod *start, int flow,
 						int ants);
-void					ft_push_front(void *content, t_list **start);
+int8_t					ft_push_front(void *content, t_list **start);
 void					ft_del_spe(t_list *elem, t_list **start);
 void					ft_del_first(t_list **start);
 void					ft_del_list(t_list **list);

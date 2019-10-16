@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 00:54:05 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 05:47:09 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 14:23:56 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int8_t		ft_add_doors(t_tree_nod *start, int flow)
 			return (FAILURE);
 		info->flow = flow;
 		info->size = ft_size_collector(door);
-		ft_push_front((void *)info, &(door->door_data));
+		if (ft_push_front((void *)info, &(door->door_data)) == FAILURE)
+			return (FAILURE);
 		start_mem = start_mem->next;
 	}
 	return (SUCCESS);

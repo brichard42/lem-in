@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 20:40:48 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 05:42:44 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 14:29:46 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ int8_t		ft_add_node_memory(t_list *tmpath, int flow)
 				&& ((t_mem *)(next->mem_data->content))->node == current)
 		{
 			mem->node = NULL;
-			ft_push_front((void *)mem, &(next->mem_data));
+			if (ft_push_front((void *)mem, &(next->mem_data)))
+				return (FAILURE);
 		}
-		else
-		{
-			mem->node = next;
-			ft_push_front((void *)mem, &(current->mem_data));
-		}
+		else if ((mem->node = next))
+			if (ft_push_front((void *)mem, &(current->mem_data)) == FAILURE)
+				return (FAILURE);
 		tmpath = tmpath->next;
 	}
 	return (SUCCESS);

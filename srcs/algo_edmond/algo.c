@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/14 05:51:25 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 13:27:22 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,25 @@ static int		ft_path_size(t_tree_nod *start)
 	return (value);
 }
 
-static void		ft_path_transformer(t_data *data, t_tree_nod *path)
+static int8_t	ft_path_transformer(t_data *data, t_tree_nod *path)
 {
 	t_tree_nod	*node;
 	t_list		**tmpath_address;
 
 	if (!path)
-		return ;
+		return (2);
 	ft_del_list(&(data->tmpath));
 	tmpath_address = &(data->tmpath);
 	node = path;
-	ft_push_front((void *)(data->end), tmpath_address);
+	if (ft_push_front((void *)(data->end), tmpath_address) == FAILURE)
+		return (FAILURE);
 	while (node)
 	{
-		ft_push_front((void *)node, tmpath_address);
+		if (ft_push_front((void *)node, tmpath_address) == FAILURE)
+			return (FAILURE);
 		node = node->parent;
 	}
+	return (SUCCESS);
 }
 
 static int8_t	ft_best_path(t_data *data, t_list *paths)
@@ -67,7 +70,8 @@ static int8_t	ft_best_path(t_data *data, t_list *paths)
 		}
 		paths = paths->next;
 	}
-	ft_path_transformer(data, the_path);
+	if (ft_path_transformer(data, the_path) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }
 
