@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/14 08:04:52 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/16 18:04:41 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME = libft.a
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
-CFLAGS += -fsanitize=address,undefined -g3
+#CFLAGS += -fsanitize=address,undefined -g3
 
 INC = includes
 
@@ -102,6 +102,7 @@ SRCS =			ft_strlen.c \
 				ft_isalpha.c \
 				ft_isdigit.c \
 				ft_isalnum.c \
+				ft_iszero.c \
 				ft_isascii.c \
 				ft_isprint.c \
 \

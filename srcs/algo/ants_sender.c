@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 16:46:50 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/15 16:56:43 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 17:14:51 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ int8_t			ft_send_ants(t_tree_nod ***paths, int *tab_i, int n_path,
 						return (FAILURE);
 				--tab_i[i++];
 			}
-			ft_buffer("\n", 0);
+			ft_buffer("\n", 3);
 			i = 0;
 		}
 	while ((i = ft_empty_paths(paths, sizes)) != FAILURE && i != SUCCESS)
-		ft_buffer("\n", 0);
+		ft_buffer("\n", 3);
 	return (ft_free_sizes_ret_i(sizes, i));
 }

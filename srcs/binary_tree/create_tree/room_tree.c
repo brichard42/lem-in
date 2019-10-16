@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 13:51:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/14 07:11:28 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 17:48:53 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int8_t		ft_room_add(t_state_machine *machine, t_tree_nod **room_tree
 		if (ft_room_add(machine, &(*room_tree)->right, room_name) == FAILURE)
 			return (FAILURE);
 	}
+	else
+		return (FAILURE);
 	ft_balance_tree(room_tree, room_name);
 	return (SUCCESS);
 }

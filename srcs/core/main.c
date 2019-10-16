@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/16 14:56:59 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 18:08:52 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int8_t	choose_the_algo(t_data *program_data, int argc, char *arg1)
 		if (ft_ant_in_paths(program_data->path_tab,
 				program_data->ant_nb, -1) == FAILURE)
 			return (FAILURE);
-		ft_buffer("\n", 1);
+		ft_buffer("\0", 1);
 	}
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:12:02 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/19 16:40:08 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/16 17:46:48 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ uint8_t			check_com(t_state_machine *machine, char *str)
 		ret_value = TRUE;
 		if (str[0] == COMMENT_SIGN && str[1] == COMMENT_SIGN)
 			get_special_com(machine, str);
-		ft_strdel(&str);
 	}
 	return (ret_value);
 }

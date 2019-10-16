@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:13:42 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/15 18:06:06 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 17:45:52 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,5 @@ int8_t			get_links(t_state_machine *machine, char *str)
 			del_splited_line(&splited_line);
 		}
 	}
-	if (machine->state == ST_LINK_PLUS)
-		ft_strdel(&str);
 	return (ret_value);
 }

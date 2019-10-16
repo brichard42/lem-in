@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:04:57 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/14 08:06:41 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 18:05:01 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int8_t			ft_gnl(const int fd, char **line);
 **	FT_IS
 */
 
+int				ft_iszero(int c);
 int				ft_isupper(int c);
 int				ft_islower(int c);
 int				ft_isalpha(int c);

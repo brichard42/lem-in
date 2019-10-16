@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/15 14:09:44 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/16 16:14:37 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -248,10 +248,10 @@ COM_STRING   = "Compiling"
 all: $(CLEAR) $(NAME)
 
 $(NAME): $(LIBS) $(OBJS_PATH) $(OBJS)
-	$(call run_and_test, $(CC) $(OBJS) $(DEBUG) $(LDFLAGS) $(LDLIBS) -o $@)
+	$(call run_and_test, $(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $@)
 
 $(OBJS): $(OBJS_PATH)%.o : %.c $(INCS) Makefile
-	$(call run_and_test, $(CC) $(DEBUG) -c $< -o $@)
+	$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
 $(OBJS_PATH):
 	$(MKDIR) $@

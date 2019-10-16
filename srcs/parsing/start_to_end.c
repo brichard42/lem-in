@@ -6,24 +6,26 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 01:16:29 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/15 16:12:16 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 17:18:52 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int8_t	ft_print_all_in_one(int ants, char *end_name)
+static int8_t	ft_print_all_in_one(int ants, char *end_name)
 {
 	int i;
 
 	i = 1;
+	ft_buffer("\n", 0);
 	while (i <= ants)
 		ft_buff_one_move(i++, end_name);
+	ft_buffer("\0", 3);
 	ft_buffer("\n", 1);
 	return (SUCCESS);
 }
 
-int8_t	ft_start_to_end(t_data *data)
+int8_t			ft_start_to_end(t_data *data)
 {
 	t_llist_nod	*start_links;
 	char		*end_name;
