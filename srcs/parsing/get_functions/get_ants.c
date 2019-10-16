@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:17:41 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/16 18:06:07 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 18:41:44 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ static int	get_ant_nb(char *str)
 	int64_t	ant_nb;
 
 	ant_nb = FAILURE;
-	if ((ft_strlen(str) <= 11
-			|| ft_strcheck(str, ft_iszero) == TRUE)
-			&& ft_strcheck(str, ft_isdigit) == TRUE)
+	if (ft_strcheck(str, ft_isdigit) == TRUE)
 		ant_nb = ft_atol(str);
 	return (ant_nb > INT_MAX || ant_nb < 0 ? FAILURE : (int)ant_nb);
 }

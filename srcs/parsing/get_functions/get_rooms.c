@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:16:18 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/16 18:05:11 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 18:51:03 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 static uint8_t	room_is_valid(char **splited_line)
 {
-	size_t nb_of_arg;
+	size_t	nb_of_arg;
 
 	nb_of_arg = 0;
 	while (splited_line[nb_of_arg] != NULL)
 		nb_of_arg++;
 	return (nb_of_arg == 3
 			&& ft_strcheck(splited_line[1], ft_isdigit) == TRUE
-			&& (ft_strlen(splited_line[1]) < 8
-			|| ft_strcheck(splited_line[1], ft_iszero) == TRUE)
-			&& ft_strcheck(splited_line[2], ft_isdigit) == TRUE
-			&& (ft_strlen(splited_line[1]) < 8
-			|| ft_strcheck(splited_line[2], ft_iszero) == TRUE));
+			&& ft_atol(splited_line[1]) <= INT_MAX
+			&& ft_atol(splited_line[1]) >= INT_MIN
+			&& ft_atol(splited_line[2]) <= INT_MAX
+			&& ft_atol(splited_line[2]) >= INT_MIN
+			&& ft_strcheck(splited_line[2], ft_isdigit) == TRUE);
 }
 
 static int8_t	put_room_in_tree(t_state_machine *machine, char *str)
