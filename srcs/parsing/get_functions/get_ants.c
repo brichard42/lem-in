@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:17:41 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/19 16:40:08 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/16 13:47:44 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static int	get_ant_nb(char *str)
 {
 	int64_t	ant_nb;
 
-	ant_nb = 0;
+	ant_nb = FAILURE;
 	if (ft_strlen(str) <= 11 && ft_strcheck(str, ft_isdigit) == TRUE)
 		ant_nb = ft_atol(str);
-	return (ant_nb > INT_MAX || ant_nb < 0 ? 0 : (int)ant_nb);
+	return (ant_nb > INT_MAX || ant_nb < 0 ? FAILURE : (int)ant_nb);
 }
 
 int8_t		get_ants(t_state_machine *machine, char *str)
@@ -29,5 +29,5 @@ int8_t		get_ants(t_state_machine *machine, char *str)
 	machine->special_com.is_start = FALSE;
 	machine->special_com.is_end = FALSE;
 	ft_strdel(&str);
-	return (machine->program_data.ant_nb == 0 ? FAILURE : SUCCESS);
+	return (machine->program_data.ant_nb == FAILURE ? FAILURE : SUCCESS);
 }

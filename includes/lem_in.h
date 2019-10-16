@@ -5,7 +5,6 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
 /*   Updated: 2019/10/16 14:12:39 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -112,11 +111,11 @@ typedef struct			s_data
 */
 typedef struct			s_bfs
 {
-	t_llist_nod     *links;
-    t_list          *to_check;
-    t_list          *checking;
-    t_tree_nod      *child;
-    t_tree_nod      *parent;
+	t_llist_nod			*links;
+    t_list				*to_check;
+    t_list				*checking;
+    t_tree_nod			*child;
+    t_tree_nod			*parent;
 }						t_bfs;
 
 /*
