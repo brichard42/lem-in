@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:28:22 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/15 16:18:19 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 13:42:12 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct			s_data
 	t_tree_nod			*start;
 	t_tree_nod			*end;
 	t_list				*tmpath;
-	int64_t				ant_nb;
+	int					ant_nb;
 	int					the_flow;
 	int					the_cost;
 	int					flow;

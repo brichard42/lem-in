@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:16:18 by brichard          #+#    #+#             */
-/*   Updated: 2019/10/12 16:30:59 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 13:52:57 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static uint8_t	room_is_valid(char **splited_line)
 		nb_of_arg++;
 	return (nb_of_arg == 3
 			&& ft_strcheck(splited_line[1], ft_isdigit) == TRUE
-			&& ft_strcheck(splited_line[2], ft_isdigit) == TRUE);
+			&& ft_strlen(splited_line[1]) < 8
+			&& ft_strcheck(splited_line[2], ft_isdigit) == TRUE
+			&& ft_strlen(splited_line[1]) < 8);
 }
 
 static int8_t	put_room_in_tree(t_state_machine *machine, char *str)

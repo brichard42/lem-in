@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 18:32:58 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/04 16:13:59 by brichard         ###   ########.fr       */
+/*   Updated: 2019/10/16 13:48:10 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int64_t		ft_atol(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		num = num * 10 + (*str - '0') * neg;
-		if (num > 0 && neg == -1)
-			return (0);
-		if (num < 0 && neg == 1)
+		if ((num > 0 && neg == -1) || (num < 0 && neg == 1))
 			return (-1);
 		++str;
 	}

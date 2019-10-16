@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 13:58:30 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/15 16:11:34 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 14:09:20 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_buffer(char *str, uint8_t ok)
 	tmp = ft_strlen(str);
 	if (buffer_index + tmp > SIZE_OF_BUFF - 1)
 	{
-		ft_putstr(buffer);
+		write(1, buffer, buffer_index);
 		buffer_index = tmp;
 		ft_strclr(buffer);
 		ft_strcpy(buffer, str);
@@ -36,6 +36,6 @@ void	ft_buffer(char *str, uint8_t ok)
 		ft_strcpy(&buffer[buffer_index], str);
 		buffer_index += tmp;
 		if (ok)
-			ft_putstr(buffer);
+			write(1, buffer, buffer_index);
 	}
 }
