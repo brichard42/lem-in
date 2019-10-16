@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 12:33:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/10/15 16:04:11 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/10/16 14:56:59 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		ft_print_error(t_state_machine *machine)
 {
 	ft_free_transformed_path(machine->program_data.path_tab);
 	ft_free_room_tree(machine->program_data.room_tree);
-	ft_putendl_fd("ERROR", STDERR_FILENO);
+	write(STDERR_FILENO, "ERROR\n", 6);
 	return (EXIT_FAILURE);
 }
 
