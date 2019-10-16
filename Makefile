@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/10/16 16:14:37 by tlandema         ###   ########.fr        #
+#    Updated: 2019/10/16 18:23:43 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SRCS += $(CORE)
 SRCS += $(BINARY_TREE)
 SRCS += $(LINKED_LIST)
 SRCS += $(PARSER)
-SRCS += $(ALGO)
-SRCS += $(ALGO2)
+SRCS += $(ALGO_EDMOND)
+SRCS += $(ALGO_MAISON)
 SRCS += $(MEMORY)
 SRCS += $(PRINT)
 SRCS += $(OPTIONS)
@@ -71,25 +71,25 @@ MEMORY += free_path.c
 MEMORY += free_with_ret_value.c
 MEMORY += ft_free_transformed_path.c
 
-ALGO += start_to_end.c
-ALGO += ants_in_path.c
-ALGO += ants_sender.c
-ALGO += calc_dist.c
-ALGO += ft_count_links.c
-ALGO += get_multi_paths.c
-ALGO += get_multi_paths2.c
-ALGO += ft_check_paths.c
-ALGO += ft_get_next_node.c
-ALGO += path_functions.c
+ALGO_MAISON += start_to_end.c
+ALGO_MAISON += ants_in_path.c
+ALGO_MAISON += ants_sender.c
+ALGO_MAISON += calc_dist.c
+ALGO_MAISON += ft_count_links.c
+ALGO_MAISON += get_multi_paths.c
+ALGO_MAISON += get_multi_paths2.c
+ALGO_MAISON += ft_check_paths.c
+ALGO_MAISON += ft_get_next_node.c
+ALGO_MAISON += path_functions.c
 
-ALGO2 += bfs.c
-ALGO2 += algo.c
-ALGO2 += doors.c
-ALGO2 += simulator.c
-ALGO2 += push_front.c
-ALGO2 += path_memory.c
-ALGO2 += del_functions.c
-ALGO2 += path_collector.c
+ALGO_EDMOND += bfs.c
+ALGO_EDMOND += algo.c
+ALGO_EDMOND += doors.c
+ALGO_EDMOND += simulator.c
+ALGO_EDMOND += push_front.c
+ALGO_EDMOND += path_memory.c
+ALGO_EDMOND += del_functions.c
+ALGO_EDMOND += path_collector.c
 
 OPTIONS += options.c
 
@@ -128,9 +128,11 @@ LINKED_LIST_DIR += linked_list/delete_list/
 MEMORY_FUNCTIONS_DIR += memory_functions/
 
 ALGO_DIR += algo/
-ALGO_DIR += algo/path_finding/
 
-ALGO2_DIR += algo_edmond/
+ALGO_MAISON_DIR += algo/algo_maison/
+ALGO_MAISON_DIR += algo/algo_maison/path_finding/
+
+ALGO_EDMOND_DIR += algo/algo_edmond/
 
 OPTIONS_DIR += options/
 
@@ -151,8 +153,9 @@ _SRCS_PATH += $(BINARY_TREE_DIR)
 _SRCS_PATH += $(LINKED_LIST_DIR)
 _SRCS_PATH += $(MEMORY_FUNCTIONS_DIR)
 _SRCS_PATH += $(ALGO_DIR)
+_SRCS_PATH += $(ALGO_MAISON_DIR)
+_SRCS_PATH += $(ALGO_EDMOND_DIR)
 _SRCS_PATH += $(PRINT_DIR)
-_SRCS_PATH += $(ALGO2_DIR)
 _SRCS_PATH += $(OPTIONS_DIR)
 
 SRCS_PATH += $(SRCS_DIR)
